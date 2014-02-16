@@ -1,0 +1,11 @@
+%h2
+  Test Checkout App
+%p
+  Try the demo below with this
+  %a{:href => "https://stripe.com/docs/testing#cards"}
+    test card number:
+  %br
+    %code
+      4242 4242 4242 4242
+= form_for @charge do |f|
+  %script{:src => asset_path("checkout"), :class => "stripe-button", :data => {:key => "pk_test_jVMUjxLAGkelwvJo9Wcbzqhi", :image => "https://stripe.com/img/documentation/checkout/marketplace.png", :name => "Demo Site", :description => "2 widgets ($20.00)", :label => "Pay with Wing", :email => "mara4187@gmail.com", :amount => "2000"}}
