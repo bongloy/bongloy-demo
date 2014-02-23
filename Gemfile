@@ -10,3 +10,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'haml'
+
+group :development do
+  gem 'foreman', :git => 'git://github.com/ddollar/foreman.git'
+end
