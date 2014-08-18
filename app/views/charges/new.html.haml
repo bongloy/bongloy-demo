@@ -3,8 +3,26 @@
   %h2
     Hi
     = "#{current_user_name}!"
-  %p
+  %hr
+  %h4
     You can test Bongloy Checkout by pressing the button below:
-
   = form_for @charge do |f|
     %script{:src => @checkout_configuration.checkout_js_url, :class => "stripe-button", :data => {:key => @checkout_configuration.publishable_key, :image => @checkout_configuration.image_url, :name => @checkout_configuration.name, :description => @checkout_configuration.description, :label => @checkout_configuration.label, :amount => @checkout_configuration.amount}}
+  %hr
+  %h4
+    You can generate your own button, on your own site, with the following code:
+  %p
+    %pre
+      %code.code
+        = preserve do
+          :escaped
+            <form action="/charge" method="POST">
+              <script
+                src="#{@checkout_configuration.checkout_js_url}" class="stripe-button"
+                data-key="#{@checkout_configuration.publishable_key}"
+                data-image="#{@checkout_configuration.image_url}"
+                data-name="#{@checkout_configuration.name}"
+                data-description="#{@checkout_configuration.description}"
+                data-amount="#{@checkout_configuration.amount}">
+              </script>
+            </form>
