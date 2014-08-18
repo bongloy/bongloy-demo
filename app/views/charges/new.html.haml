@@ -1,7 +1,8 @@
 .container-fluid
+  - current_user_name = current_user.first_name || current_user.email
   %h2
     Hi
-    = "#{current_user.first_name || current_user.email}!"
+    = "#{current_user_name}!"
   %p
     You can test Bongloy Checkout by pressing the button below:
 

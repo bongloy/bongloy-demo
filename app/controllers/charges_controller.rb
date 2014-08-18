@@ -6,6 +6,6 @@ class ChargesController < ApplicationController
   private
 
   def configure_checkout
-    @checkout_configuration = CheckoutConfiguration.new
+    @checkout_configuration = CheckoutConfiguration.new(:user => current_user)
   end
 end
