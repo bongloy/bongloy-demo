@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    %title Bongloy-Demo
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-default{:role => "navigation"}
+      .navbar-header
+        %button.navbar-toggle{:type => "button", :data => {:toggle => "collapse", :target => "#main_navbar"}}
+          %span.sr-only
+            Toggle navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        %a.navbar-brand{:href => "#"}
+          bongloy-demo
+      #main_navbar.collapse.navbar-collapse
+        %ul.nav.navbar-nav
+          %li
+            = link_to(fa_icon("home", :text => "Home"), home_path)
+        %ul.nav.navbar-nav.navbar-right
+          - if user_signed_in?
+            %li
+              = link_to(fa_icon("sign-out", :text => "Sign out"), destroy_user_session_path, :method => :delete)
+          - else
+            %li#facebook
+              = link_to(fa_icon("facebook", :text => "Connect with Facebook"), omniauth_authorize_path(:user, :facebook))
+    = yield

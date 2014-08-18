@@ -1,10 +1,11 @@
 class ChargesController < ApplicationController
-  def new
-    @charge = Charge.new
-  end
+  before_action :authenticate_user!
 
-  def create
-    @charge = Charge.new(params[:charge])
-    redirect_to root_path, :notice => "Successfully Created Charge"
+  before_action :configure_checkout, :only => :new
+
+  private
+
+  def configure_checkout
+    @checkout_configuration = CheckoutConfiguration.new
   end
 end
