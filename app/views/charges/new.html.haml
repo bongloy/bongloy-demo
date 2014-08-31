@@ -7,7 +7,7 @@
   %h4
     You can test Bongloy Checkout by pressing the button below:
   = form_for @charge do |f|
-    %script{:src => @checkout_configuration.checkout_js_url, :class => "stripe-button", :data => {:email => @checkout_configuration.email, :key => @checkout_configuration.publishable_key, :image => @checkout_configuration.image_url, :name => @checkout_configuration.name, :description => @checkout_configuration.description, :label => @checkout_configuration.label, :amount => @checkout_configuration.amount, :email => false, :address => true}}
+    %script{:src => @checkout_configuration.checkout_js_url, :class => "stripe-button", :data => {:email => @checkout_configuration.email, :key => @checkout_configuration.publishable_key, :image => @checkout_configuration.image_url, :name => @checkout_configuration.name, :description => @checkout_configuration.description, :label => @checkout_configuration.label, :amount => @checkout_configuration.amount, :email => @checkout_configuration.prefill_email?, :address => @checkout_configuration.require_address?}}
   %hr
   %h4
     You can generate your own button, on your own site, with the following code:
