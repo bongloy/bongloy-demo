@@ -19,15 +19,18 @@
           bongloy-demo
       #main_navbar.collapse.navbar-collapse
         %ul.nav.navbar-nav
-          %li
-            = link_to(fa_icon("home", :text => "Home"), home_path)
-          %li
-            = link_to(fa_icon("credit-card", :text => "Charges"), charges_path)
-        %ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
+            %li
+              = link_to(fa_icon("home", :text => "Home"), home_path)
+            %li
+              = link_to(fa_icon("credit-card", :text => "Charges"), charges_path)
             %li
               = link_to(fa_icon("sign-out", :text => "Sign out"), destroy_user_session_path, :method => :delete)
           - else
             %li#facebook
               = link_to(fa_icon("facebook", :text => "Connect with Facebook"), omniauth_authorize_path(:user, :facebook))
+  .container-fluid
     = yield
+    .github-fork-ribbon-wrapper.right-bottom
+      .github-fork-ribbon
+        = link_to("Fork me on Github", "https://github.com/dwilkie/bongloy-demo")
