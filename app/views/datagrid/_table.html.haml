@@ -1,0 +1,14 @@
+- html_options = options[:html] || {}
+- html_class = html_options[:class]
+- html_class = [html_class, "table", "table-striped", "table-bordered", "table-responsive"].compact.join(" ")
+- html_options.merge!(:class => html_class)
+= content_tag :table, html_options do
+  %thead
+    = datagrid_header(grid, options)
+  %tbody
+    - if assets.any?
+      = datagrid_rows(grid, assets, options)
+    - else
+      %tr
+        %td.noresults{:colspan=>"100%"}
+          = I18n.t('datagrid.no_results').html_safe

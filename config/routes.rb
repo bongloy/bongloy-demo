@@ -7,6 +7,6 @@ BongloyDemo::Application.routes.draw do
 
   resource :home, :only => :show
 
-  resources :charges, :only => [:new, :create]
+  resources :charges, :only => [:new, :create, :index]
   root :to => "homes#show"
 end

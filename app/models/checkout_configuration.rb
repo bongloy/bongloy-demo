@@ -1,5 +1,5 @@
 class CheckoutConfiguration
-  attr_accessor :checkout_js_url, :publishable_key, :image_url, :name, :description, :label, :amount, :user, :email
+  attr_accessor :checkout_js_url, :publishable_key, :image_url, :name, :description, :label, :amount, :currency, :user, :email
   delegate :first_name, :first_name?, :email, :to => :user, :allow_nil => true
 
   def initialize(options = {})
@@ -11,6 +11,7 @@ class CheckoutConfiguration
     self.checkout_js_url = options[:checkout_js_url] || rails_secret(:bongloy_checkout_default_js_url)
     self.label = options[:label] || rails_secret(:bongloy_checkout_default_label)
     self.amount = options[:amount] || rails_secret(:bongloy_checkout_default_amount)
+    self.currency = options[:currency] || rails_secret(:bongloy_checkout_default_currency)
     self.email = options[:email] || email
   end
 

@@ -19,6 +19,9 @@ gem 'autoprefixer-rails'
 gem 'omniauth-facebook'
 gem 'activerecord_any_of'
 gem 'inherited_resources'
+gem 'bongloy', :github => "dwilkie/bongloy-ruby"
+gem 'datagrid', :github => "bogdan/datagrid"
+gem "kaminari"
 
 group :development do
   gem 'foreman'

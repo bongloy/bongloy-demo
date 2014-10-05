@@ -21,6 +21,8 @@
         %ul.nav.navbar-nav
           %li
             = link_to(fa_icon("home", :text => "Home"), home_path)
+          %li
+            = link_to(fa_icon("credit-card", :text => "Charges"), charges_path)
         %ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
             %li
