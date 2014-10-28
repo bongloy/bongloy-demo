@@ -22,6 +22,7 @@ gem 'inherited_resources'
 gem 'bongloy', :github => "dwilkie/bongloy-ruby"
 gem 'datagrid', :github => "bogdan/datagrid"
 gem "kaminari"
+gem 'simple_form', :github => "plataformatec/simple_form"
 
 group :development do
   gem 'foreman'

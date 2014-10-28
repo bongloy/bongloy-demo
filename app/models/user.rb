@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
+  devise :database_authenticatable, :rememberable, :registerable,
+         :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
   has_many :charges
 
@@ -21,5 +22,9 @@ class User < ActiveRecord::Base
     user.provider = auth.provider
     user.uid = auth.uid
     user
+  end
+
+  def display_name
+    first_name || email
   end
 end

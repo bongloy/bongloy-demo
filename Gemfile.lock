@@ -13,6 +13,14 @@ GIT
       hashie
       httparty
 
+GIT
+  remote: git://github.com/plataformatec/simple_form.git
+  revision: 932619c180f90c5aebbb23f4d92fa254b430c775
+  specs:
+    simple_form (3.1.0.rc2)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -214,6 +222,7 @@ DEPENDENCIES
   rails (= 4.1.4)
   rails_12factor
   sass-rails (~> 4.0.3)
+  simple_form!
   turbolinks
   uglifier (>= 1.3.0)
   unicorn
