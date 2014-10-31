@@ -15,4 +15,3 @@
 //= require bootstrap
 //= require turbolinks
 //= require jquery.payment
-//= require autonumeric

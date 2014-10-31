@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :rememberable, :registerable,
          :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
-  has_many :charges
-
   def self.find_or_create_from_oauth(auth)
     oauth_email = auth.info.email
 

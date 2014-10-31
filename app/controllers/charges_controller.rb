@@ -1,34 +1,33 @@
 class ChargesController < ApplicationController
-  before_action :authenticate_user!
-
-  before_action :checkout_configuration, :only => [:new, :create]
+  before_action :authenticate_user!, :checkout_configuration
 
   def new
-    @charge = current_user.charges.new
-    @charge.amount = @checkout_configuration.amount
-    @charge.currency = @checkout_configuration.currency
+    @charge = Charge.new
+    @charge.amount = checkout_configuration.amount
+    @charge.currency = checkout_configuration.currency
+    @charge.description = checkout_configuration.charge_description
   end
 
   def create
-    @charge = current_user.charges.new(permitted_params[:charge])
+    @charge = Charge.new(permitted_params[:charge])
     @charge.token = params[:stripeToken]
     if @charge.save
-      redirect_to charges_path
+      bongloy_charge_url = checkout_configuration.bongloy_charges_url
+      redirect_to(
+        new_charge_path,
+        :flash => {
+          :success => "Your Charge was successfully created! You can view it on your Dashboard here: #{view_context.link_to(bongloy_charge_url, bongloy_charge_url, :target => '_blank')}<div class='help-block'>Use the following credentials to sign in:<dl class=\"dl-horizontal\"><dt><i class=\"fa fa-envelope\"></i></dt><dd>#{checkout_configuration.bongloy_test_account_email}</dd><dt><i class=\"fa fa-lock\"></i></dt><dd>#{checkout_configuration.bongloy_test_account_password}</dd></dl></div>"
+        }
+      )
     else
       render :new
-    end
-  end
-
-  def index
-    @grid = ChargesGrid.new(params[:charges_grid]) do |scope|
-      current_user.charges.merge(scope).page(params[:page])
     end
   end
 
   private
 
   def permitted_params
-    params.permit(:charge => [:amount, :currency])
+    params.permit(:charge => [:amount, :currency, :description])
   end
 
   def checkout_configuration

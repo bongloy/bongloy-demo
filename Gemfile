@@ -18,13 +18,9 @@ gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'omniauth-facebook'
 gem 'activerecord_any_of'
-gem 'inherited_resources'
 gem 'bongloy', :github => "dwilkie/bongloy-ruby"
-gem 'datagrid', :github => "bogdan/datagrid"
-gem "kaminari"
 gem 'simple_form', :github => "plataformatec/simple_form"
 gem 'jquery_payment-rails'
-gem 'autonumeric-rails'
 
 group :development do
   gem 'foreman'

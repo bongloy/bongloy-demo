@@ -26,8 +26,6 @@
           - if user_signed_in?
             %li
               = link_to(fa_icon("home", :text => "Home"), home_path, :data => {:no_turbolink => true})
-            %li
-              = link_to(fa_icon("credit-card", :text => "Charges"), charges_path)
         %ul#user_navbar.nav.navbar-nav.navbar-right
           - if user_signed_in?
             %li.dropdown
@@ -41,6 +39,14 @@
             %li
               = link_to(fa_icon("sign-in", :text => "Sign in"), new_user_session_path)
   .container-fluid
+    - flash.each do |type, message|
+      #flash.alert.alert-dismissible.fade.in{:class => "alert #{alert_class_for(type)}"}
+        %button.close{:type => "button", :data => {:dismiss => "alert"}}
+          %span{"aria-hidden" => true}
+            &times;
+          %span.sr-only
+            Close
+        = message.html_safe
     = yield
     .github-fork-ribbon-wrapper.right-bottom
       .github-fork-ribbon

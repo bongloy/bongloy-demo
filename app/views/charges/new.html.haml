@@ -15,12 +15,8 @@
   .col-md-5
     %p
       Press the blue button below to try Bongloy Checkout
-    - if @charge.errors.any?
-      %p.alert.alert-danger{:role => "alert"}
-        = @charge.errors.full_messages.to_sentence
     = simple_form_for(@charge, :html => {:id => "new_charge_checkout_js"}) do |f|
-      = f.input :amount, :as => :hidden
-      = f.input :currency, :as => :hidden
+      = render("form_default_fields", :f => f)
       %script{:src => @checkout_configuration.checkout_js_url, :class => "stripe-button", :data => {:email => @checkout_configuration.email, :key => @checkout_configuration.publishable_key, :image => @checkout_configuration.image_url, :name => @checkout_configuration.name, :description => @checkout_configuration.description, :label => @checkout_configuration.label, :amount => @checkout_configuration.amount, :currency => @checkout_configuration.currency, :email => @checkout_configuration.prefill_email?, :address => @checkout_configuration.require_address?}}
     %hr
     = render "sample_cards"
@@ -55,9 +51,7 @@
       = link_to("source code", "https://github.com/dwilkie/bongloy-demo")
       for an example of how to create the form below:
     = simple_form_for(@charge, :html => {:autocomplete => "on", :id => "new_charge_bongloy_js"}) do |f|
-      = f.error_notification
-      = f.input :amount, :as => :hidden
-      = f.input :currency, :as => :hidden
+      = render("form_default_fields", :f => f)
       #card_number.form-group
         %label.control-label{:for => "cc_number"}
           = fa_icon("credit-card", :text => "Card Number")

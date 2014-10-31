@@ -1,13 +1,17 @@
-class Charge < ActiveRecord::Base
-  attr_accessor :token
+class Charge
+  extend ActiveModel::Naming
+  extend ActiveModel::Callbacks
+  include ActiveModel::Model
 
-  belongs_to :user
+  attr_accessor :token, :amount, :currency, :description
 
-  validates :bongloy_customer_id, :presence => true
-  validates :bongloy_charge_id, :presence => true
-  validates :amount, :currency, :presence => true
+  validates :amount, :currency, :token, :presence => true
 
-  before_validation :execute_charge, :on => :create
+  def save
+    return false unless valid?
+    execute_charge
+    errors.empty?
+  end
 
   private
 
@@ -16,17 +20,13 @@ class Charge < ActiveRecord::Base
     @bongloy_customer ||= create_bongloy_customer
     return unless @bongloy_customer
     @bongloy_charge ||= create_bongloy_charge
-    return unless @bongloy_charge
-    self.bongloy_customer_id = @bongloy_customer.id
-    self.bongloy_charge_id = @bongloy_charge.id
-    self.currency = @bongloy_charge.currency
-    self.amount = @bongloy_charge.amount
   end
 
   def create_bongloy_charge
     charge = Bongloy::ApiResource::Charge.new
     charge.amount = amount
     charge.currency = currency
+    charge.description = description
     charge.customer = @bongloy_customer.id
     execute_bongloy_transaction { charge.save! }
     charge if charge.id

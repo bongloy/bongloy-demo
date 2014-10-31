@@ -1,13 +1,12 @@
 class HomesController < ApplicationController
-  defaults :singleton => true
+  before_action :require_signed_out
 
   def show
-    user_signed_in? ? redirect_to(new_charge_path) : super
   end
 
   private
 
-  def resource
-    nil
+  def require_signed_out
+    redirect_to(new_charge_path) if user_signed_in?
   end
 end
