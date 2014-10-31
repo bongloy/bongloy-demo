@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   def self.find_or_create_from_oauth(auth)
     oauth_email = auth.info.email
 
-    user_from_oauth = where(auth.slice(:provider, :uid))
+    user_from_oauth = where(:provider => auth.provider, :uid => auth.uid)
     user_from_email = where(:email => oauth_email)
 
     user = where.any_of(user_from_oauth, user_from_email).first_or_initialize do |u|
