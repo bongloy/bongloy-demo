@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby "2.1.2"
 
-gem 'rails', '4.1.4'
+gem 'rails', '4.1.7'
 gem 'devise'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
@@ -23,6 +23,8 @@ gem 'bongloy', :github => "dwilkie/bongloy-ruby"
 gem 'datagrid', :github => "bogdan/datagrid"
 gem "kaminari"
 gem 'simple_form', :github => "plataformatec/simple_form"
+gem 'jquery_payment-rails'
+gem 'autonumeric-rails'
 
 group :development do
   gem 'foreman'

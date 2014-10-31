@@ -1,6 +1,8 @@
 %h2
   Welcome
 %p
-  This is a demo of Bongloy Payment Gateway's Checkout feature.
+  This is a demo of Bongloy's Checkout feature.
+  = link_to("Sign in", new_user_session_path)
+  or
   = link_to("Connect with Facebook", omniauth_authorize_path(:user, :facebook))
   to try it!

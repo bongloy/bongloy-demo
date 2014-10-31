@@ -1,7 +1,11 @@
 %h2
   Charges
 %hr
-= link_to("New Charge", new_charge_path)
+
+%ul#charges_navbar.nav.nav-tabs{:role => "tablist"}
+  %li
+    = link_to(fa_icon("plus", :text => "New Charge"), new_charge_path, :data => {:no_turbolink => true})
+
 = paginate(@grid.assets)
 = datagrid_table @grid
 = paginate(@grid.assets)

@@ -5,7 +5,11 @@
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
+    - if content_for?(:head)
+      = yield(:head)
   %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
+  - if content_for?(:meta)
+    = yield(:meta)
   %body
     .navbar.navbar-default{:role => "navigation"}
       .navbar-header
@@ -21,9 +25,9 @@
         %ul#resources_navbar.nav.navbar-nav
           - if user_signed_in?
             %li
-              = link_to(fa_icon("home", :text => "Home"), home_path)
+              = link_to(fa_icon("home", :text => "Home"), home_path, :data => {:no_turbolink => true})
             %li
-              = link_to(fa_icon("credit-card", :text => "Charges"), charges_path, :id => "charges", :data => {:no_turbolink => true})
+              = link_to(fa_icon("credit-card", :text => "Charges"), charges_path)
         %ul#user_navbar.nav.navbar-nav.navbar-right
           - if user_signed_in?
             %li.dropdown

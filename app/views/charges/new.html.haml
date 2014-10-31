@@ -1,34 +1,77 @@
-- current_user_name = current_user.first_name || current_user.email
+- content_for(:head) do
+  = javascript_include_tag @checkout_configuration.bongloy_js_url, "application"
+  = javascript_include_tag "new_charge", "application"
+
+- content_for(:meta) do
+  %meta{:name => "bongloy-publishable-key", :content => @checkout_configuration.publishable_key}
+
 %h2
   Hi
-  = "#{current_user_name}!"
+  = "#{current_user.display_name}!"
 %hr
-%h4
-- if @charge.errors.any?
-  .alert.alert-danger{:role => "alert"}
-    = @charge.errors.full_messages.to_sentence
-= form_for @charge do |f|
-  = f.hidden_field :amount
-  = f.hidden_field :currency
-  %script{:src => @checkout_configuration.checkout_js_url, :class => "stripe-button", :data => {:email => @checkout_configuration.email, :key => @checkout_configuration.publishable_key, :image => @checkout_configuration.image_url, :name => @checkout_configuration.name, :description => @checkout_configuration.description, :label => @checkout_configuration.label, :amount => @checkout_configuration.amount, :currency => @checkout_configuration.currency, :email => @checkout_configuration.prefill_email?, :address => @checkout_configuration.require_address?}}
+%h3
+  Bongloy Checkout
+.row
+  .col-md-5
+    %p
+      Press the blue button below to try Bongloy Checkout
+    - if @charge.errors.any?
+      %p.alert.alert-danger{:role => "alert"}
+        = @charge.errors.full_messages.to_sentence
+    = simple_form_for(@charge, :html => {:id => "new_charge_checkout_js"}) do |f|
+      = f.input :amount, :as => :hidden
+      = f.input :currency, :as => :hidden
+      %script{:src => @checkout_configuration.checkout_js_url, :class => "stripe-button", :data => {:email => @checkout_configuration.email, :key => @checkout_configuration.publishable_key, :image => @checkout_configuration.image_url, :name => @checkout_configuration.name, :description => @checkout_configuration.description, :label => @checkout_configuration.label, :amount => @checkout_configuration.amount, :currency => @checkout_configuration.currency, :email => @checkout_configuration.prefill_email?, :address => @checkout_configuration.require_address?}}
+    %hr
+    = render "sample_cards"
+  .col-md-7
+    %p
+      You can generate the blue button with the following html snippit:
+    %p
+      %pre
+        %code.code
+          = preserve do
+            :escaped
+              <form action="/charge" method="POST">
+                <script
+                  src="#{@checkout_configuration.checkout_js_url}" class="stripe-button"
+                  data-email="#{@checkout_configuration.prefill_email? ? true : false}"
+                  data-key="#{@checkout_configuration.publishable_key}"
+                  data-image="#{@checkout_configuration.image_url}"
+                  data-name="#{@checkout_configuration.name}"
+                  data-description="#{@checkout_configuration.description}"
+                  data-amount="#{@checkout_configuration.amount}"
+                  data-currency="#{@checkout_configuration.currency}"
+                  data-address="#{@checkout_configuration.require_address? ? true : false}">
+                </script>
+              </form>
 %hr
-%h4
-  You can generate your own button, on your own site, with the following code:
-%p
-  %pre
-    %code.code
-      = preserve do
-        :escaped
-          <form action="/charge" method="POST">
-            <script
-              src="#{@checkout_configuration.checkout_js_url}" class="stripe-button"
-              data-email="#{@checkout_configuration.prefill_email? ? true : false}"
-              data-key="#{@checkout_configuration.publishable_key}"
-              data-image="#{@checkout_configuration.image_url}"
-              data-name="#{@checkout_configuration.name}"
-              data-description="#{@checkout_configuration.description}"
-              data-amount="#{@checkout_configuration.amount}"
-              data-currency="#{@checkout_configuration.currency}"
-              data-address="#{@checkout_configuration.require_address? ? true : false}">
-            </script>
-          </form>
+%h3
+  bongloy.js
+.row
+  .col-md-5
+    %p
+      You can also use bongloy.js to create your own custom form for collecting Payment. See the
+      = link_to("source code", "https://github.com/dwilkie/bongloy-demo")
+      for an example of how to create the form below:
+    = simple_form_for(@charge, :html => {:autocomplete => "on", :id => "new_charge_bongloy_js"}) do |f|
+      = f.error_notification
+      = f.input :amount, :as => :hidden
+      = f.input :currency, :as => :hidden
+      #card_number.form-group
+        %label.control-label{:for => "cc_number"}
+          = fa_icon("credit-card", :text => "Card Number")
+        %input#cc_number.input-lg.form-control.cc-number{:type => "text", :pattern => "\d*", :autocomplete => "cc-number"}
+        %p.help-block
+      #card_expiry.form-group
+        %label.control-label{:for => "cc_exp"}
+          = fa_icon("calendar", :text => "Expires MM/YY")
+        %input#cc_exp.input-lg.form-control.cc-exp{:type => "text", :pattern => "\d*", :autocomplete => "cc-exp"}
+      #card_cvc.form-group
+        %label.control-label{:for => "cc_cvc"}
+          = fa_icon("lock", :text => "Security Code / PIN")
+        %input#cc_cvc.input-lg.form-control.cc-cvc{:type => "password", :pattern => "\d*", :autocomplete => "off"}
+      .form-group.btn-group
+        = f.button :submit, "Pay with Bongloy", :class => "btn btn-success"
+  .col-md-7
+    = render "sample_cards"

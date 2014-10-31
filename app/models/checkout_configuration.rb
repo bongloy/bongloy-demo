@@ -1,5 +1,9 @@
 class CheckoutConfiguration
-  attr_accessor :checkout_js_url, :publishable_key, :image_url, :name, :description, :label, :amount, :currency, :user, :email
+  attr_accessor :bongloy_js_url, :checkout_js_url, :publishable_key,
+                :image_url, :name, :description, :label,
+                :amount, :currency,
+                :user, :email
+
   delegate :first_name, :first_name?, :email, :to => :user, :allow_nil => true
 
   def initialize(options = {})
@@ -9,6 +13,7 @@ class CheckoutConfiguration
     self.image_url = options[:image_url] || rails_secret(:bongloy_checkout_default_image_url)
     self.publishable_key = options[:publishable_key] || rails_secret(:bongloy_default_publishable_key)
     self.checkout_js_url = options[:checkout_js_url] || rails_secret(:bongloy_checkout_default_js_url)
+    self.bongloy_js_url = options[:bongloy_js_url] || rails_secret(:bongloy_default_js_url)
     self.label = options[:label] || rails_secret(:bongloy_checkout_default_label)
     self.amount = options[:amount] || rails_secret(:bongloy_checkout_default_amount)
     self.currency = options[:currency] || rails_secret(:bongloy_checkout_default_currency)
@@ -21,6 +26,10 @@ class CheckoutConfiguration
 
   def require_address?
     rails_secret(:require_address).to_i == 1
+  end
+
+  def sample_expiry_date
+    Time.now.strftime("%m / %y")
   end
 
   private
