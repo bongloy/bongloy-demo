@@ -20,7 +20,7 @@ gem 'omniauth-facebook'
 gem 'activerecord_any_of'
 gem 'bongloy', :github => "dwilkie/bongloy-ruby"
 gem 'simple_form', :github => "plataformatec/simple_form"
-gem 'jquery_payment-rails'
+gem 'jquery_payment-rails', :github => "dwilkie/jquery_payment-rails"
 
 group :development do
   gem 'foreman'
