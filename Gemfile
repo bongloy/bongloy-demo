@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
+source 'https://rails-assets.org'
 
-ruby "2.1.2"
+ruby "2.1.5"
 
-gem 'rails', '4.1.7'
+gem 'rails', '4.1.8'
 gem 'devise'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
@@ -19,7 +20,7 @@ gem 'omniauth-facebook'
 gem 'activerecord_any_of'
 gem 'bongloy', :github => "dwilkie/bongloy-ruby"
 gem 'simple_form', :github => "plataformatec/simple_form"
-gem 'jquery_payment-rails', :github => "dwilkie/jquery_payment-rails"
+gem 'rails-assets-jquery-payment'
 
 group :development do
   gem 'foreman'
