@@ -2,8 +2,8 @@
 %html
   %head
     %title Bongloy-Demo
-    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = stylesheet_link_tag    "application", media: "all"
+    = javascript_include_tag "application"
     = csrf_meta_tags
     - if content_for?(:head)
       = yield(:head)
@@ -25,7 +25,7 @@
         %ul#resources_navbar.nav.navbar-nav
           - if user_signed_in?
             %li
-              = link_to(fa_icon("home", :text => "Home"), home_path, :data => {:no_turbolink => true})
+              = link_to(fa_icon("home", :text => "Home"), home_path)
         %ul#user_navbar.nav.navbar-nav.navbar-right
           - if user_signed_in?
             %li.dropdown
