@@ -1,10 +1,3 @@
-- content_for(:head) do
-  = javascript_include_tag @checkout_configuration.bongloy_js_url, "application"
-  = javascript_include_tag "new_charge", "application"
-
-- content_for(:meta) do
-  %meta{:name => "bongloy-publishable-key", :content => @checkout_configuration.publishable_key}
-
 %h2
   Hi
   = "#{current_user.display_name}!"
@@ -50,21 +43,21 @@
       You can also use bongloy.js to create your own custom form for collecting Payment. See the
       = link_to("source code", "https://github.com/dwilkie/bongloy-demo")
       for an example of how to create the form below:
-    = simple_form_for(@charge, :html => {:autocomplete => "on", :id => "new_charge_bongloy_js"}) do |f|
+    = simple_form_for(@charge, :html => {:autocomplete => "on", :data => {:payment_form => true}}) do |f|
       = render("form_default_fields", :f => f)
       #card_number.form-group
         %label.control-label{:for => "cc_number"}
           = fa_icon("credit-card", :text => "Card Number")
-        %input#cc_number.input-lg.form-control.cc-number{:type => "text", :pattern => "\d*", :autocomplete => "cc-number"}
+        %input#cc_number.input-lg.form-control.cc-number{:type => "text", :pattern => "\d*", :autocomplete => "cc-number", :data => {:payment_card_number => true}}
         %p.help-block
       #card_expiry.form-group
         %label.control-label{:for => "cc_exp"}
           = fa_icon("calendar", :text => "Expires MM/YY")
-        %input#cc_exp.input-lg.form-control.cc-exp{:type => "text", :pattern => "\d*", :autocomplete => "cc-exp"}
+        %input#cc_exp.input-lg.form-control.cc-exp{:type => "text", :pattern => "\d*", :autocomplete => "cc-exp", :data => {:payment_card_exp => true}}
       #card_cvc.form-group
         %label.control-label{:for => "cc_cvc"}
           = fa_icon("lock", :text => "Security Code / PIN")
-        %input#cc_cvc.input-lg.form-control.cc-cvc{:type => "password", :pattern => "\d*", :autocomplete => "off"}
+        %input#cc_cvc.input-lg.form-control.cc-cvc{:type => "password", :pattern => "\d*", :autocomplete => "off", :data => {:payment_card_cvc => true}}
       .form-group.btn-group
         = f.button :submit, "Pay with Bongloy", :class => "btn btn-success"
   .col-md-7

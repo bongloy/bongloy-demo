@@ -2,14 +2,13 @@
 %html
   %head
     %title Bongloy-Demo
+    - if @checkout_configuration
+      = javascript_include_tag(@checkout_configuration.bongloy_js_url)
+      = tag(:meta, :name => "bongloy-publishable-key", :content => @checkout_configuration.publishable_key)
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-    - if content_for?(:head)
-      = yield(:head)
-  %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
-  - if content_for?(:meta)
-    = yield(:meta)
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
   %body
     .navbar.navbar-default{:role => "navigation"}
       .navbar-header
