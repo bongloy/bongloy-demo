@@ -48,16 +48,16 @@
       #card_number.form-group
         %label.control-label{:for => "cc_number"}
           = fa_icon("credit-card", :text => "Card Number")
-        %input#cc_number.input-lg.form-control.cc-number{:type => "text", :pattern => "\d*", :autocomplete => "cc-number", :data => {:payment_card_number => true}}
+        %input#cc_number.input-lg.form-control.cc-number{:type => "text", :pattern => "\\d*", :autocomplete => "cc-number", :data => {:payment_card_number => true}}
         %p.help-block
       #card_expiry.form-group
         %label.control-label{:for => "cc_exp"}
           = fa_icon("calendar", :text => "Expires MM/YY")
-        %input#cc_exp.input-lg.form-control.cc-exp{:type => "text", :pattern => "\d*", :autocomplete => "cc-exp", :data => {:payment_card_exp => true}}
+        %input#cc_exp.input-lg.form-control.cc-exp{:type => "text", :pattern => "\\d*", :autocomplete => "cc-exp", :data => {:payment_card_exp => true}}
       #card_cvc.form-group
         %label.control-label{:for => "cc_cvc"}
           = fa_icon("lock", :text => "Security Code / PIN")
-        %input#cc_cvc.input-lg.form-control.cc-cvc{:type => "password", :pattern => "\d*", :autocomplete => "off", :data => {:payment_card_cvc => true}}
+        %input#cc_cvc.input-lg.form-control.cc-cvc{:type => "password", :pattern => "\\d*", :autocomplete => "off", :data => {:payment_card_cvc => true}}
       .form-group.btn-group
         = f.button :submit, "Pay with Bongloy", :class => "btn btn-success"
   .col-md-7
