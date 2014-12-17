@@ -25,6 +25,8 @@
           - if user_signed_in?
             %li
               = link_to(fa_icon("home", :text => "Home"), home_path)
+          %li
+            = link_to(fa_icon("book", :text => "Documentation"), "https://bongloy-staging.herokuapp.com/documentation")
         %ul#user_navbar.nav.navbar-nav.navbar-right
           - if user_signed_in?
             %li.dropdown
