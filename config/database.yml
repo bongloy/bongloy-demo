@@ -6,5 +6,10 @@ development: &development
   pool: 5
   username: bongloy_demo
 
+test:
+  <<: *development
+  database: bongloy_demo_test
+
+# This gets overriden by Heroku
 production:
   <<: *development

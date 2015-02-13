@@ -26,14 +26,6 @@ class CheckoutConfiguration
     self.email = options[:email] || email
   end
 
-  def prefill_email?
-    rails_secret(:prefill_email).to_i == 1
-  end
-
-  def require_address?
-    rails_secret(:require_address).to_i == 1
-  end
-
   def sample_expiry_date
     Time.now.strftime("%m / %y")
   end

@@ -57,9 +57,9 @@ paymentForm =
     paymentForm.showCardType()
 
     paymentForm.form().submit (ev) ->
-      ev.preventDefault()
       paymentForm.toggleFormSubmit(true)
       paymentForm.processCard()
+      return false
 
   processCard: ->
     cardNumber = paymentForm.ccNumberInput().val()

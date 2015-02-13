@@ -22,8 +22,20 @@ gem 'bongloy', :github => "dwilkie/bongloy-ruby"
 gem 'simple_form', :github => "plataformatec/simple_form"
 gem 'rails-assets-jquery-payment'
 
-group :development do
+group :development, :test do
+  gem 'rspec-rails'
   gem 'foreman'
+  gem 'pry'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'launchy'
+  gem 'database_cleaner'
+  gem 'factory_girl'
+  gem 'selenium-webdriver'
+  gem 'shoulda-matchers', :require => false
+  gem "bongloy-spec-helpers", :github => "dwilkie/bongloy-spec-helpers"
 end
 
 group :production do

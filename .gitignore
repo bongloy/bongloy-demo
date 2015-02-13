@@ -21,3 +21,5 @@ vendor/ruby
 # Ignore development and production environment variables
 .env.production
 .env.development
+
+remove_focus.rb
