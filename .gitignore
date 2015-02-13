@@ -17,6 +17,7 @@
 
 # Ignore local gems
 vendor/ruby
+vendor/bundle
 
 # Ignore development and production environment variables
 .env.production
