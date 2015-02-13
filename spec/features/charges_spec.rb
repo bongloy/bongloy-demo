@@ -96,8 +96,8 @@ describe "Charges", :js do
           fill_out_payment_form(:card => card)
         end
 
-        context "Visa Card" do
-          let(:card) { {:number => "4242424242424242", :cvc => "123"}  }
+        context "Wing Card" do
+          let(:card) { {:number => "5018188000001614", :cvc => "1234"}  }
 
           it "should show a link to the newly created charge on Bongloy" do
             within_flash do

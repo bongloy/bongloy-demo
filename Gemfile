@@ -19,7 +19,7 @@ gem 'autoprefixer-rails'
 gem 'omniauth-facebook'
 gem 'bongloy', :github => "dwilkie/bongloy-ruby"
 gem 'simple_form', :github => "plataformatec/simple_form"
-gem 'rails-assets-jquery-payment'
+gem 'rails-assets-jquery.payment.cambodia'
 
 group :development, :test do
   gem 'rspec-rails'
