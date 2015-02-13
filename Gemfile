@@ -33,6 +33,7 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_girl'
   gem 'selenium-webdriver'
+  gem 'poltergeist'
   gem 'shoulda-matchers', :require => false
   gem "bongloy-spec-helpers", :github => "dwilkie/bongloy-spec-helpers"
 end
