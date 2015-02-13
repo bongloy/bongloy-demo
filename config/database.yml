@@ -9,6 +9,7 @@ development: &development
 test:
   <<: *development
   database: bongloy_demo_test
+  username: postgres
 
 # This gets overriden by Heroku
 production:
