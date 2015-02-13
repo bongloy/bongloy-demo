@@ -7,10 +7,7 @@ class User < ActiveRecord::Base
   def self.find_or_create_from_oauth(auth)
     oauth_email = auth.info.email
 
-    user_from_oauth = where(:provider => auth.provider, :uid => auth.uid)
-    user_from_email = where(:email => oauth_email)
-
-    user = where.any_of(user_from_oauth, user_from_email).first_or_initialize do |u|
+    user = where("(provider = ? AND uid = ?) OR (email = ?)", auth.provider, auth.uid, oauth_email).first_or_initialize do |u|
       u.email = oauth_email
       u.password = Devise.friendly_token[0, 20]
       u.first_name = auth.info.first_name
