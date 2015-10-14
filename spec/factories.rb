@@ -13,6 +13,6 @@ FactoryGirl.define do
 
     amount 2000
     currency "usd"
-    token { Bongloy::SpecHelpers::ApiHelpers.new.sample_token_id }
+    token { Bongloy::SpecHelpers::ApiHelpers.new.generate_uuid }
   end
 end

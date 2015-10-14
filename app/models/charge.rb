@@ -34,7 +34,7 @@ class Charge
 
   def create_bongloy_customer
     customer = Bongloy::ApiResource::Customer.new
-    customer.card = token
+    customer.source = token
     execute_bongloy_transaction { customer.save! }
     customer if customer.id
   end

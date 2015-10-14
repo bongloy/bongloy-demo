@@ -12,7 +12,7 @@ describe Charge do
   end
 
   describe "#save" do
-    let(:customer_id) { api_helpers.sample_customer_id }
+    let(:customer_id) { api_helpers.generate_uuid }
 
     before do
       api_helpers.stub_create_customer(:customer_id => customer_id)
@@ -24,7 +24,7 @@ describe Charge do
       subject.save
       expect(WebMock).to have_requested(:post, api_helpers.customers_url).with { |request|
         payload = WebMock::Util::QueryMapper.query_to_values(request.body)
-        expect(payload["card"]).to eq(subject.token)
+        expect(payload["source"]).to eq(subject.token)
       }
     end
 

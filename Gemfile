@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
-source 'https://rails-assets.org'
 
-ruby "2.2.0"
+ruby "2.2.3"
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.4'
 gem 'devise'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
@@ -19,12 +18,13 @@ gem 'autoprefixer-rails'
 gem 'omniauth-facebook'
 gem 'bongloy', :github => "dwilkie/bongloy-ruby"
 gem 'simple_form', :github => "plataformatec/simple_form"
-gem 'rails-assets-jquery.payment.cambodia'
+gem 'rails-assets-jquery.payment.cambodia', :source => 'https://rails-assets.org'
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'foreman'
   gem 'pry'
+  gem 'dotenv'
 end
 
 group :test do
@@ -34,7 +34,7 @@ group :test do
   gem 'factory_girl'
   gem 'selenium-webdriver'
   gem 'poltergeist'
-  gem 'shoulda-matchers', :require => false
+  gem 'shoulda-matchers', '~> 2.8.0', :require => false
   gem "bongloy-spec-helpers", :github => "dwilkie/bongloy-spec-helpers"
 end
 
