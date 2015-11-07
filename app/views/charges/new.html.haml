@@ -6,11 +6,17 @@
   Bongloy Checkout
 .row
   .col-md-5
-    %p
-      Press the blue button below to try Bongloy Checkout
-    = simple_form_for(@charge, :html => {:id => "new_charge_checkout_js"}) do |f|
-      = render("form_default_fields", :f => f)
-      %script{:src => @checkout_configuration.checkout_js_url, :class => "stripe-button", :data => {:key => @checkout_configuration.publishable_key, :image => @checkout_configuration.image_url, :name => @checkout_configuration.name, :description => @checkout_configuration.description, :label => @checkout_configuration.label, :amount => @checkout_configuration.amount, :currency => @checkout_configuration.currency}}
+    .row
+      .col-md-6
+        %h4
+          = @checkout_configuration.description
+        %p
+          This shampoo has rich organic Argan oil which provides moisture and nutrition for severely damaged hair. Rosehip oil and Primrose oil give a glossy, tangle free finish.
+        = simple_form_for(@charge, :html => {:id => "new_charge_checkout_js"}) do |f|
+          = render("form_default_fields", :f => f)
+          %script{:src => @checkout_configuration.checkout_js_url, :class => "stripe-button", :data => {:key => @checkout_configuration.publishable_key, :image => @checkout_configuration.image_url, :name => @checkout_configuration.name, :description => @checkout_configuration.description, :label => @checkout_configuration.label, :amount => @checkout_configuration.amount}}
+      .col-md-6
+        = image_tag("nature_republic_argan_essential_deep_care_shampoo.jpg", :class => "img-responsive", :alt => "Nature Republic Argan Essential Deep Care Shampoo")
     %hr
     = render "sample_cards"
   .col-md-7
@@ -30,7 +36,6 @@
                   data-description="#{@checkout_configuration.description}"
                   data-label="#{@checkout_configuration.label}"
                   data-amount="#{@checkout_configuration.amount}"
-                  data-currency="#{@checkout_configuration.currency}"
                   data-locale="auto">
                 </script>
               </form>
