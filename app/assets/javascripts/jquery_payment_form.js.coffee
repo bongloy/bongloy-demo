@@ -2,7 +2,7 @@ ERROR_CLASS = "has-error"
 
 jQuery ->
   return unless $('meta[name="bongloy-publishable-key"]').length
-  Stripe.setPublishableKey($('meta[name="bongloy-publishable-key"]').attr('content'))
+  Bongloy.setPublishableKey($('meta[name="bongloy-publishable-key"]').attr('content'))
   return unless paymentForm.form().length
   paymentForm.setupForm()
 
@@ -79,7 +79,7 @@ paymentForm =
       expMonth: cardExpiry.month
       expYear: cardExpiry.year
       cvc: cardCvc
-    Stripe.createToken(card, paymentForm.handleBongloyResponse)
+    Bongloy.createToken(card, paymentForm.handleBongloyResponse)
 
   handleBongloyResponse: (status, response) ->
     if response.error
