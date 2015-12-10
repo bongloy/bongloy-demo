@@ -88,5 +88,5 @@ paymentForm =
     else
       form = paymentForm.form()
       token = response.id
-      form.append($('<input type="hidden" name="stripeToken" />').val(token))
+      form.append($('<input type="hidden" name="bongloyToken" />').val(token))
       form.get(0).submit()

@@ -10,7 +10,7 @@ class ChargesController < ApplicationController
 
   def create
     @charge = Charge.new(permitted_params[:charge])
-    @charge.token = params[:stripeToken]
+    @charge.token = params[:bongloyToken]
     if @charge.save
       bongloy_charge_url = checkout_configuration.bongloy_charges_url
       redirect_to(
