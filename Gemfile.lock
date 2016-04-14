@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/dwilkie/bongloy-ruby.git
-  revision: 46bd04e1240806ab2d880426c0a1e0fd621d4e1d
+  revision: 0f211edb8917ad79672f68d81700343872114521
   specs:
     bongloy (0.0.1)
       hashie
@@ -106,7 +106,7 @@ GEM
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.10)
-    font-awesome-rails (4.6.0.0)
+    font-awesome-rails (4.6.1.0)
       railties (>= 3.2, < 5.1)
     foreman (0.78.0)
       thor (~> 0.19.1)
@@ -263,7 +263,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     warden (1.2.6)
       rack (>= 1.0)
-    webmock (1.24.2)
+    webmock (1.24.3)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
