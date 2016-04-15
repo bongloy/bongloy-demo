@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/dwilkie/bongloy-ruby.git
-  revision: 0f211edb8917ad79672f68d81700343872114521
+  revision: 31332722ab5b2c0217fc942225f1d2be848d3dde
   specs:
     bongloy (0.0.1)
       hashie
