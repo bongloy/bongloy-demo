@@ -2,13 +2,13 @@ source 'https://rubygems.org'
 
 ruby(File.read(".ruby-version").strip) if ENV["GEMFILE_LOAD_RUBY_VERSION"].to_i == 1 && File.exist?(".ruby-version")
 
-gem 'rails', '4.2.7.1'
+gem 'rails', '5.0.1'
 gem 'devise'
-gem 'sass-rails', '~> 4.0.3'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
 gem 'jquery-rails'
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 gem 'haml'
 gem 'puma'
 gem 'pg'
@@ -27,14 +27,18 @@ group :development, :test do
   gem 'dotenv'
 end
 
+group :development do
+  gem 'spring'
+  gem 'spring-commands-rspec'
+end
+
 group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'database_cleaner'
   gem 'factory_girl'
   gem 'selenium-webdriver'
-  gem 'poltergeist'
-  gem 'shoulda-matchers', '~> 2.8.0', :require => false
+  gem 'shoulda-matchers'
   gem "bongloy-spec-helpers", :github => "dwilkie/bongloy-spec-helpers"
 end
 

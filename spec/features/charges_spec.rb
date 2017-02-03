@@ -1,28 +1,32 @@
 require 'rails_helper'
 
-describe "Charges", :js do
+describe "Charges" do
   let(:user) { create(:user) }
 
-  before do |example|
-    sign_in(:user => user, :example => example)
+  def setup_scenario
+    sign_in(:user => user)
+  end
+
+  before do
+    setup_scenario
   end
 
   context "when I navigate to '/dashboard'" do
-    before do
+    def setup_scenario
+      super
       visit user_root_path
       within_resources_navbar do
         click_link("Home")
       end
     end
 
-    it "should take me to '/dashboard'" do
-      expect(current_path).to eq(user_root_path)
-    end
+    it { expect(current_path).to eq(user_root_path) }
   end
 
   context "given I'm on '/dashboard'" do
-    before do
-      visit user_root_path
+    def setup_scenario
+      super
+      visit(user_root_path)
     end
 
     context "and I test out payment using bongloy.js", :js do
@@ -75,7 +79,8 @@ describe "Charges", :js do
       end
 
       context "without filling in the form" do
-        before do
+        def setup_scenario
+          super
           fill_out_payment_form
         end
 
@@ -90,7 +95,8 @@ describe "Charges", :js do
       context "filling in the form using my" do
         let(:api_helpers) { Bongloy::SpecHelpers::ApiHelpers.new }
 
-        before do
+        def seup_scenario
+          super
           api_helpers.stub_create_customer
           api_helpers.stub_create_charge
           fill_out_payment_form(:card => card)
