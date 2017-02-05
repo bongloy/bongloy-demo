@@ -1,3 +1,8 @@
+module Bongloy::SpecHelpers
+  module FeatureHelpers
+  end
+end
+
 require_relative "feature_helpers/authentication_helpers"
 require_relative "feature_helpers/navigation_helpers"
 
