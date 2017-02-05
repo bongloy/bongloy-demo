@@ -14,7 +14,7 @@ class CheckoutConfiguration
     self.description = options[:description] || ENV["BONGLOY_CHECKOUT_DEFAULT_DESCRIPTION"]
     self.charge_description = options[:charge_description] || "Charge from #{name}"
     self.image_url = options[:image_url] || ENV["BONGLOY_CHECKOUT_DEFAULT_IMAGE_URL"]
-    self.publishable_key = options[:publishable_key] || ENV["BONGLOY_CHECKOUT_DEFAULT_PUBLISHABLE_KEY"]
+    self.publishable_key = options[:publishable_key] || ENV["BONGLOY_DEFAULT_PUBLISHABLE_KEY"]
     self.checkout_js_url = options[:checkout_js_url] || ENV["BONGLOY_CHECKOUT_DEFAULT_JS_URL"]
     self.bongloy_js_url = options[:bongloy_js_url] || ENV["BONGLOY_DEFAULT_JS_URL"]
     self.bongloy_charges_url = options[:bongloy_charges_url] || ENV["BONGLOY_CHARGES_URL"]

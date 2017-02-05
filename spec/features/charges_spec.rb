@@ -84,18 +84,20 @@ describe "Charges" do
           fill_out_payment_form
         end
 
-        it "should highlight the errors on the form" do
+        def assert_from_errors!
           form_inputs.keys.each do |form_input_id|
             form_group = find_form_group(form_input_id)
             expect(form_group[:class]).to include("has-error")
           end
         end
+
+        it { assert_form_errors! }
       end
 
       context "filling in the form using my" do
         let(:api_helpers) { Bongloy::SpecHelpers::ApiHelpers.new }
 
-        def seup_scenario
+        def setup_scenario
           super
           api_helpers.stub_create_customer
           api_helpers.stub_create_charge
@@ -105,13 +107,15 @@ describe "Charges" do
         context "Wing Card" do
           let(:card) { {:number => "5018188000001614", :cvc => "1234"}  }
 
-          it "should show a link to the newly created charge on Bongloy" do
+          def assert_successful_charge!
             within_flash do
-              expect(page).to have_link(Rails.application.secrets[:bongloy_charges_url])
-              expect(page).to have_content(Rails.application.secrets[:bongloy_test_account_email])
-              expect(page).to have_content(Rails.application.secrets[:bongloy_test_account_password])
+              expect(page).to have_link(ENV["BONGLOY_CHARGES_URL"])
+              expect(page).to have_content(ENV["BONGLOY_TEST_ACCOUNT_EMAIL"])
+              expect(page).to have_content(ENV["BONGLOY_TEST_ACCOUNT_PASSWORD"])
             end
           end
+
+          it { assert_successful_charge! }
         end
       end
     end
