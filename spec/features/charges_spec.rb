@@ -84,7 +84,7 @@ describe "Charges" do
           fill_out_payment_form
         end
 
-        def assert_from_errors!
+        def assert_form_errors!
           form_inputs.keys.each do |form_input_id|
             form_group = find_form_group(form_input_id)
             expect(form_group[:class]).to include("has-error")
