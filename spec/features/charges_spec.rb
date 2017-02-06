@@ -16,6 +16,26 @@ describe "Charges" do
       visit(new_charge_path)
     end
 
+    context "and I signed in" do
+      let(:omniauth) { Bongloy::SpecHelpers::OmniAuth.new(omniauth_options) }
+      let(:omniauth_options) { {:first_name => "David"} }
+
+      def setup_scenario
+        super
+        omniauth
+        connect_with_facebook
+      end
+
+      def assert_personalized_page!
+        expect(page).to have_no_selector("#personalize_alert")
+        within("#bongloy_checkout_snippit") do
+          expect(page).to have_content("David's Shop")
+        end
+      end
+
+      it { assert_personalized_page! }
+    end
+
     context "and I test out payment using bongloy.js", :js do
       include Bongloy::SpecHelpers::FeatureHelpers::FormHelpers
 

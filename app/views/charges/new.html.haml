@@ -1,7 +1,7 @@
 .row
   .col-xs-12.col-sm-12.col-md-12.col-lg-12
     - if !user_signed_in?
-      .alert.alert-info.alert-dismissible{:role => "alert"}
+      #personalize_alert.alert.alert-info.alert-dismissible{:role => "alert"}
         %button.close{:type => "button", :data => {:dismiss => "alert"}, "aria-label" => "Close"}
           %span{"aria-hidden" => true}
             &times;
@@ -12,8 +12,6 @@
 
     %h2
       Bongloy Demo
-      - if user_signed_in?
-        = "#{current_user.display_name}!"
 
 #bongloy_checkout.row
   .col-xs-12.col-sm-12.col-md-12.col-lg-12
@@ -44,7 +42,7 @@
       You can generate the blue button with the following html snippit:
     %p
       %pre
-        %code.code
+        %code#bongloy_checkout_snippit.code
           = preserve do
             :escaped
               <form action="/charge" method="POST">
