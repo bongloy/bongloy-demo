@@ -10,7 +10,7 @@ Bongloy-Demo is a Rails app which demonstrates how to use Bongloy. It includes t
 
 ## Live Demo
 
-You can play with the live version at [demo.bongloy.com](http://demot.bongloy.com)
+You can play with the live version at [demo.bongloy.com](http://demo.bongloy.com)
 
 ## Local Setup
 
