@@ -67,22 +67,6 @@ class User < ActiveRecord::Base
 
   private
 
-  def oauth_parser
-    @oauth_parser || OAuthParser.new
-  end
-
-  def self.parse_oauth_parameters(auth)
-
-
-    {
-      "provider" => oauth_provider,
-      "uid" => oauth_uid,
-      "email" => oauth_email,
-      "first_name" => oauth_first_name,
-      "last_name" => oauth_last_name
-    }
-  end
-
   def password_required?
     false
   end
