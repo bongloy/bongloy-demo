@@ -66,7 +66,7 @@
   .col-xs-12.col-sm-12.col-md-5.col-lg-5
     %p
       You can also use bongloy.js to create your own custom form for collecting Payment. See the
-      = link_to("source code", "https://github.com/dwilkie/bongloy-demo")
+      = link_to("source code", "https://github.com/dwilkie/bongloy-demo", :target => "_blank")
       for an example of how to create the form below:
     = simple_form_for(@charge, :html => {:autocomplete => "on", :data => {:payment_form => true}}) do |f|
       = render("form_default_fields", :f => f)
