@@ -10,27 +10,27 @@ Bongloy-Demo is a Rails app which demonstrates how to use Bongloy. It includes t
 
 ## Live Demo
 
-You can play with the live version at [https://bongloy-demo.herokuapp.com](https://bongloy-demo.herokuapp.com)
+You can play with the live version at [demo.bongloy.com](http://demot.bongloy.com)
 
 ## Local Setup
 
 ### Clone or Fork the Repo
 
-```shell
+```
 $ git clone https://github.com/dwilkie/bongloy-demo.git
 ```
 
-### Set up Postgres
+### Set up Postgresql
 
 Create a new user `bongloy_demo` and give it `SUPERUSER` and `CREATEDB` privileges.
 
-```shell
+```
 $ sudo -u postgres createuser bongloy_demo -s -d
 ```
 
 Note, if `bongloy_demo` already exists but has insufficient privileges alter the role in psql.
 
-```shell
+```
 $ sudo -u postgres psql
 postgres=# ALTER ROLE bongloy_demo SUPERUSER CREATEDB;
 postgres=# \dg
@@ -38,10 +38,6 @@ postgres=# \dg
 
 ### Boot the development server
 
-```shell
+```
 $ bundle exec foreman start web
 ```
-
-### Sign up a test user
-
-Navigate to "Sign in" then "Sign up" a new user
