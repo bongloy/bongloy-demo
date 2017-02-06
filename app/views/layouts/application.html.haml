@@ -31,7 +31,11 @@
               %li
                 = link_to("Bongloy Checkout", "#bongloy_checkout")
               %li
+                = link_to("Bongloy.js", "#bongloy_js")
+              %li
                 = link_to(fa_icon("book", :text => "Documentation"), "https://www.bongloy.com/documentation", :target => "_blank")
+              %li
+                = link_to(fa_icon("home", :text => "Bongloy Home"), "https://www.bongloy.com", :target => "_blank")
               - if !user_signed_in?
                 %li
                   = link_to(fa_icon("facebook", :text => "Sign In"), omniauth_authorize_path(:user, :facebook))

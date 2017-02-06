@@ -18,6 +18,17 @@ describe "Charges" do
       visit(new_charge_path(query))
     end
 
+    def assert_new_charge_page!
+      within_navbar do
+        expect(page).to have_link("Bongloy Checkout")
+        expect(page).to have_link("Bongloy.js")
+        expect(page).to have_link("Documentation", :href => "https://www.bongloy.com/documentation")
+        expect(page).to have_link("Bongloy Home", :href => "https://www.bongloy.com")
+      end
+    end
+
+    it { assert_new_charge_page! }
+
     context "and I signed in" do
       let(:omniauth) { Bongloy::SpecHelpers::OmniAuth.new(omniauth_options) }
       let(:omniauth_options) { {:first_name => "David"} }
