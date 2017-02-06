@@ -1,12 +1,14 @@
 !!!
 %html
+  - title = "Bongloy Demo"
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
     %title
-      Bongloy-Demo
+      = title
     = javascript_include_tag(@checkout_configuration.bongloy_js_url)
     = tag(:meta, :name => "bongloy-publishable-key", :content => @checkout_configuration.publishable_key)
+    = tag(:meta, :name => "bongloy-load-checkout", :content => @checkout_configuration.load_checkout)
     = csrf_meta_tags
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
@@ -23,7 +25,7 @@
               %span.icon-bar
               %span.icon-bar
             %a.navbar-brand{:href => "#"}
-              Bongloy Demo
+              = title
           #main_navbar.collapse.navbar-collapse
             %ul#resources_navbar.nav.navbar-nav
               %li

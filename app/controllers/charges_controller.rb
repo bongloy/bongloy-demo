@@ -31,6 +31,9 @@ class ChargesController < ApplicationController
   end
 
   def checkout_configuration
-    @checkout_configuration ||= CheckoutConfiguration.new(:user => current_user)
+    @checkout_configuration ||= CheckoutConfiguration.new(
+      :user => current_user,
+      :load_checkout => params[:load_checkout]
+    )
   end
 end

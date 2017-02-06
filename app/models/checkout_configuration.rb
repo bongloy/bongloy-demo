@@ -4,7 +4,8 @@ class CheckoutConfiguration
                 :bongloy_test_account_email, :bongloy_test_account_password,
                 :image_url, :name, :description, :label,
                 :amount, :currency,
-                :user, :email, :charge_description
+                :user, :email, :charge_description,
+                :load_checkout
 
   delegate :first_name, :first_name?, :email, :to => :user, :prefix => true, :allow_nil => true
 
@@ -24,6 +25,7 @@ class CheckoutConfiguration
     self.amount = options[:amount] || ENV["BONGLOY_CHECKOUT_DEFAULT_AMOUNT"]
     self.currency = options[:currency] || ENV["BONGLOY_CHECKOUT_DEFAULT_CURRENCY"]
     self.email = options[:email] || user_email
+    self.load_checkout = options[:load_checkout].to_s == "1" ? "1" : "0"
   end
 
   def sample_expiry_date

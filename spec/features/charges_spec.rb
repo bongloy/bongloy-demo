@@ -11,9 +11,11 @@ describe "Charges" do
   end
 
   context "given I'm on '/charges/new'" do
+    let(:query) { {} }
+
     def setup_scenario
       super
-      visit(new_charge_path)
+      visit(new_charge_path(query))
     end
 
     context "and I signed in" do
@@ -87,6 +89,23 @@ describe "Charges" do
         end
       end
 
+      def assert_checkout_not_loaded!
+        expect(page).to have_no_selector(:xpath, checkout_xpath)
+      end
+
+      def assert_checkout_loaded!
+        expect(page).to have_selector(:xpath, checkout_xpath)
+      end
+
+      def checkout_xpath
+        "//iframe[@name='stripe_checkout_app']"
+      end
+
+      context "and I pass load_checkout=1 as a query string" do
+        let(:query) { {:load_checkout => 1} }
+        it { assert_checkout_loaded! }
+      end
+
       context "without filling in the form" do
         def setup_scenario
           super
@@ -94,6 +113,7 @@ describe "Charges" do
         end
 
         def assert_form_errors!
+          assert_checkout_not_loaded!
           form_inputs.keys.each do |form_input_id|
             form_group = find_form_group(form_input_id)
             expect(form_group[:class]).to include("has-error")
