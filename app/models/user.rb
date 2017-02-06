@@ -6,15 +6,20 @@ class User < ActiveRecord::Base
   attr_accessor :password
 
   def self.find_or_create_from_oauth(auth)
-    oauth_email = auth.info.email
+    logger.info("Finding or creating user from: #{auth}")
 
-    user = where(:provider => auth.provider).where(:uid => auth.uid).or(where(:email => oauth_email)).first_or_initialize
+    oauth_provider = auth["provider"]
+    oauth_uid = auth["uid"]
+    oauth_info = auth["info"] || {}
+    oauth_email = oauth_info["email"]
 
+    user = where(:provider => oauth_provider).where(:uid => oauth_uid).or(where(:email => oauth_email)).first_or_initialize
+
+    user.provider = oauth_provider
+    user.uid = oauth_uid
     user.email = oauth_email
-    user.first_name = auth.info.first_name
-    user.last_name = auth.info.last_name
-    user.provider = auth.provider
-    user.uid = auth.uid
+    user.first_name = oauth_info["first_name"]
+    user.last_name = oauth_info["last_name"]
     user.save
     user
   end
