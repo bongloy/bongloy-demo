@@ -8,26 +8,7 @@ jQuery ->
 
 bongloyCheckout =
   loadCheckout: ->
-
-    checkoutForm = $('*[data-bongloy-checkout-form]')
-    checkoutScript = checkoutForm.find('script[data-key]')
-
-    return unless checkoutScript.length
-
-    handlerOptions = {}
-    handlerOptions["key"] = checkoutScript.data("key") if checkoutScript.data("key")
-    handlerOptions["image"] = checkoutScript.data("image") if checkoutScript.data("image")
-    handlerOptions["locale"] = checkoutScript.data("locale") if checkoutScript.data("locale")
-    handlerOptions["name"] = checkoutScript.data("name") if checkoutScript.data("name")
-    handlerOptions["description"] = checkoutScript.data("description") if checkoutScript.data("description")
-    handlerOptions["amount"] = checkoutScript.data("amount") if checkoutScript.data("amount")
-    handlerOptions["token"] = (token) ->
-      checkoutForm.append($("<input>").attr("type", "hidden").attr("name", "bongloyToken").val(token.id))
-      checkoutForm.submit()
-
-    handler = BongloyCheckout.configure(handlerOptions)
-
-    handler.open()
+    checkoutForm = $('*[data-bongloy-checkout-form]').find("button.stripe-button-el").click()
 
 paymentForm =
   form: ->
