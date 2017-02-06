@@ -19,6 +19,7 @@ gem 'omniauth-facebook'
 gem 'bongloy', :github => "dwilkie/bongloy-ruby"
 gem 'simple_form', :github => "plataformatec/simple_form"
 gem 'rails-assets-jquery.payment.cambodia', :source => 'https://rails-assets.org'
+gem 'bootswatch-rails'
 
 group :development, :test do
   gem 'rspec-rails'

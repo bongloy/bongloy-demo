@@ -1,5 +1,5 @@
 class ChargesController < ApplicationController
-  before_action :authenticate_user!, :checkout_configuration
+  before_action :checkout_configuration
 
   def new
     @charge = Charge.new

@@ -4,32 +4,21 @@ describe "Charges" do
   let(:user) { create(:user) }
 
   def setup_scenario
-    sign_in(:user => user)
   end
 
   before do
     setup_scenario
   end
 
-  context "when I navigate to '/dashboard'" do
+  context "given I'm on '/charges/new'" do
     def setup_scenario
       super
-      visit user_root_path
-      within_resources_navbar do
-        click_link("Home")
-      end
-    end
-
-    it { expect(current_path).to eq(user_root_path) }
-  end
-
-  context "given I'm on '/dashboard'" do
-    def setup_scenario
-      super
-      visit(user_root_path)
+      visit(new_charge_path)
     end
 
     context "and I test out payment using bongloy.js", :js do
+      include Bongloy::SpecHelpers::FeatureHelpers::FormHelpers
+
       def submit_form
         click_button("Pay with Bongloy")
       end

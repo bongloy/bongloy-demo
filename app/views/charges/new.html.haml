@@ -1,13 +1,31 @@
-%h2
-  Hi
-  = "#{current_user.display_name}!"
-%hr
-%h3
-  Bongloy Checkout
 .row
-  .col-md-5
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    - if !user_signed_in?
+      .alert.alert-info.alert-dismissible{:role => "alert"}
+        %button.close{:type => "button", :data => {:dismiss => "alert"}, "aria-label" => "Close"}
+          %span{"aria-hidden" => true}
+            &times;
+        = link_to(image_tag("FB-f-Logo__blue_29.png", :alt => "Sign in with Facebook"), omniauth_authorize_path(:user, :facebook))
+        Sign in with
+        = link_to("Facebook", omniauth_authorize_path(:user, :facebook))
+        to personalize your experience
+
+    %h2
+      Bongloy Demo
+      - if user_signed_in?
+        = "#{current_user.display_name}!"
+
+#bongloy_checkout.row
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    %h3
+      Bongloy Checkout
+    %p
+      Bongloy Checkout is an embeddable payment form for desktop, tablet, and mobile devices. It works within your site so customers can pay instantly, without being redirected away to complete the transaction.
+
+.row
+  .col-xs-12.col-sm-12.col-md-5.col-lg-5
     .row
-      .col-md-6
+      .col-xs-12.col-sm-12.col-md-6.col-lg-6
         %h4
           = @checkout_configuration.description
         %p
@@ -15,11 +33,13 @@
         = simple_form_for(@charge, :html => {:id => "new_charge_checkout_js"}) do |f|
           = render("form_default_fields", :f => f)
           %script{:src => @checkout_configuration.checkout_js_url, :class => "bongloy-button", :data => {:key => @checkout_configuration.publishable_key, :image => @checkout_configuration.image_url, :name => @checkout_configuration.name, :description => @checkout_configuration.description, :label => @checkout_configuration.label, :amount => @checkout_configuration.amount}}
-      .col-md-6
+      .col-xs-12.col-sm-12.col-md-6.col-lg-6
         = image_tag("nature_republic_argan_essential_deep_care_shampoo.jpg", :class => "img-responsive", :alt => "Nature Republic Argan Essential Deep Care Shampoo")
-    %hr
+
+  .col-xs-12.col-sm-12.col-md-7.col-lg-7
     = render "sample_cards"
-  .col-md-7
+.row
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
     %p
       You can generate the blue button with the following html snippit:
     %p
@@ -39,11 +59,13 @@
                   data-locale="auto">
                 </script>
               </form>
-%hr
-%h3
-  bongloy.js
+
 .row
-  .col-md-5
+  .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    %h3
+      bongloy.js
+.row
+  .col-xs-12.col-sm-12.col-md-5.col-lg-5
     %p
       You can also use bongloy.js to create your own custom form for collecting Payment. See the
       = link_to("source code", "https://github.com/dwilkie/bongloy-demo")
@@ -65,5 +87,5 @@
         %input#cc_cvc.input-lg.form-control.cc-cvc{:type => "password", :pattern => "\\d*", :autocomplete => "off", :data => {:payment_card_cvc => true}}
       .form-group.btn-group
         = f.button :submit, "Pay with Bongloy", :class => "btn btn-success"
-  .col-md-7
+  .col-xs-12.col-sm-12.col-md-7.col-lg-7
     = render "sample_cards"

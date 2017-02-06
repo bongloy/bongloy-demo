@@ -1,5 +1,9 @@
 @import "bootstrap-sprockets";
+@import "bootswatch/cerulean/variables";
 @import "bootstrap";
+// Bootstrap body padding for fixed navbar
+body { padding-top: 60px; }
+@import "bootswatch/cerulean/bootswatch";
 @import "font-awesome";
 @import "bongloy_demo";
 @import "gh-fork-ribbon"
