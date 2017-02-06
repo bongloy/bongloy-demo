@@ -47,6 +47,23 @@ describe User do
         it { assert_user!(:persisted => true) }
       end
 
+      context "name is returned instead of first_name and last_name" do
+        def setup_scenario
+          omniauth.first_name = nil
+          omniauth.last_name = nil
+          omniauth.name = "Mara Chamroune"
+          omniauth.add_mock!
+          super
+        end
+
+        def assert_name!
+          expect(subject.first_name).to eq("Mara")
+          expect(subject.last_name).to eq("Chamroune")
+        end
+
+        it { assert_name! }
+      end
+
       context "with invalid params" do
         let(:omniauth_options) { {:email => ""} }
         it { assert_user!(:persisted => false) }
