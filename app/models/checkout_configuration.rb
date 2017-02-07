@@ -65,7 +65,6 @@ class CheckoutConfiguration < ApplicationRecord
   def checkout_url_options
     {
       :amount_cents => amount_cents,
-      :currency => currency,
       :name => name,
       :description => description,
       :label => label,
