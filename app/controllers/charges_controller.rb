@@ -1,4 +1,6 @@
 class ChargesController < ApplicationController
+  before_action :checkout_configuration
+
   def new
     setup_charge
   end
