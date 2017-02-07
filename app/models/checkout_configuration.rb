@@ -67,8 +67,7 @@ class CheckoutConfiguration < ApplicationRecord
       :amount_cents => amount_cents,
       :name => name,
       :description => description,
-      :label => label,
-      :load_checkout => "1"
+      :label => label
     }
   end
 
