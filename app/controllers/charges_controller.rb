@@ -1,11 +1,6 @@
 class ChargesController < ApplicationController
-  before_action :checkout_configuration
-
   def new
-    @charge = Charge.new
-    @charge.amount = checkout_configuration.amount
-    @charge.currency = checkout_configuration.currency
-    @charge.description = checkout_configuration.charge_description
+    setup_charge
   end
 
   def create
@@ -28,12 +23,5 @@ class ChargesController < ApplicationController
 
   def permitted_params
     params.permit(:charge => [:amount, :currency, :description])
-  end
-
-  def checkout_configuration
-    @checkout_configuration ||= CheckoutConfiguration.new(
-      :user => current_user,
-      :load_checkout => params[:load_checkout]
-    )
   end
 end

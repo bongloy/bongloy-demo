@@ -15,4 +15,15 @@ FactoryGirl.define do
     currency "usd"
     token { Bongloy::SpecHelpers::ApiHelpers.new.generate_uuid }
   end
+
+  factory :checkout_configuration do
+    trait :custom do
+      currency "USD"
+      amount_cents 500
+      name "My Shop"
+      description "My Custom Description"
+      product_description "My Product Description"
+      label "My Label"
+    end
+  end
 end

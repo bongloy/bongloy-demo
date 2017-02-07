@@ -1,0 +1,18 @@
+.row
+  .col-xs-12.col-sm-12.col-md-6.col-lg-6
+    %h4
+      = @checkout_configuration.name
+    %h5
+      = @checkout_configuration.description
+    %p
+      - if local_assigns[:show_product_description]
+        = @checkout_configuration.product_description
+      = simple_form_for(@charge, :html => {:id => "new_charge_checkout_js", :data => {:bongloy_checkout_form => "true"}}) do |f|
+        = render("form_default_fields", :f => f)
+        %script{:src => @checkout_configuration.checkout_js_url, :class => "bongloy-button", :data => {:key => @checkout_configuration.publishable_key, :image => @checkout_configuration.image_url, :name => @checkout_configuration.name, :description => @checkout_configuration.description, :label => @checkout_configuration.label, :amount => @checkout_configuration.amount_cents, :currency => @checkout_configuration.currency}}
+  .col-xs-12.col-sm-12.col-md-6.col-lg-6
+    - if local_assigns[:show_qr_code]
+      #checkout_qr_code
+        %h4
+          Scan QR Code
+        = @checkout_configuration.qr_code(checkout_url(@checkout_configuration.checkout_url_options)).as_svg(:offset => 5, :module_size => 4).html_safe

@@ -21,25 +21,32 @@
       Bongloy Checkout is an embeddable payment form for desktop, tablet, and mobile devices. It works within your site so customers can pay instantly, without being redirected away to complete the transaction.
 
 .row
-  .col-xs-12.col-sm-12.col-md-5.col-lg-5
-    .row
-      .col-xs-12.col-sm-12.col-md-6.col-lg-6
-        %h4
-          = @checkout_configuration.description
-        %p
-          This shampoo has rich organic Argan oil which provides moisture and nutrition for severely damaged hair. Rosehip oil and Primrose oil give a glossy, tangle free finish.
-        = simple_form_for(@charge, :html => {:id => "new_charge_checkout_js", :data => {:bongloy_checkout_form => "true"}}) do |f|
-          = render("form_default_fields", :f => f)
-          %script{:src => @checkout_configuration.checkout_js_url, :class => "bongloy-button", :data => {:key => @checkout_configuration.publishable_key, :image => @checkout_configuration.image_url, :name => @checkout_configuration.name, :description => @checkout_configuration.description, :label => @checkout_configuration.label, :amount => @checkout_configuration.amount}}
-      .col-xs-12.col-sm-12.col-md-6.col-lg-6
-        = image_tag("nature_republic_argan_essential_deep_care_shampoo.jpg", :class => "img-responsive", :alt => "Nature Republic Argan Essential Deep Care Shampoo")
+  .col-xs-12.col-sm-12.col-md-6.col-lg-6
+    #merchant_view.panel.panel-success
+      .panel-heading
+        Merchant View
+      .panel-body
+        = simple_form_for(@checkout_configuration, :url => checkout_configuration_path, :method => :post) do |f|
+          = f.error_notification
+          = f.input(:currency, :required => false, :prompt => false, :collection => CheckoutConfiguration::CURRENCIES)
+          = f.input(:amount, :input_html => {:pattern => "\\d*", :data => {:autonumeric => true}})
+          = f.input(:name)
+          = f.input(:description)
+          = f.input(:product_description, :as => :text)
+          = f.input(:label)
+          = f.button(:submit, "Update Configuration", :class => "btn btn-success")
 
-  .col-xs-12.col-sm-12.col-md-7.col-lg-7
-    = render "sample_cards"
+  .col-xs-12.col-sm-12.col-md-6.col-lg-6
+    #customer_view.panel.panel-info
+      .panel-heading
+        Customer View
+      .panel-body
+        = render("checkout", :show_product_description => true, :show_qr_code => true)
+
 .row
   .col-xs-12.col-sm-12.col-md-12.col-lg-12
     %p
-      You can generate the blue button with the following html snippit:
+      You can generate the blue checkout button with the following html snippit:
     %p
       %pre
         %code#bongloy_checkout_snippit.code
@@ -53,7 +60,8 @@
                   data-name="#{@checkout_configuration.name}"
                   data-description="#{@checkout_configuration.description}"
                   data-label="#{@checkout_configuration.label}"
-                  data-amount="#{@checkout_configuration.amount}"
+                  data-amount="#{@checkout_configuration.amount_cents}"
+                  data-currency="#{@checkout_configuration.currency}"
                   data-locale="auto">
                 </script>
               </form>

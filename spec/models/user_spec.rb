@@ -6,6 +6,10 @@ describe User do
   let(:omniauth) { Bongloy::SpecHelpers::OmniAuth.new(omniauth_options) }
   let(:omniauth_options) { {} }
 
+  describe "associations" do
+    it { is_expected.to have_one(:checkout_configuration) }
+  end
+
   describe "#display_name" do
     context "has a first name" do
       subject { build(factory, :first_name => "Mara") }

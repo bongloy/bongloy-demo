@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe "Charges" do
-  let(:user) { create(:user) }
-
   def setup_scenario
   end
 
@@ -25,28 +23,104 @@ describe "Charges" do
         expect(page).to have_link("Documentation", :href => "https://www.bongloy.com/documentation")
         expect(page).to have_link("Bongloy Home", :href => "https://www.bongloy.com")
       end
+      expect(page).to have_selector("#checkout_qr_code")
+    end
+
+    def within_bongloy_checkout_snippit(&block)
+      within("#bongloy_checkout_snippit") do
+        yield
+      end
     end
 
     it { assert_new_charge_page! }
 
     context "and I signed in" do
+      let(:user) { create(:user, :first_name => "David") }
+      let(:checkout_configuration) { create(:checkout_configuration, :label => "My Label", :user => user) }
       let(:omniauth) { Bongloy::SpecHelpers::OmniAuth.new(omniauth_options) }
-      let(:omniauth_options) { {:first_name => "David"} }
+      let(:omniauth_options) { {:email => user.email, :first_name => user.first_name} }
 
       def setup_scenario
         super
+        checkout_configuration
         omniauth
         connect_with_facebook
       end
 
       def assert_personalized_page!
         expect(page).to have_no_selector("#personalize_alert")
-        within("#bongloy_checkout_snippit") do
+        within_bongloy_checkout_snippit do
           expect(page).to have_content("David's Shop")
+          expect(page).to have_content("My Label")
         end
       end
 
       it { assert_personalized_page! }
+    end
+
+    context "and I update the default checkout configuration" do
+      let(:checkout_configuration_options) { {} }
+      let(:checkout_configuration_attributes) { attributes_for(:checkout_configuration, :custom) }
+
+      def setup_scenario
+        super
+        update_checkout_configuration(checkout_configuration_options)
+      end
+
+      def update_checkout_configuration(options = {})
+        fill_in(
+          translate_label_for!(:amount),
+          :with => options[:amount] || checkout_configuration_attributes[:amount_cents]
+        )
+
+        fill_in(
+          translate_label_for!(:name),
+          :with => options[:name] || checkout_configuration_attributes[:name]
+        )
+
+        fill_in(
+          translate_label_for!(:description),
+          :with => options[:description] || checkout_configuration_attributes[:description]
+        )
+
+        fill_in(
+          translate_label_for!(:product_description),
+          :with => options[:product_description] || checkout_configuration_attributes[:product_description]
+        )
+
+        fill_in(
+          translate_label_for!(:label),
+          :with => options[:label] || checkout_configuration_attributes[:label]
+        )
+
+        click_button("Update Configuration")
+      end
+
+      context "incorrectly" do
+        let(:checkout_configuration_options) { { :description => ""} }
+
+        def assert_checkout_configuration_errors!
+          within("#merchant_view") do
+            expect(page).to have_content(translate_simple_form!(:error_notification, :default_message))
+          end
+        end
+
+        it { assert_checkout_configuration_errors! }
+      end
+
+      context "correctly" do
+        def assert_update_checkout_configuration!
+          within_flash do
+            expect(page).to have_content("Checkout Configuration Updated!")
+          end
+
+          within_bongloy_checkout_snippit do
+            expect(page).to have_content(checkout_configuration_attributes[:name])
+          end
+        end
+
+        it { assert_update_checkout_configuration! }
+      end
     end
 
     context "and I test out payment using bongloy.js", :js do

@@ -8,7 +8,7 @@ jQuery ->
 
 bongloyCheckout =
   loadCheckout: ->
-    checkoutForm = $('*[data-bongloy-checkout-form]').find("button.stripe-button-el").click()
+    $('*[data-bongloy-checkout-form]').find("button.stripe-button-el").click()
 
 paymentForm =
   form: ->

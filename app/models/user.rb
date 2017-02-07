@@ -1,7 +1,9 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :validatable, :omniauthable, :omniauth_providers => [:facebook]
+
+  has_one :checkout_configuration
 
   attr_accessor :password
 
