@@ -16,4 +16,5 @@
         %h4
           Click, Touch or Scan QR Code
         - url = checkout_url(@checkout_configuration.checkout_url_options)
-        = @checkout_configuration.qr_code(url).as_svg(:offset => 5, :module_size => 4).html_safe
+        = link_to("#") do
+          = @checkout_configuration.qr_code(url).as_svg(:offset => 5, :module_size => 4).html_safe
