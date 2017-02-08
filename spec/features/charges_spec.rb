@@ -11,9 +11,29 @@ describe "Charges" do
   context "given I'm on '/charges/new'" do
     let(:query) { {} }
 
+    let(:user) { create(:user) }
+    let(:checkout_configuration_attributes) { attributes_for(:checkout_configuration, :custom) }
+    let(:checkout_configuration) {
+      create(
+        :checkout_configuration, checkout_configuration_attributes.merge(:user => user)
+      )
+    }
+
+    let(:omniauth_options) { {:email => user.email} }
+    let(:omniauth) { Bongloy::SpecHelpers::OmniAuth.new(omniauth_options) }
+
+    def sign_in
+      omniauth
+      connect_with_facebook
+    end
+
+    def visit_new_charge_path
+      visit(new_charge_path(query))
+    end
+
     def setup_scenario
       super
-      visit(new_charge_path(query))
+      visit_new_charge_path
     end
 
     def assert_new_charge_page!
@@ -35,23 +55,17 @@ describe "Charges" do
     it { assert_new_charge_page! }
 
     context "and I signed in" do
-      let(:user) { create(:user, :first_name => "David") }
-      let(:checkout_configuration) { create(:checkout_configuration, :label => "My Label", :user => user) }
-      let(:omniauth) { Bongloy::SpecHelpers::OmniAuth.new(omniauth_options) }
-      let(:omniauth_options) { {:email => user.email, :first_name => user.first_name} }
-
       def setup_scenario
         super
         checkout_configuration
-        omniauth
-        connect_with_facebook
+        sign_in
       end
 
       def assert_personalized_page!
         expect(page).to have_no_selector("#personalize_alert")
         within_bongloy_checkout_snippit do
-          expect(page).to have_content("David's Shop")
-          expect(page).to have_content("My Label")
+          expect(page).to have_content(checkout_configuration_attributes[:name])
+          expect(page).to have_content(checkout_configuration_attributes[:label])
         end
       end
 
@@ -60,7 +74,7 @@ describe "Charges" do
 
     context "and I update the default checkout configuration" do
       let(:checkout_configuration_options) { {} }
-      let(:checkout_configuration_attributes) { attributes_for(:checkout_configuration, :custom) }
+
 
       def setup_scenario
         super
@@ -220,6 +234,17 @@ describe "Charges" do
 
         context "Wing Card" do
           let(:card) { {:number => "5018188000001614", :cvc => "1234"}  }
+          let(:bongloy_charges_uri) { URI.parse(api_helpers.charges_url) }
+
+          let(:bongloy_charge_requests) {
+            WebMock.requests.select { |request|
+              request.uri.host == bongloy_charges_uri.host && request.uri.path == bongloy_charges_uri.path
+            }
+          }
+
+          def parse_request_body(request_body)
+            WebMock::Util::QueryMapper.query_to_values(request_body)
+          end
 
           def assert_successful_charge!
             within_flash do
@@ -227,9 +252,32 @@ describe "Charges" do
               expect(page).to have_content(ENV["BONGLOY_TEST_ACCOUNT_EMAIL"])
               expect(page).to have_content(ENV["BONGLOY_TEST_ACCOUNT_PASSWORD"])
             end
+            expect(bongloy_charge_requests.count).to eq(1)
           end
 
-          it { assert_successful_charge! }
+          context "signing in" do
+            let(:checkout_configuration_attributes) { {:amount_cents => 50} }
+
+            def setup_scenario
+              checkout_configuration
+              visit_new_charge_path
+              sign_in
+              super
+            end
+
+            def assert_successful_charge!
+              super
+              bongloy_charge_request = bongloy_charge_requests.first
+              bongloy_charge_request_body = parse_request_body(bongloy_charge_request.body)
+              expect(bongloy_charge_request_body["amount"]).to eq("50")
+            end
+
+            it { assert_successful_charge! }
+          end
+
+          context "without signing in" do
+            it { assert_successful_charge! }
+          end
         end
       end
     end

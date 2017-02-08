@@ -2,6 +2,8 @@ class CheckoutConfiguration < ApplicationRecord
   DEFAULT_CURRENCY = "USD"
   CURRENCIES = [DEFAULT_CURRENCY]
 
+  DEFAULT_AMOUNT_CENTS = 500
+
   belongs_to :user
 
   validates :currency, :presence => true, :inclusion => {:in => CURRENCIES}
@@ -84,7 +86,7 @@ class CheckoutConfiguration < ApplicationRecord
     self.description ||= ENV["BONGLOY_CHECKOUT_DEFAULT_DESCRIPTION"]
     self.product_description ||= ENV["BONGLOY_CHECKOUT_DEFAULT_PRODUCT_DESCRIPTION"]
     self.label ||= ENV["BONGLOY_CHECKOUT_DEFAULT_LABEL"]
-    self.amount_cents ||= ENV["BONGLOY_CHECKOUT_DEFAULT_AMOUNT"].to_i
+    self.amount_cents ||= (ENV["BONGLOY_CHECKOUT_DEFAULT_AMOUNT"] || DEFAULT_AMOUNT_CENTS).to_i
     self.currency ||= ENV["BONGLOY_CHECKOUT_DEFAULT_CURRENCY"].to_s.upcase.presence || DEFAULT_CURRENCY
   end
 

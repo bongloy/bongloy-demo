@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def build_charge
     @charge = Charge.new
-    @charge.amount = checkout_configuration.amount
+    @charge.amount = checkout_configuration.amount_cents
     @charge.currency = checkout_configuration.currency
     @charge.description = checkout_configuration.charge_description
     @charge
