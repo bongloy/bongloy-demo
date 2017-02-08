@@ -23,8 +23,7 @@ class CheckoutConfiguration < ApplicationRecord
   attr_accessor :bongloy_js_url, :checkout_js_url, :publishable_key,
                 :bongloy_charges_url,
                 :bongloy_test_account_email, :bongloy_test_account_password,
-                :image_url, :charge_description,
-                :load_checkout
+                :image_url, :charge_description
 
   delegate :first_name, :first_name?, :email, :to => :user, :prefix => true, :allow_nil => true
 
@@ -62,10 +61,6 @@ class CheckoutConfiguration < ApplicationRecord
 
   def bongloy_test_account_password
     @bongloy_test_account_password ||= ENV["BONGLOY_TEST_ACCOUNT_PASSWORD"]
-  end
-
-  def load_checkout
-    @load_checkout.to_s == "1" ? "1" : "0"
   end
 
   def checkout_url_options

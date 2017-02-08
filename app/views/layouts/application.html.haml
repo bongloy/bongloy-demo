@@ -8,7 +8,6 @@
       = title
     = javascript_include_tag(@checkout_configuration.bongloy_js_url)
     = tag(:meta, :name => "bongloy-publishable-key", :content => @checkout_configuration.publishable_key)
-    = tag(:meta, :name => "bongloy-load-checkout", :content => @checkout_configuration.load_checkout)
     = csrf_meta_tags
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"

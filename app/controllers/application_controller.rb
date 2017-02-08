@@ -20,7 +20,6 @@ class ApplicationController < ActionController::Base
   def checkout_configuration
     @checkout_configuration ||= CheckoutConfiguration.find_by_id(session_checkout_configuration) || build_checkout_configuration
     @checkout_configuration.set_defaults
-    @checkout_configuration.load_checkout = params[:load_checkout]
     @checkout_configuration
   end
 

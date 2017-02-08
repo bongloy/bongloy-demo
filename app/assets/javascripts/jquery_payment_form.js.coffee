@@ -5,7 +5,6 @@ jQuery ->
   Bongloy.setPublishableKey(publishableKey) if publishableKey
   paymentForm.setupForm() if paymentForm.form().length
   bongloyCheckoutHandler = bongloyCheckout.handler()
-  bongloyCheckoutHandler.open() if $('meta[name="bongloy-load-checkout"]').attr('content') == "1"
 
   $(window).bind 'popstate', (e) ->
     bongloyCheckoutHandler.close()
