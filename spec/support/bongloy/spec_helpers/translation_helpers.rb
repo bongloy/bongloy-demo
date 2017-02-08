@@ -1,4 +1,4 @@
-module Bongloy::SpecHelpers::FeatureHelpers::TranslationHelpers
+module Bongloy::SpecHelpers::TranslationHelpers
   private
 
   def translate!(*keys)

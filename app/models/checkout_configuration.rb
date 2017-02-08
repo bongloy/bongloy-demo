@@ -10,9 +10,13 @@ class CheckoutConfiguration < ApplicationRecord
   validates :label, :presence => true
   validates :product_description, :presence => true
 
-  monetize :amount_cents, :with_model_currency => :currency
+  monetize :amount_cents, :with_model_currency => :currency,
+                          :subunit_numericality => {
+                            :greater_than_or_equal_to => 50
+                          }
 
   before_validation :set_defaults, :on => :create
+  after_validation  :copy_errors
 
   attr_accessor :bongloy_js_url, :checkout_js_url, :publishable_key,
                 :bongloy_charges_url,
@@ -82,5 +86,13 @@ class CheckoutConfiguration < ApplicationRecord
     self.label ||= ENV["BONGLOY_CHECKOUT_DEFAULT_LABEL"]
     self.amount_cents ||= ENV["BONGLOY_CHECKOUT_DEFAULT_AMOUNT"].to_i
     self.currency ||= ENV["BONGLOY_CHECKOUT_DEFAULT_CURRENCY"].to_s.upcase.presence || DEFAULT_CURRENCY
+  end
+
+  private
+
+  def copy_errors
+    errors[:amount_cents].each do |error|
+      errors.add(:amount, error)
+    end
   end
 end
