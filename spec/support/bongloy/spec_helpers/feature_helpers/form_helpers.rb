@@ -9,5 +9,6 @@ module Bongloy::SpecHelpers::FeatureHelpers::FormHelpers
     options[:with].to_s.scan(/.{1,2}/).each do |segment|
       input.native.send_keys(segment)
     end
+    input.native.send_keys(:tab) if options[:tab_after_input]
   end
 end

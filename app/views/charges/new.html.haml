@@ -2,7 +2,7 @@
   .col-xs-12.col-sm-12.col-md-12.col-lg-12
     - if !user_signed_in?
       #personalize_alert.alert.alert-info.alert-dismissible{:role => "alert"}
-        %button.close{:type => "button", :data => {:dismiss => "alert"}, "aria-label" => "Close"}
+        %button.close{:type => "button", :"aria-label" => "Close", :data => {:dismiss => "alert"}}
           %span{"aria-hidden" => true}
             &times;
         = link_to(image_tag("FB-f-Logo__blue_29.png", :alt => "Sign in with Facebook"), omniauth_authorize_path(:user, :facebook))
@@ -10,15 +10,15 @@
         = link_to("Facebook", omniauth_authorize_path(:user, :facebook))
         to personalize your experience
 
-    %h2
-      Bongloy Demo
-
 #bongloy_checkout.row
   .col-xs-12.col-sm-12.col-md-12.col-lg-12
-    %h3
+    %h2
       Bongloy Checkout
     %p
       Bongloy Checkout is an embeddable payment form for desktop, tablet, and mobile devices. It works within your site so customers can pay instantly, without being redirected away to complete the transaction.
+
+    %p
+      In this demo, merchants can customize the flow using the <span class="label label-success">Merchant View</span> updates will appear in the <span class="label label-info">Customer View</span>
 
 .row
   .col-xs-12.col-sm-12.col-md-6.col-lg-6
@@ -43,8 +43,10 @@
       .panel-body
         = render("checkout", :show_product_description => true, :show_qr_code => true)
 
-.row
+.row#code_snippits
   .col-xs-12.col-sm-12.col-md-12.col-lg-12
+    %h2
+      Code Snippits
     %p
       You can generate the blue checkout button with the following html snippit:
     %p
@@ -65,33 +67,3 @@
                   data-locale="auto">
                 </script>
               </form>
-
-.row#bongloy_js
-  .col-xs-12.col-sm-12.col-md-12.col-lg-12
-    %h3
-      Bongloy.js
-.row
-  .col-xs-12.col-sm-12.col-md-5.col-lg-5
-    %p
-      You can also use bongloy.js to create your own custom form for collecting Payment. See the
-      = link_to("source code", "https://github.com/dwilkie/bongloy-demo", :target => "_blank")
-      for an example of how to create the form below:
-    = simple_form_for(@charge, :html => {:autocomplete => "on", :data => {:payment_form => true}}) do |f|
-      = render("form_default_fields", :f => f)
-      #card_number.form-group
-        %label.control-label{:for => "cc_number"}
-          = fa_icon("credit-card", :text => "Card Number")
-        %input#cc_number.input-lg.form-control.cc-number{:type => "text", :pattern => "\\d*", :autocomplete => "cc-number", :data => {:payment_card_number => true}}
-        %p.help-block
-      #card_expiry.form-group
-        %label.control-label{:for => "cc_exp"}
-          = fa_icon("calendar", :text => "Expires MM/YY")
-        %input#cc_exp.input-lg.form-control.cc-exp{:type => "text", :pattern => "\\d*", :autocomplete => "cc-exp", :data => {:payment_card_exp => true}}
-      #card_cvc.form-group
-        %label.control-label{:for => "cc_cvc"}
-          = fa_icon("lock", :text => "Security Code / PIN")
-        %input#cc_cvc.input-lg.form-control.cc-cvc{:type => "password", :pattern => "\\d*", :autocomplete => "off", :data => {:payment_card_cvc => true}}
-      .form-group.btn-group
-        = f.button :submit, "Pay with Bongloy", :class => "btn btn-success"
-  .col-xs-12.col-sm-12.col-md-7.col-lg-7
-    = render "sample_cards"

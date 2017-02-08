@@ -38,9 +38,8 @@ describe "Charges" do
 
     def assert_new_charge_page!
       within_navbar do
-        expect(page).to have_link("Bongloy Checkout")
-        expect(page).to have_link("Bongloy.js")
         expect(page).to have_link("Documentation", :href => "https://www.bongloy.com/documentation")
+        expect(page).to have_link("Source Code", :href => "https://github.com/dwilkie/bongloy-demo")
         expect(page).to have_link("Bongloy Home", :href => "https://www.bongloy.com")
       end
       expect(page).to have_selector("#checkout_qr_code")
@@ -140,9 +139,7 @@ describe "Charges" do
     context "and I test out payment using bongloy.js", :js do
       include Bongloy::SpecHelpers::FeatureHelpers::FormHelpers
 
-      def submit_form
-        click_button("Pay with Bongloy")
-      end
+      let(:button_text) { ENV["BONGLOY_CHECKOUT_DEFAULT_LABEL"] }
 
       def within_payment_form(&block)
         within("form#new_charge") do
@@ -151,7 +148,7 @@ describe "Charges" do
       end
 
       def form_inputs
-        {:card_number => nil, :card_expiry => nil, :card_cvc => nil}
+        {:card_number => nil}
       end
 
       def find_form_group(form_input)
@@ -178,13 +175,14 @@ describe "Charges" do
 
       def fill_out_payment_form(options = {})
         expiry = options[:expiry] || valid_expiry
+        card = options[:card] || {}
+        cvc = card[:cvc] || "123"
+
         within_payment_form do
-          if options[:card]
-            fill_in_card_number(:with => options[:card][:number])
-            fill_in_card_expiry(:with => expiry)
-            fill_in_card_cvc(:with => options[:card][:cvc])
-          end
-          submit_form
+          fill_in_card_number(:with => card[:number])
+          fill_in_card_expiry(:with => expiry)
+          fill_in_card_cvc(:with => cvc, :tab_after_input => true)
+          click_button(button_text)
         end
       end
 
@@ -239,6 +237,7 @@ describe "Charges" do
 
           context "signing in" do
             let(:checkout_configuration_attributes) { {:amount_cents => 50} }
+            let(:button_text) { checkout_configuration[:label] }
 
             def setup_scenario
               checkout_configuration
