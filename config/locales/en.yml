@@ -1,1 +1,8 @@
 en:
+  activerecord:
+    errors:
+      models:
+        checkout_configuration:
+          attributes:
+            amount_cents:
+              greater_than_or_equal_to: "must be greater than or equal to %{count}c"

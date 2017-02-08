@@ -24,11 +24,14 @@ describe CheckoutConfiguration do
     it { is_expected.to validate_presence_of(:label) }
     it { is_expected.to validate_presence_of(:product_description) }
 
-    context "#amount", :focus do
+    context "#amount" do
       subject { build(factory, :amount => 0) }
+
       let(:asserted_error) {
         translate!(
-          :errors, :messages, :greater_than_or_equal_to, :count => 50
+          :activerecord, :errors, :models,
+          :checkout_configuration, :attributes, :amount_cents,
+          :greater_than_or_equal_to, :count => 50
         )
       }
 
