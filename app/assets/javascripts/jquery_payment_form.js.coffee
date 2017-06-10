@@ -1,4 +1,7 @@
 ERROR_CLASS = "has-error"
+CARD_TYPE_ICONS = ["amex", "visa", "mastercard", "discover"]
+NO_EXPIRY_CARD_TYPES = ["acleda"]
+NO_CVC_CARD_TYPES = ["acleda"]
 
 jQuery ->
   publishableKey = $('meta[name="bongloy-publishable-key"]').attr('content')
@@ -53,6 +56,9 @@ paymentForm =
   toggleFormSubmit: (disable) ->
     paymentForm.form().find('input[type=submit]').attr('disabled', disable)
 
+  toggleInputDisabled: (input, disable) ->
+    input.attr('disabled', disable)
+
   formGroup: (input) ->
     input.parent(".form-group")
 
@@ -61,16 +67,14 @@ paymentForm =
     formGroup.toggleClass(ERROR_CLASS, error)
     input
 
-  showCardType: ->
+  processCardType: ->
    paymentForm.ccNumberInput().keyup ->
       self = $(this)
       cardType = $.payment.cardType(self.val())
       helpBlock = paymentForm.formGroup(self).find(".help-block")
-      cardTypeIcons = ["amex", "visa", "mastercard", "discover"]
-
       cardTypeText = cardType || "<i class='fa fa-question'></i>"
 
-      if (cardType in cardTypeIcons)
+      if (cardType in CARD_TYPE_ICONS)
         cardTypeIcon = "cc-#{cardType}"
         cardTypeText = ""
       else
@@ -78,11 +82,21 @@ paymentForm =
 
       helpBlock.html("<i class='fa fa-#{cardTypeIcon}'></i> #{cardTypeText}")
 
+      if (cardType in NO_EXPIRY_CARD_TYPES)
+        paymentForm.toggleInputDisabled(paymentForm.ccExpInput(), true)
+      else
+        paymentForm.toggleInputDisabled(paymentForm.ccExpInput(), false)
+
+      if (cardType in NO_CVC_CARD_TYPES)
+        paymentForm.toggleInputDisabled(paymentForm.ccCvcInput(), true)
+      else
+        paymentForm.toggleInputDisabled(paymentForm.ccCvcInput(), false)
+
   setupForm: ->
     paymentForm.ccNumberInput().payment('formatCardNumber')
     paymentForm.ccExpInput().payment('formatCardExpiry')
     paymentForm.ccCvcInput().payment('formatCardCVC')
-    paymentForm.showCardType()
+    paymentForm.processCardType()
 
     paymentForm.form().submit (ev) ->
       paymentForm.toggleFormSubmit(true)
@@ -95,8 +109,10 @@ paymentForm =
     cardExpiry = paymentForm.ccExpInput().payment('cardExpiryVal')
     cardCvc = paymentForm.ccCvcInput().val()
     paymentForm.toggleInputError(paymentForm.ccNumberInput(), !$.payment.validateCardNumber(cardNumber))
-    paymentForm.toggleInputError(paymentForm.ccExpInput(), !$.payment.validateCardExpiry(cardExpiry))
-    paymentForm.toggleInputError(paymentForm.ccCvcInput(), !$.payment.validateCardCVC(cardCvc, cardType))
+    if !(cardType in NO_EXPIRY_CARD_TYPES)
+      paymentForm.toggleInputError(paymentForm.ccExpInput(), !$.payment.validateCardExpiry(cardExpiry))
+    if !(cardType in NO_EXPIRY_CARD_TYPES)
+      paymentForm.toggleInputError(paymentForm.ccCvcInput(), !$.payment.validateCardCVC(cardCvc, cardType))
 
     if paymentForm.form().find(".#{ERROR_CLASS}").length
       paymentForm.toggleFormSubmit(false)

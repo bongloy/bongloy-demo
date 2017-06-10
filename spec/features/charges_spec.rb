@@ -157,32 +157,52 @@ describe "Charges" do
         end
       end
 
+      def card_number_input(options = {})
+        find_field("Card Number", options)
+      end
+
+      def card_expiry_input(options = {})
+        find_field("Expires MM/YY", options)
+      end
+
+      def card_cvc_input(options = {})
+        find_field("Security Code / PIN", options)
+      end
+
       def fill_in_card_number(options = {})
-        native_fill_in("Card Number", options)
+        native_fill_in(card_number_input, options)
       end
 
       def fill_in_card_expiry(options = {})
-        native_fill_in("Expires MM/YY", options)
+        native_fill_in(card_expiry_input, options)
       end
 
       def fill_in_card_cvc(options = {})
-        native_fill_in("Security Code / PIN", options)
+        native_fill_in(card_cvc_input, options)
       end
 
       def valid_expiry
         1.month.from_now.strftime("%m%y")
       end
 
+      def assert_payment_form_before_submit!
+      end
+
+      def submit_form
+        click_button(button_text)
+      end
+
       def fill_out_payment_form(options = {})
-        expiry = options[:expiry] || valid_expiry
         card = options[:card] || {}
+        expiry = card[:expiry] || valid_expiry
         cvc = card[:cvc] || "123"
 
         within_payment_form do
-          fill_in_card_number(:with => card[:number])
-          fill_in_card_expiry(:with => expiry)
-          fill_in_card_cvc(:with => cvc, :tab_after_input => true)
-          click_button(button_text)
+          fill_in_card_number(:with => card[:number], :tab_after_input => true)
+          fill_in_card_expiry(:with => expiry, :tab_after_input => true) if card[:expiry] != false
+          fill_in_card_cvc(:with => cvc, :tab_after_input => true) if card[:cvc] != false
+          assert_payment_form_before_submit!
+          submit_form
         end
       end
 
@@ -202,8 +222,15 @@ describe "Charges" do
         it { assert_form_errors! }
       end
 
-      context "filling in the form using my" do
+      context "filling in the form" do
         let(:api_helpers) { Bongloy::SpecHelpers::ApiHelpers.new }
+        let(:bongloy_charges_uri) { URI.parse(api_helpers.charges_url) }
+
+        let(:bongloy_charge_requests) {
+          WebMock.requests.select { |request|
+            request.uri.host == bongloy_charges_uri.host && request.uri.path == bongloy_charges_uri.path
+          }
+        }
 
         def setup_scenario
           super
@@ -212,51 +239,66 @@ describe "Charges" do
           fill_out_payment_form(:card => card)
         end
 
-        context "Wing Card" do
-          let(:card) { {:number => "5018188000001614", :cvc => "1234"}  }
-          let(:bongloy_charges_uri) { URI.parse(api_helpers.charges_url) }
+        def parse_request_body(request_body)
+          WebMock::Util::QueryMapper.query_to_values(request_body)
+        end
 
-          let(:bongloy_charge_requests) {
-            WebMock.requests.select { |request|
-              request.uri.host == bongloy_charges_uri.host && request.uri.path == bongloy_charges_uri.path
-            }
-          }
+        def assert_successful_charge!
+          within_flash do
+            expect(page).to have_link(ENV["BONGLOY_CHARGES_URL"])
+            expect(page).to have_content(ENV["BONGLOY_TEST_ACCOUNT_EMAIL"])
+            expect(page).to have_content(ENV["BONGLOY_TEST_ACCOUNT_PASSWORD"])
+          end
+          expect(bongloy_charge_requests.count).to eq(1)
+        end
 
-          def parse_request_body(request_body)
-            WebMock::Util::QueryMapper.query_to_values(request_body)
+        context "without signing in" do
+          context "with my Visa Card" do
+            let(:card) { {:number => "4242424242424242", :cvc => "123"}  }
+            it { assert_successful_charge! }
+          end
+        end
+
+        context "while signed in" do
+          let(:checkout_configuration_attributes) { {:amount_cents => 50} }
+          let(:button_text) { checkout_configuration[:label] }
+
+          def setup_scenario
+            checkout_configuration
+            visit_new_charge_path
+            sign_in
+            super
           end
 
           def assert_successful_charge!
-            within_flash do
-              expect(page).to have_link(ENV["BONGLOY_CHARGES_URL"])
-              expect(page).to have_content(ENV["BONGLOY_TEST_ACCOUNT_EMAIL"])
-              expect(page).to have_content(ENV["BONGLOY_TEST_ACCOUNT_PASSWORD"])
-            end
-            expect(bongloy_charge_requests.count).to eq(1)
+            super
+            bongloy_charge_request = bongloy_charge_requests.first
+            bongloy_charge_request_body = parse_request_body(bongloy_charge_request.body)
+            expect(bongloy_charge_request_body["amount"]).to eq("50")
           end
 
-          context "signing in" do
-            let(:checkout_configuration_attributes) { {:amount_cents => 50} }
-            let(:button_text) { checkout_configuration[:label] }
-
-            def setup_scenario
-              checkout_configuration
-              visit_new_charge_path
-              sign_in
-              super
-            end
-
-            def assert_successful_charge!
-              super
-              bongloy_charge_request = bongloy_charge_requests.first
-              bongloy_charge_request_body = parse_request_body(bongloy_charge_request.body)
-              expect(bongloy_charge_request_body["amount"]).to eq("50")
-            end
-
+          context "with my Wing Card" do
+            let(:card) { {:number => "5018188000001614", :cvc => "1234"}  }
             it { assert_successful_charge! }
           end
 
-          context "without signing in" do
+          context "with my ACLEDA Card" do
+            let(:card) { {:number => "9116011234567885", :expiry => false, :cvc => false} }
+
+            def submit_form
+              # remove when API is enabled for ACLEDA cards
+            end
+
+            def assert_successful_charge!
+              # remove when API is enabled for ACLEDA cards
+            end
+
+            def assert_payment_form_before_submit!
+              expect(card_number_input).not_to be_disabled
+              expect(card_expiry_input(:disabled => true)).to be_disabled
+              expect(card_cvc_input(:disabled => true)).to be_disabled
+            end
+
             it { assert_successful_charge! }
           end
         end
