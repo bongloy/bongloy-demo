@@ -74,7 +74,6 @@ describe "Charges" do
     context "and I update the default checkout configuration" do
       let(:checkout_configuration_options) { {} }
 
-
       def setup_scenario
         super
         update_checkout_configuration(checkout_configuration_options)
@@ -275,11 +274,6 @@ describe "Charges" do
             bongloy_charge_request = bongloy_charge_requests.first
             bongloy_charge_request_body = parse_request_body(bongloy_charge_request.body)
             expect(bongloy_charge_request_body["amount"]).to eq("50")
-          end
-
-          context "with my Wing Card" do
-            let(:card) { {:number => "5018188000001614", :cvc => "1234"}  }
-            it { assert_successful_charge! }
           end
 
           context "with my ACLEDA Card" do
