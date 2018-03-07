@@ -1,11 +1,11 @@
-require 'active_model'
+require "active_model"
 
 class Charge
   include ActiveModel::Model
 
   attr_accessor :token, :amount, :currency, :description
 
-  validates :amount, :currency, :token, :presence => true
+  validates :amount, :currency, :token, presence: true
 
   def save
     return false unless valid?

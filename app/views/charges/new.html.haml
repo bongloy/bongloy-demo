@@ -6,20 +6,22 @@
           .panel-heading
             Fill out the Payment Form
           .panel-body
-            = simple_form_for(:charge, :html => {:autocomplete => "on", :data => { name: "paymentForm" }}) do |f|
-              - if @charge.errors.any?
+            = simple_form_for(:new_charge, url: charges_path, :html => {:autocomplete => "on", :data => { name: "paymentForm" }}) do |f|
+              - if charge.errors.any?
                 %p.alert.alert-danger{:role => "alert", data: { name: "errorMessages" }}
-                  = @charge.errors.full_messages.to_sentence
+                  = charge.errors.full_messages.to_sentence
 
               = f.input :token, as: :hidden, input_html: { data: { name: "cardToken" } }
-              = f.input :card_number, input_html: { data: { name: "cardNumber" } }
-              = f.input :exp_month, input_html: { data: { name: "expMonth" } }
-              = f.input :exp_year, input_html: { data: { name: "expYear" } }
-              = f.input :cvc, input_html: { data: { name: "cvc" } }
-              = f.input :currency, input_html: { value: "USD", readonly: true }
-              = f.input :amount
+              = f.input :card_number, placeholder: "Card Number", label: false, input_html: { name: nil, id: nil, data: { name: "cardNumber" } }
+              = f.input :exp_month, placeholder: "Expiry Month", label: false, input_html: { name: nil, id: nil, data: { name: "expMonth" } }
+              = f.input :exp_year, placeholder: "Expiry Year", label: false, input_html: { name: nil, id: nil, data: { name: "expYear" } }
+              = f.input :cvc, placeholder: "CVC", label: false, input_html: { name: nil, id: nil, data: { name: "cvc" } }
+              = f.input :currency, label: false, input_html: { value: "USD", readonly: true }
+              = f.input :amount, placeholder: "Amount", label: false
               #submit_payment_form.form-group.btn-group
-                = f.button(:submit, @checkout_configuration.label, :class => "btn-success")
+                = f.button(:submit, "Buy", :class => "btn-success")
     .row#sample_cards
       .col-xs-12.col-sm-12.col-md-12.col-lg-12
         = render "sample_cards"
+
+    = javascript_include_tag "charges"
