@@ -4,5 +4,3 @@ deploy:
   provider: heroku
   api_key:
     secure: B54voqXffIckJlMgFOIrtq1PeSDOfm1OdgG6hwRv7I94dVFb/tmWiT1W6/9g1NOTatJsfyrfpmpJ6N/2bPjel6Fjbdef2Ih6dyMmnIhLCpZWy/5WOjgLWYHdnWtODrXAqEsmkxiAjmSCCoWfEjwDzLPE3TxYGR7Yeqz5RQsFFLE=
-  run:
-    - "rake db:migrate"
