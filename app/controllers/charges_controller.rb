@@ -1,13 +1,11 @@
 class ChargesController < ApplicationController
-  before_action :checkout_configuration
-
+  helper_method :checkout_configuration
+  
   def new
-    setup_charge
   end
 
   def create
     @charge = Charge.new(permitted_params[:charge])
-    @charge.token = params[:bongloyToken]
     if @charge.save
       bongloy_charge_url = checkout_configuration.bongloy_charges_url
       redirect_to(
@@ -24,6 +22,10 @@ class ChargesController < ApplicationController
   private
 
   def permitted_params
-    params.permit(:charge => [:amount, :currency, :description])
+    params.permit(:charge => [:token, :amount, :currency, :description])
+  end
+
+  def checkout_configuration
+    @checkout_configuration ||= CheckoutConfiguration.new
   end
 end

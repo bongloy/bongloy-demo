@@ -13,7 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require jquery.payment
-//= require jquery.payment.cambodia
-//= require jquery_payment_form
-//= require autonumeric
+//= require charges

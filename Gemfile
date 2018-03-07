@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby(File.read(".ruby-version").strip) if ENV["GEMFILE_LOAD_RUBY_VERSION"].to_i == 1 && File.exist?(".ruby-version")
 
-gem 'rails', '5.0.1'
+gem 'rails', '5.1.5'
 gem 'devise'
 gem 'sass-rails'
 gem 'uglifier'
@@ -15,20 +15,15 @@ gem 'pg'
 gem 'font-awesome-rails'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
-gem 'omniauth-facebook'
-gem 'bongloy', :github => "dwilkie/bongloy-ruby"
-gem 'simple_form', :github => "plataformatec/simple_form"
-gem 'rails-assets-jquery.payment.cambodia', :source => 'https://rails-assets.org'
-gem 'bootswatch-rails'
-gem 'autonumeric-rails'
+gem 'simple_form'
 gem 'money-rails'
-gem 'rqrcode'
+gem 'stripe'
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'foreman'
   gem 'pry'
-  gem 'dotenv'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -37,13 +32,9 @@ group :development do
 end
 
 group :test do
-  gem 'capybara'
-  gem 'launchy'
-  gem 'database_cleaner'
-  gem 'factory_girl'
-  gem 'selenium-webdriver'
+  gem 'factory_bot_rails'
   gem 'shoulda-matchers'
-  gem "bongloy-spec-helpers", :github => "dwilkie/bongloy-spec-helpers"
+  gem 'webmock'
 end
 
 group :production do

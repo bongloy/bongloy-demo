@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   sequence :email do |n|
     "someone#{n}@example.com"
   end
@@ -13,7 +13,8 @@ FactoryGirl.define do
 
     amount 2000
     currency "usd"
-    token { Bongloy::SpecHelpers::ApiHelpers.new.generate_uuid }
+    token { SecureRandom.uuid }
+    description "hello"
   end
 
   factory :checkout_configuration do

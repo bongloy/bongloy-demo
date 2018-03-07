@@ -6,7 +6,7 @@
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
     %title
       = title
-    = javascript_include_tag(@checkout_configuration.bongloy_js_url)
+    = javascript_include_tag("https://js.bongloy.com/v3")
     = tag(:meta, :name => "bongloy-publishable-key", :content => @checkout_configuration.publishable_key)
     = csrf_meta_tags
     = stylesheet_link_tag    "application", media: "all"
@@ -29,7 +29,7 @@
               %li
                 = link_to(fa_icon("book", :text => "Documentation"), "https://www.bongloy.com/documentation", :target => "_blank")
               %li
-                = link_to(fa_icon("github", :text => "Source Code"), "https://github.com/dwilkie/bongloy-demo", :target => "_blank")
+                = link_to(fa_icon("github", :text => "Source Code"), "https://github.com/bongloy/bongloy-demo", :target => "_blank")
               %li
                 = link_to(fa_icon("home", :text => "Bongloy Home"), "https://www.bongloy.com", :target => "_blank")
               - if !user_signed_in?
