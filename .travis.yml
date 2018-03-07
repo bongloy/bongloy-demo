@@ -5,4 +5,4 @@ language: ruby
 deploy:
   provider: heroku
   api_key:
-    secure: B54voqXffIckJlMgFOIrtq1PeSDOfm1OdgG6hwRv7I94dVFb/tmWiT1W6/9g1NOTatJsfyrfpmpJ6N/2bPjel6Fjbdef2Ih6dyMmnIhLCpZWy/5WOjgLWYHdnWtODrXAqEsmkxiAjmSCCoWfEjwDzLPE3TxYGR7Yeqz5RQsFFLE=
+    secure: UQsMxx8zsjfpSq1iicjXj7s4RSlWbK6dYp6kT9lJTCBLTwxFkS/yf2qgdV5ZwxjmLTiMMk5wq4dViHuQpp8hbVdhtw6Gi8iKdaZEdq9otjIzZ+NA2sSTcoI7T2IhPyU+darD5gs2TQEGcnh5LLzV7K0vFzoEPBjBMROi7pEp/iY=
