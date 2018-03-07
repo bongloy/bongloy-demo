@@ -1,39 +1,32 @@
 require 'rails_helper'
 
 describe Charge do
-  subject { build(factory) }
-  let(:factory) { :charge }
-  let(:api_helpers) { Bongloy::SpecHelpers::ApiHelpers.new }
-
   describe "validations" do
-    it { expect(subject).to validate_presence_of(:amount) }
-    it { expect(subject).to validate_presence_of(:token) }
-    it { expect(subject).to validate_presence_of(:currency) }
+    it "validates attributes" do
+      expect(subject).to validate_presence_of(:amount)
+      expect(subject).to validate_presence_of(:token)
+      expect(subject).to validate_presence_of(:currency)
+    end
   end
 
   describe "#save" do
-    let(:customer_id) { api_helpers.generate_uuid }
+    it "creates a charge using the Bongloy API" do
+      charge = build(:charge)
+      WebMock.stub_request(:post, "https://api.bongloy.com/v1/charges").and_return(
+        :body => File.read(Rails.root.join("spec/fixtures/charge.succeeded.json")),
+        :status => 201,
+        :headers => {'Content-Type' => "application/json;charset=utf-8"}
+      )
 
-    before do
-      api_helpers.stub_create_customer(:customer_id => customer_id)
-      api_helpers.stub_create_charge
-      subject.save
-    end
+      result = charge.save
 
-    it "should create a customer using the Bongloy API" do
-      subject.save
-      expect(WebMock).to have_requested(:post, api_helpers.customers_url).with { |request|
+      expect(result).to eq(true)
+      expect(WebMock).to have_requested(:post, "https://api.bongloy.com/v1/charges").with { |request|
         payload = WebMock::Util::QueryMapper.query_to_values(request.body)
-        expect(payload["source"]).to eq(subject.token)
-      }
-    end
-
-    it "should create a charge using the Bongloy API" do
-      expect(WebMock).to have_requested(:post, api_helpers.charges_url).with { |request|
-        payload = WebMock::Util::QueryMapper.query_to_values(request.body)
-        expect(payload["customer"]).to eq(customer_id)
-        expect(payload["amount"]).to eq(subject.amount.to_s)
-        expect(payload["currency"]).to eq(subject.currency)
+        expect(payload["source"]).to eq(charge.token)
+        expect(payload["amount"]).to eq(charge.amount.to_s)
+        expect(payload["currency"]).to eq(charge.currency)
+        expect(payload["description"]).to eq(charge.description)
       }
     end
   end

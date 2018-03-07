@@ -6,8 +6,8 @@
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
     %title
       = title
-    = javascript_include_tag(@checkout_configuration.bongloy_js_url)
-    = tag(:meta, :name => "bongloy-publishable-key", :content => @checkout_configuration.publishable_key)
+    = javascript_include_tag("https://js.bongloy.com/v3")
+    = tag(:meta, :name => "bongloy-publishable-key", :content => checkout_configuration.publishable_key)
     = csrf_meta_tags
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
@@ -27,20 +27,12 @@
           #main_navbar.collapse.navbar-collapse
             %ul#resources_navbar.nav.navbar-nav
               %li
-                = link_to(fa_icon("book", :text => "Documentation"), "https://www.bongloy.com/documentation", :target => "_blank")
+                = link_to("Documentation", "https://www.bongloy.com/documentation", :target => "_blank")
               %li
-                = link_to(fa_icon("github", :text => "Source Code"), "https://github.com/dwilkie/bongloy-demo", :target => "_blank")
+                = link_to("Source Code", "https://github.com/bongloy/bongloy-demo", :target => "_blank")
               %li
-                = link_to(fa_icon("home", :text => "Bongloy Home"), "https://www.bongloy.com", :target => "_blank")
-              - if !user_signed_in?
-                %li
-                  = link_to(fa_icon("facebook", :text => "Sign In"), omniauth_authorize_path(:user, :facebook))
+                = link_to("Bongloy Home", "https://www.bongloy.com", :target => "_blank")
       - flash.each do |type, message|
         #flash.alert.alert-dismissible.fade.in{:class => "alert #{alert_class_for(type)}"}
-          %button.close{:type => "button", :data => {:dismiss => "alert"}}
-            %span{"aria-hidden" => true}
-              &times;
-            %span.sr-only
-              Close
           = message.html_safe
       = yield

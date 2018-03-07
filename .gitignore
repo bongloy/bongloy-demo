@@ -23,4 +23,5 @@ vendor/bundle
 .env.production
 .env.development
 
-remove_focus.rb
+/node_modules
+/yarn-error.log
