@@ -20,11 +20,14 @@
               = f.input :amount, placeholder: "Amount", label: false
               #submit_payment_form.form-group.btn-group
                 = f.button(:submit, "Buy", :class => "btn-success")
+
+  .col-md-12
+    .row#caredit_card
+      = react_component("CreditCard")
     .row#sample_cards
       .col-xs-12.col-sm-12.col-md-12.col-lg-12
         = render "sample_cards"
-  .col-md-6
-    .row#caredit_card
-      = react_component("CreditCard")
+
+
 
     = javascript_include_tag "charges"

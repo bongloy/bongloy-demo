@@ -11,7 +11,7 @@ class CreditCard extends React.Component {
     this.state.inputs = ["number", "name", "expiry", "cvc"].map(
       (input_name) =>{
         return(
-          <div className="form-group">
+          <div key={input_name} className="form-group">
             <input
               key={input_name}
               type="text"
@@ -19,7 +19,7 @@ class CreditCard extends React.Component {
               onChange={ this.handleChange.bind(this) }
               onFocus ={ this.handleFocus.bind(this) }
               placeholder={input_name}
-              className = "form-control"
+              className = "form-control required"
             />
           </div>
         );
@@ -38,7 +38,7 @@ class CreditCard extends React.Component {
   render () {
     return (
       <React.Fragment>
-      <div className="col-md-4">
+      <div className="col-md-offset-4 col-md-2">
         <Cards
           number={this.state.number}
           name={this.state.name}
@@ -47,26 +47,29 @@ class CreditCard extends React.Component {
           focused={this.state.focused}
           />
       </div>
-      <div className="col-md-6">
-        {this.state.inputs}
-        <hr />
-        <div className="form-group">
-          <input
-            type="text"
-            name="currency"
-            disabled={true}
-            value="USD"
-            className = "form-control"
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            name="amount"
-            placeholder="amount"
-            className = "form-control"
-          />
-        </div>
+      <div className="col-md-2">
+        <form action="/charges" method="POST">
+          {this.state.inputs}
+          <hr />
+          <div className="form-group">
+            <input
+              type="text"
+              name="currency"
+              disabled={true}
+              value="USD"
+              className = "form-control required"
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="amount"
+              placeholder="amount"
+              className = "form-control required"
+            />
+          </div>
+            <input type="submit" value="Buy" className="btn btn-success"/>
+        </form>
       </div>
       </React.Fragment>
     );
