@@ -27,7 +27,23 @@
     .row#sample_cards
       .col-xs-12.col-sm-12.col-md-12.col-lg-12
         = render "sample_cards"
+  = javascript_include_tag "charges"
+  :javascript
+    docReady(function() {
+      var changeEvent = new Event('change');
+      var cardObj = document.querySelector('[data-name="cardNumber"]');
+      var cardTarget = document.getElementsByName("number")[0];
+      var nameTarget = document.getElementsByName("name")[0];
+      var cvcTarget = document.getElementsByName("cvc")[0];
+      cardObj.addEventListener("onKeyPress",processCardNumber);
+      cardObj.addEventListener("onKeyUp",processCardNumber);
+      cardObj.addEventListener("input",processCardNumber);
+      cardObj.addEventListener("change",processCardNumber);
 
-
-
-    = javascript_include_tag "charges"
+      function processCardNumber(){
+        console.log(cardObj.value);
+        cardTarget.value = cardObj.value;
+        cardTarget.dispatchEvent(new Event('focus'));
+        cardTarget.dispatchEvent(new Event('change'));
+      }
+    });

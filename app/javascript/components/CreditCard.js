@@ -19,7 +19,7 @@ class CreditCard extends React.Component {
               onChange={ this.handleChange.bind(this) }
               onFocus ={ this.handleFocus.bind(this) }
               placeholder={input_name}
-              className = "form-control required"
+              className = "form-control"
             />
           </div>
         );
@@ -31,6 +31,7 @@ class CreditCard extends React.Component {
     this.setState({focused: e.target.name});
   }
   handleChange(e) {
+    console.log(e.type);
     this.setState({focused: e.target.name});
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -38,7 +39,7 @@ class CreditCard extends React.Component {
   render () {
     return (
       <React.Fragment>
-      <div className="col-md-offset-4 col-md-2">
+      <div className="col-md-offset-3 col-md-3">
         <Cards
           number={this.state.number}
           name={this.state.name}
@@ -47,7 +48,7 @@ class CreditCard extends React.Component {
           focused={this.state.focused}
           />
       </div>
-      <div className="col-md-2">
+      <div className="col-md-3">
         <form action="/charges" method="POST">
           {this.state.inputs}
           <hr />
@@ -57,7 +58,7 @@ class CreditCard extends React.Component {
               name="currency"
               disabled={true}
               value="USD"
-              className = "form-control required"
+              className = "form-control"
             />
           </div>
           <div className="form-group">
@@ -65,7 +66,7 @@ class CreditCard extends React.Component {
               type="text"
               name="amount"
               placeholder="amount"
-              className = "form-control required"
+              className = "form-control"
             />
           </div>
             <input type="submit" value="Buy" className="btn btn-success"/>
