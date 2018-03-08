@@ -10,10 +10,12 @@ gem "haml"
 gem "jbuilder"
 gem "puma"
 gem "rails", "5.1.5"
+gem "react-rails", "~> 2.4", ">= 2.4.4"
 gem "sass-rails"
 gem "simple_form"
 gem "stripe"
 gem "uglifier"
+gem "webpacker", "~> 3.3"
 
 group :development, :test do
   gem "dotenv-rails"

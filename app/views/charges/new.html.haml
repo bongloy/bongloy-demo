@@ -23,5 +23,8 @@
     .row#sample_cards
       .col-xs-12.col-sm-12.col-md-12.col-lg-12
         = render "sample_cards"
+  .col-md-6
+    .row#caredit_card
+      = react_component("CreditCard")
 
     = javascript_include_tag "charges"
