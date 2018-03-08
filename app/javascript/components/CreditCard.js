@@ -49,26 +49,32 @@ class CreditCard extends React.Component {
           />
       </div>
       <div className="col-md-6">
-        <div className="form-group">
+        <div className="heading">
+          <h4>Order Summary</h4>
+        </div>
+        <div className="form-group col-md-3">
           <input
             type="text"
             name="currency"
             disabled={true}
             value="USD"
-            className = "form-control"
+            className = "form-control currency"
           />
         </div>
-        <div className="form-group">
+        <div className="form-group col-md-9">
           <input
             type="text"
             name="amount"
             placeholder="amount"
-            className = "form-control"
+            className = "form-control amount"
             readOnly={true}
             value={this.state.amount_value}
           />
         </div>
-        <hr />
+
+        <div className="heading">
+          <h4>Credit card information</h4>
+        </div>
         {this.state.inputs}
       </div>
       </React.Fragment>

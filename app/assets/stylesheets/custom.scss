@@ -17,6 +17,17 @@ body {
 }
 
 h1.title{
-    padding: 0px 0 30px;
+    margin: 5px;
     text-align: center;
+}
+.amount, .currency{
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background-color: rgba(0,0,0,0) !important;
+  box-shadow: none;
+  border-radius: 0px;
+}
+
+.heading{
+  text-align: left;
 }
