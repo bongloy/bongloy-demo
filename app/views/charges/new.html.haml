@@ -1,49 +1,72 @@
 .row
-  .col-md-6
-    .row#payment_form
-      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-        .panel.panel-success
-          .panel-heading
-            Fill out the Payment Form
-          .panel-body
-            = simple_form_for(:new_charge, url: charges_path, :html => {:autocomplete => "on", :data => { name: "paymentForm" }}) do |f|
-              - if charge.errors.any?
-                %p.alert.alert-danger{:role => "alert", data: { name: "errorMessages" }}
-                  = charge.errors.full_messages.to_sentence
+  .row#payment_form
+    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+      .container
+        .card.card-shadow
+          %h1
+            Checkout
 
-              = f.input :token, as: :hidden, input_html: { data: { name: "cardToken" } }
-              = f.input :card_number, placeholder: "Card Number", label: false, input_html: { name: nil, id: nil, data: { name: "cardNumber" } }
-              = f.input :exp_month, placeholder: "Expiry Month", label: false, input_html: { name: nil, id: nil, data: { name: "expMonth" } }
-              = f.input :exp_year, placeholder: "Expiry Year", label: false, input_html: { name: nil, id: nil, data: { name: "expYear" } }
-              = f.input :cvc, placeholder: "CVC", label: false, input_html: { name: nil, id: nil, data: { name: "cvc" } }
-              = f.input :currency, label: false, input_html: { value: "USD", readonly: true }
-              = f.input :amount, placeholder: "Amount", label: false
-              #submit_payment_form.form-group.btn-group
-                = f.button(:submit, "Buy", :class => "btn-success")
+          = react_component("CreditCard")
+          = simple_form_for(:new_charge, url: charges_path, :html => {:autocomplete => "on", :data => { name: "paymentForm" }, :id => "charge_form"}) do |f|
+            - if charge.errors.any?
+              %p.alert.alert-danger{:role => "alert", data: { name: "errorMessages" }}
+                = charge.errors.full_messages.to_sentence
 
-  .col-md-12
-    .row#caredit_card
-      = react_component("CreditCard")
-    .row#sample_cards
-      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+            = f.input :token, as: :hidden, input_html: { data: { name: "cardToken" } }
+            = f.input :card_number, placeholder: "Card Number", label: false, input_html: { name: nil, id: nil, data: { name: "cardNumber" } }
+            = f.input :exp_month, placeholder: "Expiry Month", label: false, input_html: { name: nil, id: nil, data: { name: "expMonth" } }
+            = f.input :exp_year, placeholder: "Expiry Year", label: false, input_html: { name: nil, id: nil, data: { name: "expYear" } }
+            = f.input :cvc, placeholder: "CVC", label: false, input_html: { name: nil, id: nil, data: { name: "cvc" } }
+            = f.input :currency, label: false, input_html: { value: "USD", readonly: true }
+            = f.input :amount, placeholder: "Amount", label: false
+            #submit_payment_form.form-group.btn-group
+              = f.button(:submit, "Buy", :class => "btn-success")
+  .row#sample_cards
+    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+      .container
         = render "sample_cards"
   = javascript_include_tag "charges"
   :javascript
     docReady(function() {
-      var changeEvent = new Event('change');
-      var cardObj = document.querySelector('[data-name="cardNumber"]');
-      var cardTarget = document.getElementsByName("number")[0];
-      var nameTarget = document.getElementsByName("name")[0];
-      var cvcTarget = document.getElementsByName("cvc")[0];
-      cardObj.addEventListener("onKeyPress",processCardNumber);
-      cardObj.addEventListener("onKeyUp",processCardNumber);
-      cardObj.addEventListener("input",processCardNumber);
-      cardObj.addEventListener("change",processCardNumber);
+      // hide Original Form
+      var charge_form = document.getElementById("charge_form");
+      var inputs = charge_form.querySelectorAll('input');
+      inputs.forEach(function(input){
+        if(input.type != 'submit'){
+          input.setAttribute('type', 'hidden');
+        }
+      });
+      var cardObj = document.getElementsByName("number")[0];
+      var cardTarget = document.querySelector('[data-name="cardNumber"]');
 
-      function processCardNumber(){
-        console.log(cardObj.value);
+      var expiryObj = document.getElementsByName("expiry")[0];
+      var expiryMonthTarget = document.querySelector('[data-name="expMonth"]');
+      var expiryYearTarget = document.querySelector('[data-name="expYear"]');
+
+      var cvcTarget = document.querySelector('[data-name="cvc"]');
+      var cvcObj = document.getElementsByName("cvc")[0];
+
+
+      var amountTarget = document.getElementById('new_charge_amount');
+      var amountObj = document.getElementsByName("amount")[0];
+      amountTarget.value = amountObj.value
+
+      // var submitObj = document.getElementById('submit');
+      //   submit.addEventListener('click', function(){
+      //   document.getElementsByName('commit')[0].click();
+      // });
+
+      // Register input event listener
+      cardObj.addEventListener("input",function(){
         cardTarget.value = cardObj.value;
-        cardTarget.dispatchEvent(new Event('focus'));
-        cardTarget.dispatchEvent(new Event('change'));
-      }
+      });
+      expiryObj.addEventListener("input",function(){
+        expiryMonthTarget.value = expiryObj.value.substring(0, 2);
+        expiryYearTarget.value = expiryObj.value.substring(2, 4);
+      });
+
+      cvcObj.addEventListener("input",function(){
+        cvcTarget.value = cvcObj.value;
+      });
+
     });
