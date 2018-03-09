@@ -11,4 +11,4 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require bootstrap
+//= require card/dist/card

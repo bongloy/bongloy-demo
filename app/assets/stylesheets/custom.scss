@@ -1,0 +1,16 @@
+.card-container, .card-wrapper{
+  background: #EEE;
+  position: relative;
+}
+.card-wrapper{
+  margin: 10px;
+}
+
+.card-container{
+  .form-group{
+    margin-bottom: 8px;
+  }
+  input.form-control{
+    border-radius: 0px;
+  }
+}

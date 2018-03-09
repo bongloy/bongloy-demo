@@ -1,27 +1,64 @@
 .row
-  .col-md-6
-    .row#payment_form
+  .col-md-offset-4.col-md-4
+    .row#payment_form.card-container
       .col-xs-12.col-sm-12.col-md-12.col-lg-12
-        .panel.panel-success
-          .panel-heading
-            Fill out the Payment Form
-          .panel-body
-            = simple_form_for(:new_charge, url: charges_path, :html => {:autocomplete => "on", :data => { name: "paymentForm" }}) do |f|
-              - if charge.errors.any?
-                %p.alert.alert-danger{:role => "alert", data: { name: "errorMessages" }}
-                  = charge.errors.full_messages.to_sentence
-
-              = f.input :token, as: :hidden, input_html: { data: { name: "cardToken" } }
-              = f.input :card_number, placeholder: "Card Number", label: false, input_html: { name: nil, id: nil, data: { name: "cardNumber" } }
-              = f.input :exp_month, placeholder: "Expiry Month", label: false, input_html: { name: nil, id: nil, data: { name: "expMonth" } }
-              = f.input :exp_year, placeholder: "Expiry Year", label: false, input_html: { name: nil, id: nil, data: { name: "expYear" } }
+        .text-center
+          %h3 Fill out the Payment Form
+          %hr
+          = simple_form_for(:new_charge, url: charges_path, :html => {:autocomplete => "on", :data => { name: "paymentForm" }}) do |f|
+            .card-wrapper
+            - if charge.errors.any?
+              %p.alert.alert-danger{:role => "alert", data: { name: "errorMessages" }}
+                = charge.errors.full_messages.to_sentence
+            = f.input :token, as: :hidden, input_html: { data: { name: "cardToken" } }
+            = f.input :card_number, placeholder: "Card Number", label: false, input_html: { name: nil, id: nil, data: { name: "cardNumber" } }
+            = f.input :card_name, placeholder: "Name on card", label: false, input_html: { name: nil, id: nil, data: { name: "cardName" } }
+            -# = f.input :exp_month, placeholder: "Expiry Month", label: false, input_html: { name: nil, id: nil, data: { name: "expMonth" } }
+            -# = f.input :exp_year, placeholder: "Expiry Year", label: false, input_html: { name: nil, id: nil, data: { name: "expYear" } }
+            .row.col-md-6
+              = f.input :expiry, placeholder: "Expiry", label: false, input_html: { name: nil, id: nil, data: { name: "expiry" } }
+            .col-md-6
               = f.input :cvc, placeholder: "CVC", label: false, input_html: { name: nil, id: nil, data: { name: "cvc" } }
-              = f.input :currency, label: false, input_html: { value: "USD", readonly: true }
+
+            .row.col-md-9
               = f.input :amount, placeholder: "Amount", label: false
-              #submit_payment_form.form-group.btn-group
-                = f.button(:submit, "Buy", :class => "btn-success")
+            .col-md-3
+              = f.input :currency, label: false, input_html: { value: "USD", readonly: true }
+            #submit_payment_form.form-group
+              = f.button(:submit, "Buy", :class => "btn-success form-control")
+
+  .col-md-offset-2.col-md-8
     .row#sample_cards
       .col-xs-12.col-sm-12.col-md-12.col-lg-12
         = render "sample_cards"
-
     = javascript_include_tag "charges"
+  :javascript
+    var card = new Card({
+        form: 'form', // *required*
+        container: '.card-wrapper', // *required*
+
+        formSelectors: {
+            numberInput: 'input[data-name="cardNumber"]', // optional — default input[name="number"]
+            expiryInput: 'input[data-name="expiry"]', // optional — default input[name="expiry"]
+            cvcInput: 'input[data-name="cvc"]', // optional — default input[name="cvc"]
+            nameInput: 'input[data-name="cardName"]' // optional - defaults input[name="name"]
+        },
+
+        formatting: true, // optional - default true
+
+        // Strings for translation - optional
+        messages: {
+            monthYear: 'mm/yyyy', // optional - default 'month/year'
+        },
+
+        // Default placeholders for rendered fields - optional
+        placeholders: {
+            number: '•••• •••• •••• ••••',
+            name: 'Name on Card',
+            expiry: '••/••',
+            cvc: '•••'
+        },
+
+        // if true, will log helpful messages for setting up Card
+        debug: false // optional - default false
+    });
