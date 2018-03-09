@@ -7,10 +7,14 @@
 }
 
 .card-container{
+  margin: 30px;
   .form-group{
     margin-bottom: 8px;
   }
   input.form-control{
     border-radius: 0px;
+  }
+  .form-group#submit_payment_form {
+    margin-bottom: 20px !important;
   }
 }
