@@ -1,0 +1,39 @@
+body {
+  background: #f6f6f6;
+  text-align: center;
+}
+
+.card {
+  background: #fff;
+  border-radius: 2px;
+  display: inline-block;
+  margin: 30px;
+  position: relative;
+  padding: 50px;
+  width: 80%;
+
+  .card-shadow{
+    box-shadow: 0 3px 6px rgba(0,0,0,0), 0 3px 6px rgba(0,0,0,0.1);
+  }
+}
+p.alert, .alert-success{
+  text-align: left !important;
+  margin-top: 10px;
+}
+
+h1.title{
+    margin: 5px;
+    text-align: center;
+}
+
+.amount, .currency{
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background-color: rgba(0,0,0,0) !important;
+  box-shadow: none;
+  border-radius: 0px;
+}
+
+.heading{
+  text-align: left;
+}
