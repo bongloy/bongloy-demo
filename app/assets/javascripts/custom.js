@@ -1,43 +1,60 @@
 docReady(function() {
-  // hide Original Form
-  var charge_form = document.getElementById("charge_form");
-  var inputs = charge_form.querySelectorAll('input');
-  inputs.forEach(function(input){
-    if(input.type != 'submit'){
-      input.setAttribute('type', 'hidden');
-    }
+
+  var cardNumber = document.querySelector('[data-name="cardNumber"]');
+  var cardName = document.querySelector('[data-name="cardName"]');
+  var expMonth= document.querySelector('[data-name="expMonth"]');
+  var expYear = document.querySelector('[data-name="expYear"]');
+  var cvc = document.querySelector('[data-name="cvc"]');
+  var dispatchAnchor = document.getElementById('card');
+  var focused = document.getElementById('focused');
+
+  cardNumber.addEventListener("focus",function(){
+    focused.value = "number";
+    dispatchEvent(dispatchAnchor);
   });
-  var cardObj = document.getElementsByName("number")[0];
-  var cardTarget = document.querySelector('[data-name="cardNumber"]');
-
-  var expiryObj = document.getElementsByName("expiry")[0];
-  var expiryMonthTarget = document.querySelector('[data-name="expMonth"]');
-  var expiryYearTarget = document.querySelector('[data-name="expYear"]');
-
-  var cvcTarget = document.querySelector('[data-name="cvc"]');
-  var cvcObj = document.getElementsByName("cvc")[0];
-
-
-  var amountTarget = document.getElementById('new_charge_amount');
-  var amountObj = document.getElementsByName("amount")[0];
-  amountTarget.value = amountObj.value
-
-  // var submitObj = document.getElementById('submit');
-  //   submit.addEventListener('click', function(){
-  //   document.getElementsByName('commit')[0].click();
-  // });
-
-  // Register input event listener
-  cardObj.addEventListener("input",function(){
-    cardTarget.value = cardObj.value;
-  });
-  expiryObj.addEventListener("input",function(){
-    expiryMonthTarget.value = expiryObj.value.substring(0, 2);
-    expiryYearTarget.value = expiryObj.value.substring(2, 4);
+  cardNumber.addEventListener("input",function(){
+    focused.value = "number";
+    dispatchEvent(dispatchAnchor);
   });
 
-  cvcObj.addEventListener("input",function(){
-    cvcTarget.value = cvcObj.value;
+  cardName.addEventListener("focus",function(){
+    focused.value = "name";
+    dispatchEvent(dispatchAnchor);
   });
+
+  cardName.addEventListener("input",function(){
+    focused.value = "name";
+    dispatchEvent(dispatchAnchor);
+  });
+
+  expMonth.addEventListener("focus",function(){
+    focused.value = "expiry";
+    dispatchEvent(dispatchAnchor);
+  });
+  expMonth.addEventListener("input",function(){
+    focused.value = "expiry";
+    dispatchEvent(dispatchAnchor);
+  });
+  expYear.addEventListener("focus",function(){
+    focused.value = "expiry";
+    dispatchEvent(dispatchAnchor);
+  });
+  expYear.addEventListener("input",function(){
+    focused.value = "expiry";
+    dispatchEvent(dispatchAnchor);
+  });
+
+  cvc.addEventListener("focus",function(){
+    focused.value = "cvc";
+    dispatchEvent(dispatchAnchor);
+  });
+
+  cvc.addEventListener("input",function(){
+    dispatchEvent(dispatchAnchor);
+  });
+
+  function dispatchEvent(anchor){
+    anchor.dispatchEvent(new Event('click', { bubbles: true}));
+  }
 
 });

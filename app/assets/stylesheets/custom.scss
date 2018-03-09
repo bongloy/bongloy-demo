@@ -11,15 +11,21 @@ body {
   position: relative;
   padding: 50px;
   width: 80%;
+
+  .card-shadow{
+    box-shadow: 0 3px 6px rgba(0,0,0,0), 0 3px 6px rgba(0,0,0,0.1);
+  }
 }
-.card-shadow{
-  box-shadow: 0 3px 6px rgba(0,0,0,0), 0 3px 6px rgba(0,0,0,0.1);
+p.alert, .alert-success{
+  text-align: left !important;
+  margin-top: 10px;
 }
 
 h1.title{
     margin: 5px;
     text-align: center;
 }
+
 .amount, .currency{
   border: none;
   border-bottom: 1px solid #ccc;
