@@ -41,14 +41,18 @@ function submitHandler(event) {
 
   var cardObject = {
     number:     document.querySelector('[data-name="cardNumber"]').value,
-    // exp_month: document.querySelector('[data-name="expMonth"]').value,
-    // exp_year:  document.querySelector('[data-name="expYear"]').value,
     exp_month:  expiry.month,
     exp_year:   expiry.year,
     cvc:        document.querySelector('[data-name="cvc"]').value
+    // exp_month: document.querySelector('[data-name="expMonth"]').value,
+    // exp_year:  document.querySelector('[data-name="expYear"]').value,
   };
 
   Bongloy.createToken('card', cardObject, function(statusCode, response) {
+    // Clean/Hide error block and submit button
+    var errorMessages = document.querySelector('[data-name="errorMessages"]');
+    errorMessages.style.display = 'none';
+
     if (statusCode === 201) {
       // Success: assign Bongloy token back to your checkout form.
       document.querySelector('[data-name="cardToken"]').value = response.id;
@@ -59,7 +63,9 @@ function submitHandler(event) {
     else {
       // Error: display an error message. Note that `response.error.message` contains
       // a preformatted error message.
-      document.querySelector('[data-name="errorMessages"]').innerHTML = response.error.message;
+      document.querySelector("input[type=submit]").removeAttribute('disabled');
+      errorMessages.style.display = 'block';
+      errorMessages.innerHTML = response.error.message;
     }
   });
 }
