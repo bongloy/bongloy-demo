@@ -38,7 +38,6 @@ function submitHandler(event) {
   }
   */
   var expiry = Payment.fns.cardExpiryVal(document.querySelector('[data-name="expiry"]').value);
-
   var cardObject = {
     number:     document.querySelector('[data-name="cardNumber"]').value,
     exp_month:  expiry.month,

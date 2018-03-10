@@ -12,3 +12,4 @@
 //
 //= require rails-ujs
 //= require card/dist/card
+//= require cleave/dist/cleave

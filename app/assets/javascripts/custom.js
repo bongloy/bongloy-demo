@@ -1,3 +1,4 @@
+// Generating Credit Card - jessepollak/card
 var card = new Card({
     form: 'form', // *required*
     container: '.card-wrapper', // *required*
@@ -22,6 +23,36 @@ var card = new Card({
         name: 'Name on Card',
         expiry: '••/••',
         cvc: '•••'
-    },
-    debug: false // optional - default false
+    }
 });
+// Validating Form - nosir/cleave.js
+var cardNumber = new Cleave('[data-name="cardNumber"]', {
+  creditCard: true,
+});
+new Cleave('[data-name="expiry"]', {
+    date: true,
+    datePattern: ['m', 'y']
+});
+
+new Cleave('[data-name="cardName"]', {
+    uppercase: true,
+    blocks: [0, 9999]
+});
+
+
+new Cleave('#new_charge_amount', {
+    numeral: true,
+    numeralThousandsGroupStyle: 'none'
+});
+
+// Resolve conflict between nosir/cleave.js and jessepollak/card
+// This block will make the validations triggered on blur of any inputs.
+Array.prototype.slice.call(
+  document.getElementsByTagName('input'), 0
+).map(input => {
+  input.addEventListener('blur', function(){
+    this.dispatchEvent(
+      new Event('input', { bubbles: true})
+    );
+  });
+})
