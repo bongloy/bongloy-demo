@@ -3,7 +3,7 @@ a.navbar-brand{
 }
 .card-container{
   background: #EEE;
-  min-width: 464px;
+  min-width: 400px;
 }
 .card-wrapper{
   margin: 10px;
@@ -20,7 +20,7 @@ a.navbar-brand{
     border: none;
   }
   .fields-wraper {
-    margin: 20px !important;
+    margin: 20px;
   }
   .row.h-separator{
     margin-bottom: 8px;
@@ -32,5 +32,16 @@ a.navbar-brand{
   }
   p.show{
     display: block;
+  }
+}
+@media(max-width: 750px) {
+  .card-container, .card-wrapper{
+    margin: 0px;
+  }
+  .card-container{
+    min-width: 325px;
+  }
+  .card-container .fields-wraper{
+    margin: 20px 0px 20px 0px !important;
   }
 }

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Charge do
   describe "validations" do
@@ -13,9 +13,9 @@ describe Charge do
     it "creates a charge using the Bongloy API" do
       charge = build(:charge)
       WebMock.stub_request(:post, "https://api.bongloy.com/v1/charges").and_return(
-        :body => File.read(Rails.root.join("spec/fixtures/charge.succeeded.json")),
-        :status => 201,
-        :headers => {'Content-Type' => "application/json;charset=utf-8"}
+        body: File.read(Rails.root.join("spec/fixtures/charge.succeeded.json")),
+        status: 201,
+        headers: { "Content-Type" => "application/json;charset=utf-8" }
       )
 
       result = charge.save
@@ -24,7 +24,7 @@ describe Charge do
       expect(WebMock).to have_requested(:post, "https://api.bongloy.com/v1/charges").with { |request|
         payload = WebMock::Util::QueryMapper.query_to_values(request.body)
         expect(payload["source"]).to eq(charge.token)
-        expect(payload["amount"]).to eq(charge.amount.to_s)
+        expect(payload["amount"]).to eq((charge.amount.to_s.delete(",").to_f * 100).to_i.to_s)
         expect(payload["currency"]).to eq(charge.currency)
         expect(payload["description"]).to eq(charge.description)
       }

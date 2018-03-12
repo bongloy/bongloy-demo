@@ -12,6 +12,7 @@ $(document).ready(function(){
       },
 
       formatting: true, // optional - default true
+      width: 330, // optional — default 350px
 
       // Strings for translation - optional
       messages: {
