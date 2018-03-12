@@ -11,4 +11,8 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery
 //= require bootstrap
+//= require card/card
+//= require cleave/cleave
+//= require custom
