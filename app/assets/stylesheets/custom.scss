@@ -26,4 +26,11 @@ a.navbar-brand{
     margin-bottom: 8px;
     border-bottom: 1px solid #ddd;
   }
+
+  p.hidden{
+    display: none;
+  }
+  p.show{
+    display: block;
+  }
 }

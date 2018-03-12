@@ -17,7 +17,7 @@ class Charge
 
   def execute_charge
     Stripe::Charge.create(
-      amount: amount,
+      amount: amount_in_cents,
       currency: currency,
       source: token,
       description: description
@@ -28,4 +28,9 @@ class Charge
     puts e.message
     false
   end
+
+  def amount_in_cents
+    (amount.gsub(',', '').to_f * 100).to_i
+  end
+
 end

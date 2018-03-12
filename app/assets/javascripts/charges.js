@@ -3,7 +3,6 @@ Bongloy.setPublishableKey(publishableKey);
 
 var checkoutForm = document.querySelector('[data-name="paymentForm"]');
 checkoutForm.addEventListener('submit', submitHandler, false);
-
 // Submit handler for checkout form.
 function submitHandler(event) {
   event.preventDefault();
@@ -50,7 +49,8 @@ function submitHandler(event) {
   Bongloy.createToken('card', cardObject, function(statusCode, response) {
     // Clean/Hide error block and submit button
     var errorMessages = document.querySelector('[data-name="errorMessages"]');
-    errorMessages.style.display = 'none';
+    errorMessages.classList.remove('show');
+    errorMessages.classList.add('hidden');
 
     if (statusCode === 201) {
       // Success: assign Bongloy token back to your checkout form.
@@ -63,7 +63,8 @@ function submitHandler(event) {
       // Error: display an error message. Note that `response.error.message` contains
       // a preformatted error message.
       document.querySelector("input[type=submit]").removeAttribute('disabled');
-      errorMessages.style.display = 'block';
+      errorMessages.classList.remove('hidden');
+      errorMessages.classList.add('show');
       errorMessages.innerHTML = response.error.message;
     }
   });

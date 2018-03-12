@@ -5,6 +5,7 @@ class ChargesController < ApplicationController
 
   def create
     @charge = Charge.new(permitted_params[:new_charge])
+
     if @charge.save
       redirect_to(
         new_charge_path,
