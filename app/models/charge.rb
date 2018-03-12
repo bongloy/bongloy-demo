@@ -30,7 +30,6 @@ class Charge
   end
 
   def amount_in_cents
-    (amount.gsub(',', '').to_f * 100).to_i
+    (amount.to_s.delete(",").to_f * 100).to_i
   end
-
 end
