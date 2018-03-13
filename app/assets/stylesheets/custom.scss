@@ -5,9 +5,7 @@ a.navbar-brand{
   font-weight: 500;
 }
 
-
 .card-container{
-
   // create a box for card and form
   min-width: 350px;
   background: #EEE;
@@ -20,7 +18,6 @@ a.navbar-brand{
   .fields-wraper{
     padding: 10px 30px 0px 30px;
   }
-
   .form-group{
     margin-bottom: 8px;
   }
@@ -37,17 +34,15 @@ a.navbar-brand{
     margin-bottom: 8px;
     border-bottom: 1px solid #ddd;
   }
-
   p.hidden{
     display: none;
   }
   p.show{
     display: block;
   }
-
 }
-@media(max-width: 750px) {
 
+@media(max-width: 750px) {
   .card-container{
     min-width: 250px;
     // Make box big enought for the card
