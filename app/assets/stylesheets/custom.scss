@@ -18,14 +18,17 @@ a.navbar-brand{
   padding: 16px 0px 16px 0px;
 
   .fields-wraper{
-    padding: 10px 35px 0px 35px;
+    padding: 10px 30px 0px 30px;
   }
 
   .form-group{
     margin-bottom: 8px;
   }
-  input.form-control, p.alert.alert-danger{
-    border-radius: 0px;
+  .form-control{
+    border: 1px solid #ddd;
+  }
+  p.alert.alert-danger{
+    border-radius: 4px;
   }
   p.alert.alert-danger{
     border: none;
@@ -55,7 +58,7 @@ a.navbar-brand{
       padding: 10px 10px 10px 10px;
     }
     .jp-card-container{
-      transform: scale(0.92)
+      transform: scale(0.92) !important;
     }
   }
 }
