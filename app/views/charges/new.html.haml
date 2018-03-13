@@ -14,20 +14,20 @@
                 = charge.errors.full_messages.to_sentence
             .row
               .col-md-12
-                = f.input :card_number, placeholder: "Card Number", label: false, input_html: { name: nil, id: nil, data: { name: "cardNumber" } }
+                = f.input :card_number, as: :tel, placeholder: "Card Number", label: false, input_html: { name: nil, id: nil, data: { name: "cardNumber" } }
                 = f.input :card_name, placeholder: "Name on card", label: false, input_html: { name: nil, id: nil, data: { name: "cardName" } }
             .row
               .col-md-6.col-sm-6.col-xs-6
-                = f.input :expiry, placeholder: "Expiry", label: false, input_html: { name: nil, id: nil, data: { name: "expiry" } }
+                = f.input :expiry, as: :tel, placeholder: "Expiry", label: false, input_html: { name: nil, id: nil, data: { name: "expiry" } }
                 / Uncomment to include separate inputs for expiry month and expiry year
                 /= f.input :exp_month, placeholder: "Expiry Month", label: false, input_html: { name: nil, id: nil, data: { name: "expMonth" } }
                 /= f.input :exp_year, placeholder: "Expiry Year", label: false, input_html: { name: nil, id: nil, data: { name: "expYear" } }
               .col-md-6.col-sm-6.col-xs-6
-                = f.input :cvc, placeholder: "CVC", label: false, input_html: { name: nil, id: nil, data: { name: "cvc" }, maxLength: 4}
+                = f.input :cvc, as: :tel, placeholder: "CVC", label: false, input_html: { name: nil, id: nil, data: { name: "cvc" }, maxLength: 4}
             .row.h-separator
             .row
               .col-md-8.col-sm-8.col-xs-12
-                = f.input :amount, placeholder: "Amount", label: false, input_html: { data: { name: "amount" } }
+                = f.input :amount, as: :tel, placeholder: "Amount", label: false, input_html: { data: { name: "amount" } }
               .col-md-4.col-sm-4.col-xs-12
                 = f.input :currency, label: false, input_html: { value: "USD", readonly: true }
             #submit_payment_form.form-group
