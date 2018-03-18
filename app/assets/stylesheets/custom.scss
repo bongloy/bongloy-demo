@@ -4,29 +4,36 @@
 a.navbar-brand{
   font-weight: 500;
 }
-.card-wrapper{
-  margin: 10px;
-}
+
 .card-container{
-  min-width: 400px;
+  // create a box for card and form
+  min-width: 350px;
   background: #EEE;
+  border-radius: 5px;
+  // Make the box is smaller
+  margin: 0px 55px 0px 55px;
+  // Make some space between edge of the box and card/fields
+  padding: 16px 0px 16px 0px;
+
+  .fields-wraper{
+    padding: 10px 30px 0px 30px;
+  }
   .form-group{
     margin-bottom: 8px;
   }
-  input.form-control, p.alert.alert-danger{
-    border-radius: 0px;
+  .form-control{
+    border: 1px solid #ddd;
+  }
+  p.alert.alert-danger{
+    border-radius: 4px;
   }
   p.alert.alert-danger{
     border: none;
-  }
-  .fields-wraper {
-    margin: 20px;
   }
   .row.h-separator{
     margin-bottom: 8px;
     border-bottom: 1px solid #ddd;
   }
-
   p.hidden{
     display: none;
   }
@@ -34,11 +41,19 @@ a.navbar-brand{
     display: block;
   }
 }
+
 @media(max-width: 750px) {
   .card-container{
-    min-width: 325px;
-  }
-  .card-container .fields-wraper{
-    margin: 20px 0px 20px 0px !important;
+    min-width: 250px;
+    // Make box big enought for the card
+    margin: 0px -20px 0px -20px;
+    // Make the space inside the big enought for the card
+    padding: 10px 0px 10px 0px;
+    .fields-wraper{
+      padding: 10px 10px 10px 10px;
+    }
+    .jp-card-container{
+      transform: scale(0.92) !important;
+    }
   }
 }
