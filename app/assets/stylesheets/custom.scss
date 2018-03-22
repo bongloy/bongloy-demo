@@ -7,7 +7,7 @@ a.navbar-brand{
 
 .card-container{
   // create a box for card and form
-  min-width: 350px;
+  min-width: 410px;
   background: #EEE;
   border-radius: 5px;
   // Make the box is smaller
@@ -55,5 +55,15 @@ a.navbar-brand{
     .jp-card-container{
       transform: scale(0.92) !important;
     }
+  }
+}
+@media(max-width: 1280px) {
+  .card-container{
+    margin: 0px;
+  }
+}
+@media(max-width: 1440px) {
+  .card-container{
+    margin: 0px;
   }
 }
