@@ -7,32 +7,30 @@
     %title
       = title
     = javascript_include_tag("https://js.bongloy.com/v3")
-    = tag(:meta, :name => "bongloy-publishable-key", :content => checkout_configuration.publishable_key)
+    = tag(:meta, name: "bongloy-publishable-key", content: checkout_configuration.publishable_key)
     = csrf_meta_tags
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
     = favicon_link_tag "logos/bongloy_favicon.png"
 
   %body
-    .container-fluid
-      %nav.navbar.navbar-default.navbar-fixed-top{:role => "navigation"}
-        .container-fluid
-          .navbar-header
-            %button.navbar-toggle.collapsed{:type => "button", :data => {:toggle => "collapse", :target => "#main_navbar", :expanded => false}}
-              %span.sr-only
-                Toggle navigation
-              %span.icon-bar
-              %span.icon-bar
-              %span.icon-bar
-            = link_to(title, root_path, :class => "navbar-brand")
-          #main_navbar.collapse.navbar-collapse
-            %ul#resources_navbar.nav.navbar-nav
-              %li
-                = link_to("Documentation", "https://www.bongloy.com/documentation", :target => "_blank")
-              %li
-                = link_to("Source Code", "https://github.com/bongloy/bongloy-demo", :target => "_blank")
-              %li
-                = link_to("Bongloy Home", "https://www.bongloy.com", :target => "_blank")
+    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      %a.navbar-brand{ href: "#" }
+        = title
+      %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+        %span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse
+        %ul.navbar-nav.mr-auto
+          %li.nav-item.active
+            %a.nav-link{:href => "#"}
+              Demo
+              %span.sr-only (current)
+          %li.nav-item
+            = link_to("Official Documentation", "https://www.bongloy.com/documentation", target: "_blank", class: "nav-link")
+          %li.nav-item
+            = link_to("Source Code", "https://github.com/bongloy/bongloy-demo", target: "_blank", class: "nav-link")
+
+    .container
       - flash.each do |type, message|
         #flash.alert.alert-dismissible.fade.in{:class => "alert #{alert_class_for(type)}"}
           = message.html_safe
