@@ -5,26 +5,26 @@ FactoryBot.define do
 
   factory :user do
     email
-    password "secret123"
+    password { "secret123" }
   end
 
   factory :charge do
     skip_create
 
-    amount 2000
-    currency "usd"
+    amount { 2000 }
+    currency { "usd" }
     token { SecureRandom.uuid }
-    description "hello"
+    description { "hello" }
   end
 
   factory :checkout_configuration do
     trait :custom do
-      currency "USD"
-      amount_cents 500
-      name "My Shop"
-      description "My Custom Description"
-      product_description "My Product Description"
-      label "My Label"
+      currency { "USD" }
+      amount_cents { 500 }
+      name { "My Shop" }
+      description { "My Custom Description" }
+      product_description { "My Product Description" }
+      label { "My Label" }
     end
   end
 end

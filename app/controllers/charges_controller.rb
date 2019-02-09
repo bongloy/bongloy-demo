@@ -10,7 +10,7 @@ class ChargesController < ApplicationController
       redirect_to(
         new_charge_path,
         flash: {
-          success: "Your Charge was successfully created! You can view it on your Dashboard #{view_context.link_to('here', 'https://sandbox.bongloy.com/dashboard/charges', target: '_blank')}<div class='help-block'>Use the following credentials to sign in:<dl class=\"dl-horizontal\"><dt>Email</dt><dd>#{checkout_configuration.bongloy_test_account_email}</dd><dt>Password</dt><dd>#{checkout_configuration.bongloy_test_account_password}</dd></dl></div>"
+          success: "Your Charge was successfully created!"
         }
       )
     else
@@ -25,7 +25,7 @@ class ChargesController < ApplicationController
   end
 
   def permitted_params
-    params.permit(new_charge: %i[token amount currency description])
+    params.permit(new_charge: %i[token description])
   end
 
   def checkout_configuration

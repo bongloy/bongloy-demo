@@ -1,5 +1,3 @@
-@import "bootstrap-sprockets";
+// Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
-@import "custom.scss";
-// Bootstrap body padding for fixed navbar
-body { padding-top: 60px; }
+@import "paymentfont/paymentfont"

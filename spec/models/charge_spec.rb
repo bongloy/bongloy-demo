@@ -2,11 +2,7 @@ require "rails_helper"
 
 describe Charge do
   describe "validations" do
-    it "validates attributes" do
-      expect(subject).to validate_presence_of(:amount)
-      expect(subject).to validate_presence_of(:token)
-      expect(subject).to validate_presence_of(:currency)
-    end
+    it { is_expected.to validate_presence_of(:token) }
   end
 
   describe "#save" do
@@ -24,8 +20,8 @@ describe Charge do
       expect(WebMock).to have_requested(:post, "https://api.bongloy.com/v1/charges").with { |request|
         payload = WebMock::Util::QueryMapper.query_to_values(request.body)
         expect(payload["source"]).to eq(charge.token)
-        expect(payload["amount"]).to eq((charge.amount.to_s.delete(",").to_f * 100).to_i.to_s)
-        expect(payload["currency"]).to eq(charge.currency)
+        expect(payload["amount"]).to eq("10000")
+        expect(payload["currency"]).to eq("USD")
         expect(payload["description"]).to eq(charge.description)
       }
     end

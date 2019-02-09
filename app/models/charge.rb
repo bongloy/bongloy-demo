@@ -5,7 +5,7 @@ class Charge
 
   attr_accessor :token, :amount, :currency, :description
 
-  validates :amount, :currency, :token, presence: true
+  validates :token, presence: true
 
   def save
     return false unless valid?
@@ -17,8 +17,8 @@ class Charge
 
   def execute_charge
     Stripe::Charge.create(
-      amount: amount_in_cents,
-      currency: currency,
+      amount: 10000,
+      currency: "USD",
       source: token,
       description: description
     )
@@ -27,9 +27,5 @@ class Charge
     errors.add(:base, e.message)
     puts e.message
     false
-  end
-
-  def amount_in_cents
-    (amount.to_s.delete(",").to_f * 100).to_i
   end
 end
