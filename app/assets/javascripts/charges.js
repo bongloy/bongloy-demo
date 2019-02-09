@@ -12,14 +12,14 @@ checkoutForm.addEventListener('submit', submitHandler, false);
 function submitHandler(event) {
   event.preventDefault();
 
-  var expiry = Payment.fns.cardExpiryVal(document.querySelector('[data-name="expiry"]').value);
+  var expiry = Payment.fns.cardExpiryVal(document.querySelector('[data-name="cardExpiry"]').value);
   var cardObject = {
     // The HTML in this example uses `data-name` attribute instead of the HTML name attribute to prevent sending credit card information fields to the backend server via HTTP POST
 
     number:     document.querySelector('[data-name="cardNumber"]').value,
     exp_month:  expiry.month,
     exp_year:   expiry.year,
-    cvc:        document.querySelector('[data-name="cvc"]').value
+    cvc:        document.querySelector('[data-name="cardCVC"]').value
     // exp_month: document.querySelector('[data-name="expMonth"]').value,
     // exp_year:  document.querySelector('[data-name="expYear"]').value,
 

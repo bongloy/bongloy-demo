@@ -13,5 +13,5 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
-//= require card/card
 //= require cleave/cleave
+//= require custom
