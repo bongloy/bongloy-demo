@@ -4,8 +4,8 @@ $(document).ready(function(){
     creditCard: true,
     creditCardStrictMode: true,
     onCreditCardTypeChanged: function (type) {
-      let icons = ["mastercard", "visa", "diners", "discover", "jcb", "dankort", "unionpay"];
-      let icon = (icons.includes(type.toLowerCase()) ? type.toLowerCase() : "credit-card");
+      var icons = ["mastercard", "visa", "diners", "discover", "jcb", "dankort", "unionpay"];
+      var icon = (icons.includes(type.toLowerCase()) ? type.toLowerCase() : "credit-card");
       document.getElementById(this.element.dataset.target).className = "pf pf-" + icon;
     }
   });
