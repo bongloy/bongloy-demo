@@ -12,13 +12,13 @@ checkoutForm.addEventListener('submit', submitHandler, false);
 function submitHandler(event) {
   event.preventDefault();
 
-  var expiry = Payment.fns.cardExpiryVal(document.querySelector('[data-name="cardExpiry"]').value);
+  var expiry = document.querySelector('[data-name="cardExpiry"]').value.split("/");
   var cardObject = {
     // The HTML in this example uses `data-name` attribute instead of the HTML name attribute to prevent sending credit card information fields to the backend server via HTTP POST
 
     number:     document.querySelector('[data-name="cardNumber"]').value,
-    exp_month:  expiry.month,
-    exp_year:   expiry.year,
+    exp_month:  expiry[0],
+    exp_year:   expiry[1],
     cvc:        document.querySelector('[data-name="cardCVC"]').value
     // exp_month: document.querySelector('[data-name="expMonth"]').value,
     // exp_year:  document.querySelector('[data-name="expYear"]').value,
@@ -29,8 +29,8 @@ function submitHandler(event) {
   Bongloy.createToken('card', cardObject, function(statusCode, response) {
     // hide error messages
     var errorMessages = document.querySelector('[data-name="errorMessages"]');
-    errorMessages.classList.remove('show');
-    errorMessages.classList.add('hidden');
+    errorMessages.classList.remove('d-block');
+    errorMessages.classList.add('d-none');
 
     if (statusCode === 201) {
       // On success, set token in your checkout form
@@ -43,8 +43,8 @@ function submitHandler(event) {
       // If unsuccessful, display an error message.
       // Note that `response.error.message` contains a preformatted error message.
       document.querySelector("input[type=submit]").removeAttribute('disabled');
-      errorMessages.classList.remove('hidden');
-      errorMessages.classList.add('show');
+      errorMessages.classList.remove('d-none');
+      errorMessages.classList.add('d-block');
       errorMessages.innerHTML = response.error.message;
     }
   });

@@ -31,7 +31,9 @@
             = link_to("Source Code", "https://github.com/bongloy/bongloy-demo", target: "_blank", class: "nav-link")
 
     .container
-      - flash.each do |type, message|
-        #flash.alert.alert-dismissible.fade.in{:class => "alert #{alert_class_for(type)}"}
-          = message.html_safe
-      = yield
+      .row
+        .col
+          - flash.each do |type, message|
+            #flash.alert.alert-dismissible.fade.in{class: "alert #{alert_class_for(type)}"}
+              = message.html_safe
+          = yield
