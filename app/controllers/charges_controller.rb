@@ -9,9 +9,7 @@ class ChargesController < ApplicationController
     if @charge.save
       redirect_to(
         new_charge_path,
-        flash: {
-          success: "Your Charge was successfully created!"
-        }
+        notice: "Your Charge was successfully created!"
       )
     else
       render :new

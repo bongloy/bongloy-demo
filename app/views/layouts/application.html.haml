@@ -33,7 +33,7 @@
     .container
       .row
         .col
-          - flash.each do |type, message|
-            #flash.alert.alert-dismissible.fade.in{class: "alert #{alert_class_for(type)}"}
-              = message.html_safe
+          - if flash.present?
+            .alert.alert-success{ role: "alert" }
+              = flash[:notice]
           = yield
