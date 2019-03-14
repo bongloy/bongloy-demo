@@ -1,0 +1,2 @@
+module Tax::VehiclesHelper
+end

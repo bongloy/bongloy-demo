@@ -1,0 +1,67 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tax Vehicles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Plate number</th>
+      <th>Brand</th>
+      <th>Type</th>
+      <th>Color</th>
+      <th>Engine number</th>
+      <th>Year</th>
+      <th>Power</th>
+      <th>Name</th>
+      <th>En name</th>
+      <th>Gender</th>
+      <th>Birth date</th>
+      <th>Id number</th>
+      <th>Home</th>
+      <th>Street</th>
+      <th>Vilage</th>
+      <th>Commune</th>
+      <th>District</th>
+      <th>City</th>
+      <th>Email</th>
+      <th>Phone number</th>
+      <th>Reference number</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tax_vehicles.each do |tax_vehicle| %>
+      <tr>
+        <td><%= tax_vehicle.plate_number %></td>
+        <td><%= tax_vehicle.brand %></td>
+        <td><%= tax_vehicle.type %></td>
+        <td><%= tax_vehicle.color %></td>
+        <td><%= tax_vehicle.engine_number %></td>
+        <td><%= tax_vehicle.year %></td>
+        <td><%= tax_vehicle.power %></td>
+        <td><%= tax_vehicle.name %></td>
+        <td><%= tax_vehicle.en_name %></td>
+        <td><%= tax_vehicle.gender %></td>
+        <td><%= tax_vehicle.birth_date %></td>
+        <td><%= tax_vehicle.id_number %></td>
+        <td><%= tax_vehicle.home %></td>
+        <td><%= tax_vehicle.street %></td>
+        <td><%= tax_vehicle.vilage %></td>
+        <td><%= tax_vehicle.commune %></td>
+        <td><%= tax_vehicle.district %></td>
+        <td><%= tax_vehicle.city %></td>
+        <td><%= tax_vehicle.email %></td>
+        <td><%= tax_vehicle.phone_number %></td>
+        <td><%= tax_vehicle.reference_number %></td>
+        <td><%= link_to 'Show', tax_vehicle %></td>
+        <td><%= link_to 'Edit', edit_tax_vehicle_path(tax_vehicle) %></td>
+        <td><%= link_to 'Destroy', tax_vehicle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tax Vehicle', new_tax_vehicle_path %>
