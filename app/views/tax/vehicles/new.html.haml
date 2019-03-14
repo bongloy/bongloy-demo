@@ -1,24 +1,51 @@
-%h1 Vehicle and Owner information
-= simple_form_for @tax_vehicle, html: { class: 'form-inline' } do |f|
-  = f.input :plate_number
-  = f.input :brand
-  = f.input :type
-  = f.input :color
-  = f.input :engine_number
-  = f.input :year
-  = f.input :power
-  = f.input :name
-  = f.input :en_name
-  = f.input :gender
-  = f.input :birth_date
-  = f.input :id_number
-  = f.input :home
-  = f.input :street
-  = f.input :vilage
-  = f.input :commune
-  = f.input :district
-  = f.input :city
-  = f.input :email
-  = f.input :phone_number
+%h1 Vehicle tax payment demo
+= simple_form_for @tax_vehicle, wrapper: :horizontal_form do |f|
+  %hr
+  %h3 Vehicle information
+  .row
+    .col-12.col-md-6.col-lg-4
+      = f.input :plate_number
+    .col-12.col-md-6.col-lg-4
+      = f.input :brand
+    .col-12.col-md-6.col-lg-4
+      = f.input :type
+    .col-12.col-md-6.col-lg-4
+      = f.input :color
+    .col-12.col-md-6.col-lg-4
+      = f.input :engine_number
+    .col-12.col-md-6.col-lg-4
+      = f.input :year
+    .col-12.col-md-6.col-lg-4
+      = f.input :power
+
+  %hr
+  %h3 Owner information
+  .row
+    .col-12.col-md-6.col-lg-4
+      = f.input :name
+    .col-12.col-md-6.col-lg-4
+      = f.input :en_name
+    .col-12.col-md-6.col-lg-4
+      = f.input :gender
+    .col-12.col-md-6.col-lg-4
+      = f.input :birth_date
+    .col-12.col-md-6.col-lg-4
+      = f.input :id_number
+    .col-12.col-md-6.col-lg-4
+      = f.input :home
+    .col-12.col-md-6.col-lg-4
+      = f.input :street
+    .col-12.col-md-6.col-lg-4
+      = f.input :vilage
+    .col-12.col-md-6.col-lg-4
+      = f.input :commune
+    .col-12.col-md-6.col-lg-4
+      = f.input :district
+    .col-12.col-md-6.col-lg-4
+      = f.input :city
+    .col-12.col-md-6.col-lg-4
+      = f.input :email
+    .col-12.col-md-6.col-lg-4
+      = f.input :phone_number
   .form-group
     = f.button :submit, class: 'btn btn-primary'
