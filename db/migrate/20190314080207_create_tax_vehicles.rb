@@ -22,6 +22,7 @@ class CreateTaxVehicles < ActiveRecord::Migration[5.2]
       t.string :email
       t.string :phone_number
       t.string :reference_number
+      t.string :token
 
       t.timestamps
     end

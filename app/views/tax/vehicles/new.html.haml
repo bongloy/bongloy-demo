@@ -1,0 +1,24 @@
+%h1 Vehicle and Owner information
+= simple_form_for @tax_vehicle, html: { class: 'form-inline' } do |f|
+  = f.input :plate_number
+  = f.input :brand
+  = f.input :type
+  = f.input :color
+  = f.input :engine_number
+  = f.input :year
+  = f.input :power
+  = f.input :name
+  = f.input :en_name
+  = f.input :gender
+  = f.input :birth_date
+  = f.input :id_number
+  = f.input :home
+  = f.input :street
+  = f.input :vilage
+  = f.input :commune
+  = f.input :district
+  = f.input :city
+  = f.input :email
+  = f.input :phone_number
+  .form-group
+    = f.button :submit, class: 'btn btn-primary'

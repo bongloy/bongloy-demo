@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_080207) do
     t.string "email"
     t.string "phone_number"
     t.string "reference_number"
+    t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
