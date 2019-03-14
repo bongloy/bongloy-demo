@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_080207) do
     t.string "name"
     t.string "en_name"
     t.string "gender"
-    t.string "birth_date"
+    t.date "birth_date"
     t.string "id_number"
     t.string "home"
     t.string "street"

@@ -1,4 +1,7 @@
 class Tax::Vehicle < ApplicationRecord
+  GENDERS = ["Male", "Female"].freeze
+  TYPES = ["Car", "Truck", "Van"].freeze
+
   before_create :generate_reference_number
 
   def generate_reference_number

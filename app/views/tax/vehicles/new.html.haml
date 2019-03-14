@@ -8,7 +8,7 @@
     .col-12.col-md-6.col-lg-4
       = f.input :brand
     .col-12.col-md-6.col-lg-4
-      = f.input :type
+      = f.input :type, collection: Tax::Vehicle::TYPES, prompt: 'Please select vihecle type'
     .col-12.col-md-6.col-lg-4
       = f.input :color
     .col-12.col-md-6.col-lg-4
@@ -26,9 +26,9 @@
     .col-12.col-md-6.col-lg-4
       = f.input :en_name
     .col-12.col-md-6.col-lg-4
-      = f.input :gender
+      = f.input :gender,  collection: Tax::Vehicle::GENDERS, prompt: 'Please select your gender'
     .col-12.col-md-6.col-lg-4
-      = f.input :birth_date
+      = f.input :birth_date, start_year: Time.now.year - 50, wrapper: :horizontal_multi_select
     .col-12.col-md-6.col-lg-4
       = f.input :id_number
     .col-12.col-md-6.col-lg-4

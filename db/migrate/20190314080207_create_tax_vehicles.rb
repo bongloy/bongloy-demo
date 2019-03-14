@@ -11,7 +11,7 @@ class CreateTaxVehicles < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :en_name
       t.string :gender
-      t.string :birth_date
+      t.date :birth_date
       t.string :id_number
       t.string :home
       t.string :street
