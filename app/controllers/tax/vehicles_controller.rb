@@ -1,5 +1,5 @@
 class Tax::VehiclesController < ApplicationController
-  before_action :set_tax_vehicle, only: [:show, :edit, :update, :destroy]
+  before_action :set_tax_vehicle, only: [:show, :pay, :update, :destroy]
 
   def show
   end
@@ -8,7 +8,7 @@ class Tax::VehiclesController < ApplicationController
     @tax_vehicle = Tax::Vehicle.prefill
   end
 
-  def edit
+  def pay
   end
 
   # POST /tax/vehicles
@@ -16,7 +16,7 @@ class Tax::VehiclesController < ApplicationController
     @tax_vehicle = Tax::Vehicle.new(tax_vehicle_params)
 
     if @tax_vehicle.save
-      redirect_to [:edit, @tax_vehicle]
+      redirect_to [:pay, @tax_vehicle]
     else
       render :new
     end
@@ -26,7 +26,7 @@ class Tax::VehiclesController < ApplicationController
     if @tax_vehicle.charge(charge_params)
       redirect_to @tax_vehicle
     else
-      render :edit
+      render :pay
     end
   end
 
