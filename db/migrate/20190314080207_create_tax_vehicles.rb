@@ -3,7 +3,7 @@ class CreateTaxVehicles < ActiveRecord::Migration[5.2]
     create_table :tax_vehicles do |t|
       t.string :plate_number
       t.string :brand
-      t.string :type
+      t.string :vehicle_type
       t.string :color
       t.string :engine_number
       t.string :year

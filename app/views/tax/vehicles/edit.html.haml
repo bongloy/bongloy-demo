@@ -1,4 +1,5 @@
-%h1 Payment
+%h2.my-3.text-center សូមបំពេញពត៍មានបង់ប្រាក់ / Please fill your payment information
+%h4.text-center លោកអ្នកនឹងត្រូវបានកាត់ទឹកប្រាក់ចំនួន ១០០ ដុល្លារ / Your will be charge for $100
 = simple_form_for @tax_vehicle, html: { data: { name: 'hiddenForm' } } do |f|
   = f.input :token, as: :hidden, input_html: { data: { name: "cardToken" } }
 

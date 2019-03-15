@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_080207) do
   create_table "tax_vehicles", force: :cascade do |t|
     t.string "plate_number"
     t.string "brand"
-    t.string "type"
+    t.string "vehicle_type"
     t.string "color"
     t.string "engine_number"
     t.string "year"

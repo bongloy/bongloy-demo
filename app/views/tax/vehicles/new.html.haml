@@ -9,7 +9,7 @@
     .col-12.col-md-6.col-lg-4
       = f.input :brand , label: small_text('ម៉ាក / Brand')
     .col-12.col-md-6.col-lg-4
-      = f.input :type, collection: Tax::Vehicle::TYPES, prompt: '--សូមជ្រើសរើសប្រភេទយានយន្ត--', label: small_text('ប្រភេទ / Type')
+      = f.input :vehicle_type, collection: Tax::Vehicle::TYPES, prompt: '--សូមជ្រើសរើសប្រភេទយានយន្ត--', label: small_text('ប្រភេទ / Type')
     .col-12.col-md-6.col-lg-4
       = f.input :color, label: small_text('ពណ៍ / Color')
     .col-12.col-md-6.col-lg-4
@@ -50,3 +50,8 @@
       = f.input :phone_number, label: small_text('ទូរស័ព្ទចល័ត / Mobile Telephone')
   .form-group
     = f.button :submit, class: 'btn btn-primary'
+
+:css
+  abbr[title="required"] {
+    display: none;
+  }

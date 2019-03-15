@@ -5,7 +5,7 @@ class Tax::VehiclesController < ApplicationController
   end
 
   def new
-    @tax_vehicle = Tax::Vehicle.new
+    @tax_vehicle = Tax::Vehicle.prefill
   end
 
   def edit
@@ -24,7 +24,7 @@ class Tax::VehiclesController < ApplicationController
 
   def update
     if @tax_vehicle.charge(charge_params)
-      redirect_to @tax_vehicle, notice: 'Vehicle was successfully updated.'
+      redirect_to @tax_vehicle
     else
       render :edit
     end
@@ -45,6 +45,6 @@ class Tax::VehiclesController < ApplicationController
       params.require(:tax_vehicle).permit(
         :plate_number,
         :brand,
-        :type, :color, :engine_number, :year, :power, :name, :en_name, :gender, :birth_date, :id_number, :home, :street, :vilage, :commune, :district, :city, :email, :phone_number)
+        :vehicle_type, :color, :engine_number, :year, :power, :name, :en_name, :gender, :birth_date, :id_number, :home, :street, :vilage, :commune, :district, :city, :email, :phone_number)
     end
 end
