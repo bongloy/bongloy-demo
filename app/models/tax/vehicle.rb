@@ -1,23 +1,21 @@
 class Tax::Vehicle < ApplicationRecord
   GENDERS = ["ប្រុស", "ស្រី"].freeze
-  TYPES = [
-    "រថយន្តទេសចរណ៍",
-    "រថយន្តដឹកទំនិញធន់តូច(PICK UP)ទ្វារ២",
-    "រថយន្តដឹកទំនិញធន់តូច​(PICK UP)ទ្វារ៤",
-    "រថយន្តដឹកទំនិញធន់ធ្ងន់",
-    "រ៉ឺម៉កសណ្តោង",
-    "រថយន្តដឹកអ្នកដំណើរ",
-    "មធ្យោបាយដឹកជញ្ជូនកែឆ្នៃផ្សេងទៀត"
-  ].freeze
+  PRICES = {
+    "រថយន្តទេសចរណ៍" => 160000,
+    "រថយន្តដឹកទំនិញធន់តូច(PICK UP)ទ្វារ២" => 200000,
+    "រថយន្តដឹកទំនិញធន់តូច​(PICK UP)ទ្វារ៤" => 250000,
+    "រថយន្តដឹកទំនិញធន់ធ្ងន់" => 500000,
+    "រ៉ឺម៉កសណ្តោង" => 500000,
+    "រថយន្តដឹកអ្នកដំណើរ" => 250000,
+    "មធ្យោបាយដឹកជញ្ជូនកែឆ្នៃផ្សេងទៀត" => 2000000
+  }.freeze
 
   validates :plate_number, :brand, :vehicle_type, :color, :engine_number, :year, :power, :name, :en_name, :gender, :birth_date, :id_number, :home, :street, :vilage, :commune, :district, :city, :email, :phone_number, presence: true
 
 
   def self.prefill
     new(
-      plate_number: '1AX-1212',
       brand: 'Audi Q7',
-      vehicle_type: TYPES.first,
       color: 'ស',
       engine_number: '1D4GP25B34B579630',
       year: '2010',
@@ -44,10 +42,22 @@ class Tax::Vehicle < ApplicationRecord
     self.reference_number = rand(10**5..10**6-1)
   end
 
+  def amount_in_riel
+    PRICES[vehicle_type]
+  end
+
+  def amount
+    amount_in_riel / 4000
+  end
+
+  def amount_in_cents
+    amount * 100
+  end
+
   def charge(params)
     update(params)
     Stripe::Charge.create(
-      amount: 10000,
+      amount: amount_in_cents,
       currency: "USD",
       source: token,
       metadata: {reference_number: reference_number }
