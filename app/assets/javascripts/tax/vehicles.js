@@ -32,7 +32,9 @@ function submitHandler(event) {
     else {
       // If unsuccessful, display an error message.
       // Note that `response.error.message` contains a preformatted error message.
-      document.querySelector("input[type=submit]").removeAttribute('disabled');
+      var submitButton = document.querySelector("input[type=submit]");
+      submitButton.removeAttribute('disabled');
+      submitButton.value = "Pay Now"
       errorMessages.classList.remove('d-none');
       errorMessages.classList.add('d-block');
       errorMessages.innerHTML = response.error.message;

@@ -27,27 +27,6 @@
 .row
   .col
     %p
-      %table.table.table-bordered.table-striped
-        %thead
-          %tr
-            %th{ scope: "col" }
-              Number
-            %th{ scope: "col" }
-              Card Brand
-            %th{ scope: "col" }
-              Expiry Date
-            %th{ scope: "col" }
-              CVC
-        %tbody
-          %tr
-            %td
-              %code
-                6200 0000 0000 0005
-            %td
-              Union Pay
-            %td
-              = checkout_configuration.sample_expiry_date
-            %td
-              123
+      = render 'shared/testing_card'
 
 = javascript_include_tag "charges"

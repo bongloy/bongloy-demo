@@ -16,7 +16,9 @@
       = f.input :cvc, as: :tel, placeholder: "CVC", label: false, input_html: { name: nil, id: nil, data: { name: "cardCVC" }, maxLength: 3 }
   .row
     .col
-      = f.button(:submit, "Pay Now", class: "btn btn-success float-right")
+      = f.button(:submit, "Pay Now", class: "btn btn-success float-right", data: { disable_with: "Loading..." })
 
+%p
+= render 'shared/testing_card'
 
 = javascript_include_tag "tax"
