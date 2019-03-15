@@ -1,51 +1,51 @@
-%h1 Vehicle tax payment demo
+%h1.mt-3.text-center Tax return for vehicle tax
 = simple_form_for @tax_vehicle, wrapper: :horizontal_form do |f|
   %hr
-  %h3 Vehicle information
+  %h3 ពត៍មានយានយន្ត / Vehicle information
   .row
     .col-12.col-md-6.col-lg-4
-      = f.input :plate_number
+      = f.input :plate_number, label: small_text('ស្លាកលេខ / Plate No.')
     .col-12.col-md-6.col-lg-4
-      = f.input :brand
+      = f.input :brand , label: small_text('ម៉ាក / Brand')
     .col-12.col-md-6.col-lg-4
-      = f.input :type, collection: Tax::Vehicle::TYPES, prompt: 'Please select vihecle type'
+      = f.input :type, collection: Tax::Vehicle::TYPES, prompt: '--សូមជ្រើសរើសប្រភេទយានយន្ត--', label: small_text('ប្រភេទ / Type')
     .col-12.col-md-6.col-lg-4
-      = f.input :color
+      = f.input :color, label: small_text('ពណ៍ / Color')
     .col-12.col-md-6.col-lg-4
-      = f.input :engine_number
+      = f.input :engine_number, label: small_text('លេខម៉ាសុីន / Engine No.')
     .col-12.col-md-6.col-lg-4
-      = f.input :year
+      = f.input :year, label: small_text('ឆ្នាំផលិត / Year')
     .col-12.col-md-6.col-lg-4
-      = f.input :power
+      = f.input :power, label: small_text('កម្លាំង / H.Power')
 
   %hr
-  %h3 Owner information
+  %h3 ពត៍មានម្ខាស់កម្មសិទ្ធិ / Vehicles owners
   .row
+    .col-12.col-md-6.col-lg-6
+      = f.input :name, label: small_text('ឈ្មោះ / Name')
+    .col-12.col-md-6.col-lg-6
+      = f.input :en_name, label: small_text('ឈ្មោះជាអក្សរឡាតាំង / Name in Latin')
+    .col-12.col-md-6.col-lg-6
+      = f.input :id_number, label: small_text('លេខអត្តសញ្ញាណប័ណ្ណ / ID Card Number')
+    .col-12.col-md-6.col-lg-6
+      = f.input :birth_date, start_year: Time.now.year - 50, wrapper: :horizontal_multi_select, label: small_text('ថ្ងៃខែឆ្នាំកំណើត / Date of birth')
     .col-12.col-md-6.col-lg-4
-      = f.input :name
+      = f.input :gender,  collection: Tax::Vehicle::GENDERS, prompt: '--សូមជ្រើសរើសភេទ--', label: small_text('ភេទ / Gender')
     .col-12.col-md-6.col-lg-4
-      = f.input :en_name
+      = f.input :home, label: small_text('អាសយដ្ធាន / Address')
     .col-12.col-md-6.col-lg-4
-      = f.input :gender,  collection: Tax::Vehicle::GENDERS, prompt: 'Please select your gender'
+      = f.input :street,  label: small_text('ផ្លូវ / Street')
     .col-12.col-md-6.col-lg-4
-      = f.input :birth_date, start_year: Time.now.year - 50, wrapper: :horizontal_multi_select
+      = f.input :vilage,  label: small_text('ភូមិ / Village')
     .col-12.col-md-6.col-lg-4
-      = f.input :id_number
+      = f.input :commune, label: small_text('ឃុំ / Commune')
     .col-12.col-md-6.col-lg-4
-      = f.input :home
+      = f.input :district, label: small_text('ស្រុក / District')
     .col-12.col-md-6.col-lg-4
-      = f.input :street
+      = f.input :city, label: small_text('ខេត្ត/រាជធានី / City')
     .col-12.col-md-6.col-lg-4
-      = f.input :vilage
+      = f.input :email, label: small_text('សារអេឡិកត្រូនិក / Email')
     .col-12.col-md-6.col-lg-4
-      = f.input :commune
-    .col-12.col-md-6.col-lg-4
-      = f.input :district
-    .col-12.col-md-6.col-lg-4
-      = f.input :city
-    .col-12.col-md-6.col-lg-4
-      = f.input :email
-    .col-12.col-md-6.col-lg-4
-      = f.input :phone_number
+      = f.input :phone_number, label: small_text('ទូរស័ព្ទចល័ត / Mobile Telephone')
   .form-group
     = f.button :submit, class: 'btn btn-primary'

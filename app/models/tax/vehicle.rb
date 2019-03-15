@@ -1,6 +1,14 @@
 class Tax::Vehicle < ApplicationRecord
-  GENDERS = ["Male", "Female"].freeze
-  TYPES = ["Car", "Truck", "Van"].freeze
+  GENDERS = ["ប្រុស", "ស្រី"].freeze
+  TYPES = [
+    "រថយន្តទេសចរណ៍",
+    "រថយន្តដឹកទំនិញធន់តូច(PICK UP)ទ្វារ២",
+    "រថយន្តដឹកទំនិញធន់តូច​(PICK UP)ទ្វារ៤",
+    "រថយន្តដឹកទំនិញធន់ធ្ងន់",
+    "រ៉ឺម៉កសណ្តោង",
+    "រថយន្តដឹកអ្នកដំណើរ",
+    "មធ្យោបាយដឹកជញ្ជូនកែឆ្នៃផ្សេងទៀត"
+  ].freeze
 
   before_create :generate_reference_number
 
