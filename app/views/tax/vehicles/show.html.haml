@@ -1,64 +1,75 @@
-%h1 Tax Payment
-%p
-  %strong Reference number:
-  = @tax_vehicle.reference_number
-%p
-  %strong Plate number:
-  = @tax_vehicle.plate_number
-%p
-  %strong Brand:
-  = @tax_vehicle.brand
-%p
-  %strong Type:
-  = @tax_vehicle.type
-%p
-  %strong Color:
-  = @tax_vehicle.color
-%p
-  %strong Engine number:
-  = @tax_vehicle.engine_number
-%p
-  %strong Year:
-  = @tax_vehicle.year
-%p
-  %strong Power:
-  = @tax_vehicle.power
-%p
-  %strong Name:
-  = @tax_vehicle.name
-%p
-  %strong En name:
-  = @tax_vehicle.en_name
-%p
-  %strong Gender:
-  = @tax_vehicle.gender
-%p
-  %strong Birth date:
-  = @tax_vehicle.birth_date
-%p
-  %strong Id number:
-  = @tax_vehicle.id_number
-%p
-  %strong Home:
-  = @tax_vehicle.home
-%p
-  %strong Street:
-  = @tax_vehicle.street
-%p
-  %strong Vilage:
-  = @tax_vehicle.vilage
-%p
-  %strong Commune:
-  = @tax_vehicle.commune
-%p
-  %strong District:
-  = @tax_vehicle.district
-%p
-  %strong City:
-  = @tax_vehicle.city
-%p
-  %strong Email:
-  = @tax_vehicle.email
-%p
-  %strong Phone number:
-  = @tax_vehicle.phone_number
+%h1.text-center Tax Payment
+%h3.text-center= "No. #{@tax_vehicle.reference_number}"
+.row
+  .col-12.col-md-6
+    %h3 Vehicle Information
+    %hr
+    %p
+      %strong Plate number:
+      = @tax_vehicle.plate_number
+    %p
+      %strong Brand:
+      = @tax_vehicle.brand
+    %p
+      %strong Type:
+      = @tax_vehicle.type
+    %p
+      %strong Color:
+      = @tax_vehicle.color
+    %p
+      %strong Engine number:
+      = @tax_vehicle.engine_number
+    %p
+      %strong Year:
+      = @tax_vehicle.year
+    %p
+      %strong Power:
+      = @tax_vehicle.power
+
+
+  .col-12.col-md-6
+    %h3 Owner Information
+    %hr
+    .row
+      .col-12.col-md-6
+        %p
+          %strong Name:
+          = @tax_vehicle.name
+        %p
+          %strong En name:
+          = @tax_vehicle.en_name
+        %p
+          %strong Gender:
+          = @tax_vehicle.gender
+        %p
+          %strong Birth date:
+          = @tax_vehicle.birth_date
+        %p
+          %strong Id number:
+          = @tax_vehicle.id_number
+
+      .col-12.col-md-6
+        %p
+          %strong Home:
+          = @tax_vehicle.home
+        %p
+          %strong Street:
+          = @tax_vehicle.street
+        %p
+          %strong Vilage:
+          = @tax_vehicle.vilage
+        %p
+          %strong Commune:
+          = @tax_vehicle.commune
+        %p
+          %strong District:
+          = @tax_vehicle.district
+        %p
+          %strong City:
+          = @tax_vehicle.city
+        %p
+          %strong Email:
+          = @tax_vehicle.email
+        %p
+          %strong Phone:
+          = @tax_vehicle.phone_number
