@@ -15,16 +15,19 @@
 
   %body
     %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      %a.navbar-brand{ href: "#" }
+      %a.navbar-brand{ href: "/" }
         = title
       %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
         %span.navbar-toggler-icon
       #navbarSupportedContent.collapse.navbar-collapse
         %ul.navbar-nav.mr-auto
           %li.nav-item.active
-            %a.nav-link{:href => "#"}
+            %a.nav-link{:href => "/"}
               Demo
               %span.sr-only (current)
+          %li.nav-item
+            %a.nav-link{:href => new_tax_vehicle_path}
+              Tax Demo
           %li.nav-item
             = link_to("Official Documentation", "https://www.bongloy.com/documentation", target: "_blank", class: "nav-link")
           %li.nav-item

@@ -9,9 +9,9 @@
     .col-12.col-md-6.col-lg-4
       = f.input :plate_number, label: small_text('ស្លាកលេខ / Plate No.')
     .col-12.col-md-6.col-lg-4
-      = f.input :brand , label: small_text('ម៉ាក / Brand')
+      = f.input :vehicle_type, collection: Tax::Vehicle::PRICES.keys, prompt: '--សូមជ្រើសរើសប្រភេទយានយន្ត--', label: small_text('ប្រភេទ / Type')
     .col-12.col-md-6.col-lg-4
-      = f.input :vehicle_type, collection: Tax::Vehicle::TYPES, prompt: '--សូមជ្រើសរើសប្រភេទយានយន្ត--', label: small_text('ប្រភេទ / Type')
+      = f.input :brand , label: small_text('ម៉ាក / Brand')
     .col-12.col-md-6.col-lg-4
       = f.input :color, label: small_text('ពណ៍ / Color')
     .col-12.col-md-6.col-lg-4
@@ -22,7 +22,7 @@
       = f.input :power, label: small_text('កម្លាំង / H.Power')
 
   %hr
-  %h3 ពត៍មានម្ខាស់កម្មសិទ្ធិ / Vehicles owners
+  %h3 ពត៍មានម្ខាស់កម្មសិទ្ធិ / Vehicles owner
   .row
     .col-12.col-md-6.col-lg-6
       = f.input :name, label: small_text('ឈ្មោះ / Name')
@@ -33,7 +33,7 @@
     .col-12.col-md-6.col-lg-6
       = f.input :birth_date, start_year: Time.now.year - 50, wrapper: :horizontal_multi_select, label: small_text('ថ្ងៃខែឆ្នាំកំណើត / Date of birth')
     .col-12.col-md-6.col-lg-4
-      = f.input :gender,  collection: Tax::Vehicle::GENDERS, prompt: '--សូមជ្រើសរើសភេទ--', label: small_text('ភេទ / Gender')
+      = f.input :gender,  collection: Tax::Vehicle::PRICES.keys, prompt: '--សូមជ្រើសរើសភេទ--', label: small_text('ភេទ / Gender')
     .col-12.col-md-6.col-lg-4
       = f.input :home, label: small_text('អាសយដ្ធាន / Address')
     .col-12.col-md-6.col-lg-4
@@ -51,9 +51,11 @@
     .col-12.col-md-6.col-lg-4
       = f.input :phone_number, label: small_text('ទូរស័ព្ទចល័ត / Mobile Telephone')
   .form-group
-    = f.button :submit, class: 'btn btn-primary'
+    = f.button :submit, "បន្ទាប់ / Next", class: 'btn btn-primary'
 
 :css
   abbr[title="required"] {
     display: none;
   }
+
+= javascript_include_tag "tax"

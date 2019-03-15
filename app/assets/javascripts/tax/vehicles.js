@@ -1,5 +1,15 @@
 var publishableKey = document.head.querySelector("meta[name=bongloy-publishable-key]").content;
 Bongloy.setPublishableKey(publishableKey);
+try {
+  var cleave = new Cleave('#tax_vehicle_plate_number', {
+      delimiters: ['-'],
+      blocks: [3, 4],
+      uppercase: true
+  });
+} catch (e) {
+
+}
+
 
 var checkoutForm = document.querySelector('[data-name="taxPaymentForm"]');
 var hiddenForm = document.querySelector('[data-name="hiddenForm"]');
