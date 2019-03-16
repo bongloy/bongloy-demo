@@ -2,6 +2,7 @@ sudo: false
 dist: trusty
 cache: bundler
 language: ruby
+postgresql: '10'
 deploy:
   provider: heroku
   api_key:
