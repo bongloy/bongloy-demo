@@ -3,6 +3,8 @@ dist: trusty
 cache: bundler
 language: ruby
 postgresql: '10'
+before_script:
+  - psql -c 'create database bongloy_demo_test;' -U travis
 deploy:
   provider: heroku
   api_key:
