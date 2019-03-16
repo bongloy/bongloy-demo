@@ -1,4 +1,5 @@
 class Tax::VehiclesController < ApplicationController
+  http_basic_authenticate_with name: ENV['DEMO_USERNAME'], password: ENV['DEMO_PASSWORD']
   before_action :set_tax_vehicle, only: [:show, :pay, :update, :destroy]
 
   def show
@@ -11,7 +12,6 @@ class Tax::VehiclesController < ApplicationController
   def pay
   end
 
-  # POST /tax/vehicles
   def create
     @tax_vehicle = Tax::Vehicle.new(tax_vehicle_params)
 
@@ -31,7 +31,6 @@ class Tax::VehiclesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_tax_vehicle
       @tax_vehicle = Tax::Vehicle.find(params[:id])
     end
@@ -40,7 +39,6 @@ class Tax::VehiclesController < ApplicationController
       params.require(:tax_vehicle).permit(:token)
     end
 
-    # Only allow a trusted parameter "white list" through.
     def tax_vehicle_params
       params.require(:tax_vehicle).permit(
         :plate_number,
