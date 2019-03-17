@@ -14,5 +14,6 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+//= require payment_form
 //= require cleave/cleave
 //= require custom

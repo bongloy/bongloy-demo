@@ -1,5 +1,5 @@
 class Tax::VehiclesController < ApplicationController
-  http_basic_authenticate_with name: ENV['DEMO_USERNAME'], password: ENV['DEMO_PASSWORD']
+  http_basic_authenticate_with name: Rails.application.credentials.demo_username, password: Rails.application.credentials.demo_password
   before_action :set_tax_vehicle, only: [:show, :pay, :update, :destroy]
 
   def show

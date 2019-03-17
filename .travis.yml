@@ -11,7 +11,6 @@ addons:
 env:
   global:
     - PGUSER=travis
-    - PGHOST=""
     - PGPORT=5433
 before_script:
   - bundle exec rails db:test:prepare RAILS_ENV=test

@@ -1,3 +1,6 @@
+var publishableKey = document.head.querySelector("meta[name=bongloy-publishable-key]").content;
+Bongloy.setPublishableKey(publishableKey);
+
 $(document).ready(function(){
   // Form validations with cleave.js
   new Cleave('[data-name="cardNumber"]', {

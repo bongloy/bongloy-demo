@@ -6,15 +6,16 @@ end
 
 gem "autoprefixer-rails"
 gem "bootstrap", "~> 4.2.1"
+gem "coffee-rails"
 gem "haml"
 gem "jquery-rails"
 gem "pg"
 gem "puma"
 gem "rails", "~> 5.2.0"
+gem "sass-rails"
 gem "simple_form"
 gem "stripe"
 gem "uglifier"
-gem "sass-rails"
 
 group :development, :test do
   gem "dotenv-rails"
