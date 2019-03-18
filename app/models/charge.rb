@@ -25,7 +25,6 @@ class Charge
     true
   rescue Bongloy::StripeError => e
     errors.add(:base, e.message)
-    puts e.message
     false
   end
 end
