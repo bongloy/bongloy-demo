@@ -1,0 +1,22 @@
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %th{ scope: "col" }
+        Number
+      %th{ scope: "col" }
+        Card Brand
+      %th{ scope: "col" }
+        Expiry Date
+      %th{ scope: "col" }
+        CVC
+  %tbody
+    %tr
+      %td
+        %code
+          6200 0000 0000 0005
+      %td
+        Union Pay
+      %td
+        = 1.month.from_now.strftime("%m / %y")
+      %td
+        123

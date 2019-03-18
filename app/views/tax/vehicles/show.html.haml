@@ -1,0 +1,159 @@
+.text-center.my-4
+  = image_tag 'tax/logo.jpg', class: 'img-fluid', width: 200
+  %h1 ពន្ធមធ្យោបាយដឹកជញ្ជូន / Tax Vehicle Payment
+  %h3.mt-4.lead
+    %i
+      = "លេខសំគាល់ / No. #{@tax_vehicle.reference_number}"
+  %h4.text-success.mt-3
+    %i.fa.fa-check-circle{title: "paid", data: { toggle:"tooltip"}}
+    %i Paid
+
+%h4 ព័ត៍មានយានយន្ត​ / Vehicle Information
+%hr
+.row
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        ស្លាកលេខ / Plate number:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.plate_number
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        ម៉ាក / Brand:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.brand
+
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        ប្រភេទ / Type:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.vehicle_type
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        ពណ៍ / Color:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.color
+  .col-12.col-md-8
+    %p
+      %span.mr-2
+        លេខម៉ាសុីន / Engine number:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.engine_number
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        ឆ្នាំផលិត / Year:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.year
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        កម្លាំង / Power:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.power
+
+
+%h4.mt-4 ព័ត៍មានម្ចាស់កម្មសិទ្ធ​ / Owner Information
+%hr
+.row
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        ឈ្មោះ / Name:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.name
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        ឈ្មោះជាអក្សរឡាតាំង / En name:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.en_name
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        ភេទ / Gender:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.gender
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        ថ្ងៃខែឆ្នាំកំណើត / Birth date:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.birth_date
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        លេខអត្តសញ្ញាណប័ណ្ណ / Id number:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.id_number
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        ផ្លូវ / Street:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.street
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        ភូមិ / Vilage:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.vilage
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        ឃុំ / Commune:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.commune
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        អាសយដ្ធាន / Home:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.home
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        ស្រុក / District:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.district
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        ខេត្ត/រាជធានី / City:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.city
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        សារអេឡិកត្រូនិក / Email:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.email
+  .col-12.col-md-4
+    %p
+      %span.mr-2
+        ទូរស័ព្ទចល័ត / Phone:
+      %span.border-bottom.text-muted
+        %i
+          = @tax_vehicle.phone_number

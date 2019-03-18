@@ -16,16 +16,15 @@ class Charge
   private
 
   def execute_charge
-    Stripe::Charge.create(
+    Bongloy::Charge.create(
       amount: 10000,
       currency: "USD",
       source: token,
       description: description
     )
     true
-  rescue Stripe::StripeError => e
+  rescue Bongloy::StripeError => e
     errors.add(:base, e.message)
-    puts e.message
     false
   end
 end

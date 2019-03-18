@@ -5,12 +5,14 @@ if ENV["GEMFILE_LOAD_RUBY_VERSION"].to_i == 1 && File.exist?(".ruby-version")
 end
 
 gem "autoprefixer-rails"
-gem "bootstrap", "~> 4.2.1"
+gem "bootstrap"
+gem "coffee-rails"
 gem "haml"
-gem "jbuilder"
 gem "jquery-rails"
+gem "pg"
 gem "puma"
 gem "rails", "~> 5.2.0"
+gem "sass-rails"
 gem "simple_form"
 gem "stripe"
 gem "uglifier"

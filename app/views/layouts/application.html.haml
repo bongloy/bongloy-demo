@@ -7,22 +7,21 @@
     %title
       = title
     = javascript_include_tag("https://js.bongloy.com/v3")
-    = tag(:meta, name: "bongloy-publishable-key", content: checkout_configuration.publishable_key)
+    = tag(:meta, name: "bongloy-publishable-key", content: ENV.fetch("BONGLOY_DEFAULT_PUBLISHABLE_KEY"))
     = csrf_meta_tags
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
-    = favicon_link_tag "logos/bongloy_favicon.png"
 
   %body
     %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      %a.navbar-brand{ href: "#" }
+      %a.navbar-brand{ href: "/" }
         = title
       %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
         %span.navbar-toggler-icon
       #navbarSupportedContent.collapse.navbar-collapse
         %ul.navbar-nav.mr-auto
           %li.nav-item.active
-            %a.nav-link{:href => "#"}
+            %a.nav-link{:href => "/"}
               Demo
               %span.sr-only (current)
           %li.nav-item

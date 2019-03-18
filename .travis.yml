@@ -2,6 +2,18 @@ sudo: false
 dist: trusty
 cache: bundler
 language: ruby
+addons:
+  postgresql: '10'
+  apt:
+    packages:
+      - postgresql-10
+      - postgresql-client-10
+env:
+  global:
+    - PGUSER=travis
+    - PGPORT=5433
+before_script:
+  - bundle exec rails db:test:prepare RAILS_ENV=test
 deploy:
   provider: heroku
   api_key:

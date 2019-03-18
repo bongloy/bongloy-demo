@@ -1,0 +1,35 @@
+.my-5.text-center
+  = image_tag 'tax/logo.jpg', class: 'img-fluid', width: 200
+  %h1 សូមបំពេញពត៍មានបង់ប្រាក់
+  %h3 Please fill your payment information
+
+.row
+  .col-md-3.col-sm-1
+  .col
+    = simple_form_for(:charge, url: tax_vehicle_path(@tax_vehicle), method: :patch, wrapper: :input_group, :html => {:autocomplete => "on", :data => { name: "paymentForm" }}) do |f|
+      = f.input :token, as: :hidden, input_html: { data: { name: "cardToken" } }
+      .alert.alert-danger.d-none{ role: "alert", data: { name: "errorMessages"} }
+      = f.input :card_number, prepend: "<i id='card-brand-icon' class='pf pf-credit-card'></i>".html_safe, as: :tel, placeholder: "Card Number", label: false, input_html: { name: nil, id: nil, data: { name: "cardNumber", target: "card-brand-icon" } }
+      .row
+        .col
+          = f.input :expiry, as: :tel, placeholder: "Expiry", label: false, input_html: { name: nil, id: nil, data: { name: "cardExpiry" } }
+          / Uncomment to include separate inputs for expiry month and expiry year
+          / = f.input :exp_month, placeholder: "Expiry Month", label: false, input_html: { name: nil, id: nil, data: { name: "expMonth" } }
+          / = f.input :exp_year, placeholder: "Expiry Year", label: false, input_html: { name: nil, id: nil, data: { name: "expYear" } }
+        .col
+          = f.input :cvc, as: :tel, placeholder: "CVC", label: false, input_html: { name: nil, id: nil, data: { name: "cardCVC" }, maxLength: 3 }
+      .row
+        .col
+          %p
+            ចំនួនទឹកប្រាក់ត្រូវបង់ #{number_to_currency(@tax_vehicle.amount_in_riel, unit: '៛', precision: 0, format: '%n%u')}
+          %p
+            Amount to pay: #{number_to_currency(@tax_vehicle.amount)}
+        .col
+
+          = f.button(:submit, "Pay Now", class: "btn btn-success float-right", data: { disable_with: "Loading..." })
+      .row
+        .col.text-right.text-muted
+          Powered by Bongloy
+  .col-md-3.col-sm-1
+
+= javascript_include_tag "payment_form"

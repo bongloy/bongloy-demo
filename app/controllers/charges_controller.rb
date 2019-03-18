@@ -1,5 +1,5 @@
 class ChargesController < ApplicationController
-  helper_method :checkout_configuration, :charge
+  helper_method :charge
 
   def new; end
 
@@ -24,9 +24,5 @@ class ChargesController < ApplicationController
 
   def permitted_params
     params.permit(new_charge: %i[token description])
-  end
-
-  def checkout_configuration
-    @checkout_configuration ||= CheckoutConfiguration.new
   end
 end

@@ -1,4 +1,6 @@
 $(document).ready(function(){
+  
+  $('[data-toggle="tooltip"]').tooltip()
   // Form validations with cleave.js
   new Cleave('[data-name="cardNumber"]', {
     creditCard: true,
@@ -19,4 +21,6 @@ $(document).ready(function(){
     numeral: true,
     numeralThousandsGroupStyle: 'none'
   });
+
 });
+
