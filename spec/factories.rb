@@ -16,15 +16,4 @@ FactoryBot.define do
     token { SecureRandom.uuid }
     description { "hello" }
   end
-
-  factory :checkout_configuration do
-    trait :custom do
-      currency { "USD" }
-      amount_cents { 500 }
-      name { "My Shop" }
-      description { "My Custom Description" }
-      product_description { "My Product Description" }
-      label { "My Label" }
-    end
-  end
 end

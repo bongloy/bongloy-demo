@@ -7,7 +7,7 @@
     %title
       = title
     = javascript_include_tag("https://js.bongloy.com/v3")
-    = tag(:meta, name: "bongloy-publishable-key", content: checkout_configuration.publishable_key)
+    = tag(:meta, name: "bongloy-publishable-key", content: ENV.fetch("BONGLOY_DEFAULT_PUBLISHABLE_KEY"))
     = csrf_meta_tags
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
