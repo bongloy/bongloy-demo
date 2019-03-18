@@ -7,7 +7,7 @@
   %h3 ពត៍មានយានយន្ត / Vehicle information
   .row
     .col-12.col-md-6.col-lg-4
-      = f.input :plate_number, label: 'ស្លាកលេខ / Plate No.'
+      = f.input :plate_number, label: 'ស្លាកលេខ / Plate No.', input_html: { data: { name: "plateNumber" } }
     .col-12.col-md-6.col-lg-4
       = f.input :vehicle_type, collection: Tax::Vehicle::PRICES.keys, prompt: '--សូមជ្រើសរើសប្រភេទយានយន្ត--', label: 'ប្រភេទ / Type'
     .col-12.col-md-6.col-lg-4

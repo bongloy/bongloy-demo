@@ -1,45 +1,47 @@
 module Tax
   class Vehicle < ApplicationRecord
-    self.table_name = 'tax_vehicles'
+    self.table_name = "tax_vehicles"
 
-    GENDERS = ["ប្រុស", "ស្រី"].freeze
+    GENDERS = %w[ប្រុស ស្រី].freeze
     PRICES = {
-      "រថយន្តទេសចរណ៍" => 160000,
-      "រថយន្តដឹកទំនិញធន់តូច(PICK UP)ទ្វារ២" => 200000,
-      "រថយន្តដឹកទំនិញធន់តូច​(PICK UP)ទ្វារ៤" => 250000,
-      "រថយន្តដឹកទំនិញធន់ធ្ងន់" => 500000,
-      "រ៉ឺម៉កសណ្តោង" => 500000,
-      "រថយន្តដឹកអ្នកដំណើរ" => 250000,
-      "មធ្យោបាយដឹកជញ្ជូនកែឆ្នៃផ្សេងទៀត" => 2000000
+      "រថយន្តទេសចរណ៍" => 160_000,
+      "រថយន្តដឹកទំនិញធន់តូច(PICK UP)ទ្វារ២" => 200_000,
+      "រថយន្តដឹកទំនិញធន់តូច​(PICK UP)ទ្វារ៤" => 250_000,
+      "រថយន្តដឹកទំនិញធន់ធ្ងន់" => 500_000,
+      "រ៉ឺម៉កសណ្តោង" => 500_000,
+      "រថយន្តដឹកអ្នកដំណើរ" => 250_000,
+      "មធ្យោបាយដឹកជញ្ជូនកែឆ្នៃផ្សេងទៀត" => 2_000_000
     }.freeze
+
+    validates :plate_number, :vehicle_type, presence: true
 
     before_create :generate_reference_number
 
     def self.prefill
       new(
-        brand: 'Audi Q7',
-        color: 'ស',
-        engine_number: '1D4GP25B34B579630',
-        year: '2010',
-        power: '329',
-        name: 'លី ពិសិទ្ធ',
-        en_name: 'Ly Piseth',
-        gender: 'ប្រុស',
-        birth_date: '1980-05-23',
-        id_number: '010334455',
-        home: '24',
-        street: '271',
-        vilage: 'ដំណាក់ធំ',
-        commune: 'ស្ទឹងមានជ័យ',
-        district: 'មានជ័យ',
-        city: 'ភ្នំពេញ',
-        email: 'demo@bongloy.com',
-        phone_number: '012345678'
+        brand: "Audi Q7",
+        color: "ស",
+        engine_number: "1D4GP25B34B579630",
+        year: "2010",
+        power: "329",
+        name: "លី ពិសិទ្ធ",
+        en_name: "Ly Piseth",
+        gender: "ប្រុស",
+        birth_date: "1980-05-23",
+        id_number: "010334455",
+        home: "24",
+        street: "271",
+        vilage: "ដំណាក់ធំ",
+        commune: "ស្ទឹងមានជ័យ",
+        district: "មានជ័យ",
+        city: "ភ្នំពេញ",
+        email: "demo@bongloy.com",
+        phone_number: "012345678"
       )
     end
 
     def generate_reference_number
-      self.reference_number = rand(10**5..10**6-1)
+      self.reference_number = rand(10**5..10**6 - 1)
     end
 
     def amount_in_riel

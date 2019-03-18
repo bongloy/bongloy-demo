@@ -7,6 +7,7 @@ end
 gem "autoprefixer-rails"
 gem "bootstrap"
 gem "coffee-rails"
+gem "font-awesome-rails"
 gem "haml"
 gem "jquery-rails"
 gem "pg"
