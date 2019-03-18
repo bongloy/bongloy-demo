@@ -1,3 +1,7 @@
+// JQuery is not required for Bongloy.js
+
+// Here we get our Bongloy Publishable Key from a meta tag attribute in the HTML head
+// so we don't need to hard-code it the JavaScript
 var publishableKey = document.head.querySelector("meta[name=bongloy-publishable-key]").content;
 Bongloy.setPublishableKey(publishableKey);
 
