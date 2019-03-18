@@ -36,7 +36,7 @@ class Tax::VehiclesController < ApplicationController
   end
 
   def charge_params
-    params.require(:tax_vehicle).permit(:token)
+    params.require(:charge).permit(:token)
   end
 
   def tax_vehicle_params
