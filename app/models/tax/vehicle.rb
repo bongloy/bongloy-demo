@@ -13,6 +13,8 @@ module Tax
       "មធ្យោបាយដឹកជញ្ជូនកែឆ្នៃផ្សេងទៀត" => 2000000
     }.freeze
 
+    before_create :generate_reference_number
+
     def self.prefill
       new(
         brand: 'Audi Q7',
@@ -36,8 +38,6 @@ module Tax
       )
     end
 
-    before_create :generate_reference_number
-
     def generate_reference_number
       self.reference_number = rand(10**5..10**6-1)
     end
@@ -56,7 +56,7 @@ module Tax
 
     def charge(params)
       update(params)
-      Stripe::Charge.create(
+      Bongloy::Charge.create(
         amount: amount_in_cents,
         currency: "USD",
         source: token,
@@ -68,7 +68,7 @@ module Tax
         }
       )
       true
-    rescue Stripe::StripeError => e
+    rescue Bongloy::StripeError => e
       errors.add(:base, e.message)
       puts e.message
       false
