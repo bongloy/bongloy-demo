@@ -5,7 +5,7 @@ if ENV["GEMFILE_LOAD_RUBY_VERSION"].to_i == 1 && File.exist?(".ruby-version")
 end
 
 gem "autoprefixer-rails"
-gem "bootstrap", "~> 4.2.1"
+gem "bootstrap"
 gem "coffee-rails"
 gem "haml"
 gem "jquery-rails"
