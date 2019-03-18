@@ -75,11 +75,7 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
 production:
-  <<: *default
-  database: bongloy_demo_production
-  username: bongloy_demo
-  password: <%= ENV['BONGLOY_demo_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+#
+
