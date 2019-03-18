@@ -1,3 +1,10 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
-@import "paymentfont/paymentfont"
+@import "paymentfont/paymentfont";
+
+.small-label-form { 
+	label {
+	  font-size: 80%;
+	  font-weight: 400;
+	}
+}

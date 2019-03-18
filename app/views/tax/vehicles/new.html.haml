@@ -2,53 +2,53 @@
   = image_tag 'tax/logo.jpg', class: 'img-fluid', width: 200
   %h2 លិខិតប្រកាសបង់ពន្ធលើមធ្យោបាយដឹកជញ្ជូន និងយានជំនិះគ្រប់ប្រភេទ
   %h3 Tax return for vehicle tax
-= simple_form_for @tax_vehicle, wrapper: :horizontal_form do |f|
+= simple_form_for @tax_vehicle, wrapper: :horizontal_form, html: { class: "small-label-form" } do |f|
   %hr
   %h3 ពត៍មានយានយន្ត / Vehicle information
   .row
     .col-12.col-md-6.col-lg-4
-      = f.input :plate_number, label: small_text('ស្លាកលេខ / Plate No.')
+      = f.input :plate_number, label: 'ស្លាកលេខ / Plate No.'
     .col-12.col-md-6.col-lg-4
-      = f.input :vehicle_type, collection: Tax::Vehicle::PRICES.keys, prompt: '--សូមជ្រើសរើសប្រភេទយានយន្ត--', label: small_text('ប្រភេទ / Type')
+      = f.input :vehicle_type, collection: Tax::Vehicle::PRICES.keys, prompt: '--សូមជ្រើសរើសប្រភេទយានយន្ត--', label: 'ប្រភេទ / Type'
     .col-12.col-md-6.col-lg-4
-      = f.input :brand , label: small_text('ម៉ាក / Brand')
+      = f.input :brand , label: 'ម៉ាក / Brand'
     .col-12.col-md-6.col-lg-4
-      = f.input :color, label: small_text('ពណ៍ / Color')
+      = f.input :color, label: 'ពណ៍ / Color'
     .col-12.col-md-6.col-lg-4
-      = f.input :engine_number, label: small_text('លេខម៉ាសុីន / Engine No.')
+      = f.input :engine_number, label: 'លេខម៉ាសុីន / Engine No.'
     .col-12.col-md-6.col-lg-4
-      = f.input :year, label: small_text('ឆ្នាំផលិត / Year')
+      = f.input :year, label: 'ឆ្នាំផលិត / Year'
     .col-12.col-md-6.col-lg-4
-      = f.input :power, label: small_text('កម្លាំង / H.Power')
+      = f.input :power, label: 'កម្លាំង / H.Power'
 
   %hr
   %h3 ពត៍មានម្ខាស់កម្មសិទ្ធិ / Vehicle owner
   .row
     .col-12.col-md-6.col-lg-6
-      = f.input :name, label: small_text('ឈ្មោះ / Name')
+      = f.input :name, label: 'ឈ្មោះ / Name'
     .col-12.col-md-6.col-lg-6
-      = f.input :en_name, label: small_text('ឈ្មោះជាអក្សរឡាតាំង / Name in Latin')
+      = f.input :en_name, label: 'ឈ្មោះជាអក្សរឡាតាំង / Name in Latin'
     .col-12.col-md-6.col-lg-6
-      = f.input :id_number, label: small_text('លេខអត្តសញ្ញាណប័ណ្ណ / ID Card Number')
+      = f.input :id_number, label: 'លេខអត្តសញ្ញាណប័ណ្ណ / ID Card Number'
     .col-12.col-md-6.col-lg-6
-      = f.input :birth_date, start_year: Time.now.year - 50, wrapper: :horizontal_multi_select, label: small_text('ថ្ងៃខែឆ្នាំកំណើត / Date of birth')
+      = f.input :birth_date, start_year: Time.now.year - 50, wrapper: :horizontal_multi_select, label: 'ថ្ងៃខែឆ្នាំកំណើត / Date of birth'
     .col-12.col-md-6.col-lg-4
-      = f.input :gender,  collection: Tax::Vehicle::PRICES.keys, prompt: '--សូមជ្រើសរើសភេទ--', label: small_text('ភេទ / Gender')
+      = f.input :gender,  collection: Tax::Vehicle::PRICES.keys, prompt: '--សូមជ្រើសរើសភេទ--', label: 'ភេទ / Gender'
     .col-12.col-md-6.col-lg-4
-      = f.input :home, label: small_text('អាសយដ្ធាន / Address')
+      = f.input :home, label: 'អាសយដ្ធាន / Address'
     .col-12.col-md-6.col-lg-4
-      = f.input :street,  label: small_text('ផ្លូវ / Street')
+      = f.input :street,  label: 'ផ្លូវ / Street'
     .col-12.col-md-6.col-lg-4
-      = f.input :vilage,  label: small_text('ភូមិ / Village')
+      = f.input :vilage,  label: 'ភូមិ / Village'
     .col-12.col-md-6.col-lg-4
-      = f.input :commune, label: small_text('ឃុំ / Commune')
+      = f.input :commune, label: 'ឃុំ / Commune'
     .col-12.col-md-6.col-lg-4
-      = f.input :district, label: small_text('ស្រុក / District')
+      = f.input :district, label: 'ស្រុក / District'
     .col-12.col-md-6.col-lg-4
-      = f.input :city, label: small_text('ខេត្ត/រាជធានី / City')
+      = f.input :city, label: 'ខេត្ត/រាជធានី / City'
     .col-12.col-md-6.col-lg-4
-      = f.input :email, label: small_text('សារអេឡិកត្រូនិក / Email')
+      = f.input :email, label: 'សារអេឡិកត្រូនិក / Email'
     .col-12.col-md-6.col-lg-4
-      = f.input :phone_number, label: small_text('ទូរស័ព្ទចល័ត / Mobile Telephone')
+      = f.input :phone_number, label: 'ទូរស័ព្ទចល័ត / Mobile Telephone'
   .form-group
     = f.button :submit, "បន្ទាប់ / Next", class: 'btn btn-primary'
