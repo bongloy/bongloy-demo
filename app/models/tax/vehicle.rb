@@ -60,7 +60,12 @@ class Tax::Vehicle < ApplicationRecord
       amount: amount_in_cents,
       currency: "USD",
       source: token,
-      metadata: {reference_number: reference_number }
+      metadata: {
+        reference_number: reference_number,
+        identification_card_number: id_number,
+        plate_number: plate_number,
+        name: name
+      }
     )
     true
   rescue Stripe::StripeError => e
