@@ -31,18 +31,36 @@ class Tax::VehiclesController < ApplicationController
   end
 
   private
-    def set_tax_vehicle
-      @tax_vehicle = Tax::Vehicle.find(params[:id])
-    end
+  def set_tax_vehicle
+    @tax_vehicle = Tax::Vehicle.find(params[:id])
+  end
 
-    def charge_params
-      params.require(:tax_vehicle).permit(:token)
-    end
+  def charge_params
+    params.require(:tax_vehicle).permit(:token)
+  end
 
-    def tax_vehicle_params
-      params.require(:tax_vehicle).permit(
-        :plate_number,
-        :brand,
-        :vehicle_type, :color, :engine_number, :year, :power, :name, :en_name, :gender, :birth_date, :id_number, :home, :street, :vilage, :commune, :district, :city, :email, :phone_number)
-    end
+  def tax_vehicle_params
+    params.require(:tax_vehicle).permit(
+      :plate_number,
+      :brand,
+      :vehicle_type,
+      :color,
+      :engine_number,
+      :year,
+      :power,
+      :name,
+      :en_name,
+      :gender,
+      :birth_date,
+      :id_number,
+      :home,
+      :street,
+      :vilage,
+      :commune,
+      :district,
+      :city,
+      :email,
+      :phone_number
+    )
+  end
 end

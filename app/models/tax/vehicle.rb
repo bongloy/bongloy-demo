@@ -10,9 +10,6 @@ class Tax::Vehicle < ApplicationRecord
     "មធ្យោបាយដឹកជញ្ជូនកែឆ្នៃផ្សេងទៀត" => 2000000
   }.freeze
 
-  validates :plate_number, :brand, :vehicle_type, :color, :engine_number, :year, :power, :name, :en_name, :gender, :birth_date, :id_number, :home, :street, :vilage, :commune, :district, :city, :email, :phone_number, presence: true
-
-
   def self.prefill
     new(
       brand: 'Audi Q7',
