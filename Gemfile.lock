@@ -69,7 +69,7 @@ GEM
     dotenv-rails (2.7.5)
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
-    erubi (1.8.0)
+    erubi (1.9.0)
     execjs (2.7.0)
     factory_bot (5.1.0)
       activesupport (>= 4.2.0)
@@ -180,7 +180,7 @@ GEM
       tilt
     shoulda-matchers (4.1.2)
       activesupport (>= 4.2.0)
-    simple_form (4.1.0)
+    simple_form (5.0.0)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
     spring (2.1.0)
