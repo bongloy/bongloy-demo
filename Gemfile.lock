@@ -182,7 +182,7 @@ GEM
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
-    spring (2.1.0)
+    spring (2.1.1)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
     sprockets (3.7.2)
