@@ -1,0 +1,17 @@
+version: 2
+updates:
+- package-ecosystem: bundler
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "22:00"
+  open-pull-requests-limit: 99
+  versioning-strategy: lockfile-only
+  ignore:
+  - dependency-name: rails
+    versions:
+    - 5.2.4.4
+    - 5.2.4.5
+  - dependency-name: rspec-rails
+    versions:
+    - 5.0.0
